@@ -1,0 +1,24 @@
+Package: sdb
+Version: 2016.7
+Type: Package
+Depends:
+    R (>= 3.0.0),
+    data.table,
+    magrittr,
+    stringr,
+    RMySQL
+Suggests:
+    RMySQL,
+    rgdal,
+    knitr,
+    ggplot2,
+    shinyAce,
+    shinydashboard,
+    testthat
+VignetteBuilder: knitr
+Title: Database tools
+Author: Mihai Valcu
+Maintainer: Mihai Valcu <valcu@orn.mpg.de>
+Description: Database tools (mysql and postgres)
+License: MPIO
+RoxygenNote: 5.0.1
