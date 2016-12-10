@@ -28,7 +28,7 @@ Similarly you can access a database using various interfaces.
 
 
 ##### R-based interfaces
- *  sdb package. To install run `` devtools::install_git("//ds.mpio.orn.mpg.de/raw_data_kemp/GIT/sdb")  `` 
+ *  [sdb (internal package)](http://scidb.mpio.orn.mpg.de)
  * [RMySQL](https://cran.r-project.org/package=RMySQL)
 
 ## Interfaces for PostgreSQL
@@ -41,13 +41,6 @@ Similarly you can access a database using various interfaces.
 * <a href="http://www.heidisql.com/" target="_blank"> HeidySQL</a>
 * <a href="http://www.pgadmin.org/" target="_blank"> pgadmin </a>
 * <a href="http://www.openoffice.org/dba/drivers/postgresql/" target="_blank"> postgresql for OpenOffice </a> 
-
-
-
-##### R-based interfaces
- * sdb package To install run `` devtools::install_git("//ds.mpio.orn.mpg.de/raw_data_kemp/GIT/sdb")  `` 
- * [RMySQL](https://cran.r-project.org/package=RPostgreSQL)
-
 
 
 
