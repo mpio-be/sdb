@@ -11,7 +11,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
 
-<meta name="date" content="2016-11-15" />
+<meta name="date" content="2016-12-10" />
 
 <title>SQL snippets</title>
 
@@ -68,7 +68,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 
 
 <h1 class="title toc-ignore">SQL snippets</h1>
-<h4 class="date"><em>2016-11-15</em></h4>
+<h4 class="date"><em>2016-12-10</em></h4>
 
 
 
@@ -76,31 +76,34 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <h3>Using SQL snippets in sdb</h3>
 <div id="save-an-arbitrary-query-to-dblog.snippets-with-snipsave." class="section level4">
 <h4>Save an arbitrary query to DBLOG.snippets with snipSave().</h4>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">require</span>(sdb)
-Host =<span class="st"> 'localhost'</span>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">require</span>(sdb)</code></pre></div>
+<pre><code>## Loading required package: sdb</code></pre>
+<pre><code>## This is sdb 2016.7</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">Host =<span class="st"> 'localhost'</span>
 
 id =<span class="st"> </span><span class="kw">snipSave</span>(<span class="dt">query =</span> <span class="st">'SELECT * FROM BTatWESTERHOLZ.BREEDING limit 1'</span>, 
             <span class="dt">description =</span> <span class="st">'select the first line of the table'</span>, <span class="dt">user =</span> <span class="st">'valcu'</span>, <span class="dt">host =</span> Host)</code></pre></div>
 <pre><code>## --&gt; Testing snippet ...</code></pre>
 <pre><code>## Warning in .local(conn, statement, ...): Unsigned INTEGER in col 14
 ## imported as numeric</code></pre>
-<pre><code>## This is sdb 2016.6</code></pre>
 <pre><code>## 
-## --&gt; Saving snippet  SELECT * FROM BTatWESTERHOLZ.BREEDING limit 1... by valcu as  ID:  99</code></pre>
+## --&gt; Saving snippet  SELECT * FROM BTatWESTERHOLZ.BREEDING limit 1... by valcu as  ID:  131</code></pre>
 </div>
 <div id="search-for-an-sql-snippet-by-keyword-andor-author." class="section level4">
 <h4>Search for an SQL snippet by keyword and/or author.</h4>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">s =<span class="st"> </span><span class="kw">snipSearch</span>(<span class="st">&quot;BTatWESTERHOLZ.BREEDING&quot;</span>, <span class="dt">user =</span> <span class="st">'valcu'</span>, <span class="dt">host =</span> Host)</code></pre></div>
-<pre><code>##    ID                                              query author
-## 1:  3               SELECT f.box, gap_x, laying_gap FROM  mihai
-## 2: 27                     SELECT b.box, b.clutch, eggs,   mihai
-## 3: 32 SELECT b_PK, b.year_, b.IDmale, b.IDfemale, b.box,  mihai
-## 4: 99      SELECT * FROM BTatWESTERHOLZ.BREEDING limit 1  valcu
-##                           description
-## 1:                        laying gaps
-## 2:                        Laying gaps
-## 3:         Westerholz: paternity loss
-## 4: select the first line of the table</code></pre>
+<pre><code>##     ID                                              query author
+## 1:   3               SELECT f.box, gap_x, laying_gap FROM  mihai
+## 2:  27                     SELECT b.box, b.clutch, eggs,   mihai
+## 3:  32 SELECT b_PK, b.year_, b.IDmale, b.IDfemale, b.box,  mihai
+## 4:  99           SELECT box, IDfemale, IDmale, firstEgg,   valcu
+## 5: 131      SELECT * FROM BTatWESTERHOLZ.BREEDING limit 1  valcu
+##                                     description
+## 1:                                  laying gaps
+## 2:                                  Laying gaps
+## 3:                   Westerholz: paternity loss
+## 4: Blue Tits, breeiding, first egg and last egg
+## 5:           select the first line of the table</code></pre>
 </div>
 <div id="fetch-a-snippet-by-id." class="section level4">
 <h4>Fetch a snippet by ID.</h4>
@@ -109,7 +112,7 @@ id =<span class="st"> </span><span class="kw">snipSave</span>(<span class="dt">q
 <div id="delete-a-snippet-by-id." class="section level4">
 <h4>Delete a snippet by ID.</h4>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">id</code></pre></div>
-<pre><code>## [1] 99</code></pre>
+<pre><code>## [1] 131</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">snipDrop</span>(id, <span class="dt">user =</span> <span class="st">'valcu'</span>, <span class="dt">host =</span> Host)</code></pre></div>
 <pre><code>## NULL</code></pre>
 </div>

@@ -59,15 +59,6 @@
 	},
 	"buffers":
 	[
-		{
-			"file": "R/dbio_dbcon.R",
-			"settings":
-			{
-				"buffer_size": 3566,
-				"encoding": "UTF-8",
-				"line_ending": "Windows"
-			}
-		}
 	],
 	"build_system": "",
 	"build_system_choices":
@@ -112,21 +103,22 @@
 	"expanded_folders":
 	[
 		"/home/mihai/ownCloud/PACKAGES/sdb",
-		"/home/mihai/ownCloud/PACKAGES/sdb/R"
+		"/home/mihai/ownCloud/PACKAGES/sdb/R",
+		"/home/mihai/ownCloud/PACKAGES/sdb/vignettes"
 	],
 	"file_history":
 	[
+		"/home/mihai/ownCloud/PACKAGES/sdb/R/dbio_dbcon.R",
+		"/home/mihai/ownCloud/PACKAGES/sdb/vignettes/db_access.Rmd",
 		"/home/mihai/ownCloud/PACKAGES/sdb/R/dbio_credentials.R",
 		"/home/mihai/ownCloud/PACKAGES/sdb/R/sql_sqlSnippets.R",
 		"/home/mihai/ownCloud/PACKAGES/sdb/DESCRIPTION",
 		"/home/mihai/ownCloud/PACKAGES/sdb/R/dbio_dbq.R",
-		"/home/mihai/ownCloud/PACKAGES/sdb/R/dbio_dbcon.R",
 		"/home/mihai/ownCloud/NOTES/current_notes.todo",
 		"/home/mihai/.config/sublime-text-3/Packages/User/SideBarEnhancements/Open With/Side Bar.sublime-menu",
 		"/home/mihai/Desktop/plotly_example/ui.R",
 		"/home/mihai/Desktop/plotly_example/server.R",
 		"/home/mihai/ownCloud/PACKAGES/sdb/inst/ui/ui.R",
-		"/home/mihai/ownCloud/PACKAGES/sdb/vignettes/db_access.Rmd",
 		"/home/mihai/ownCloud/PACKAGES/sdb/R/admin_OSstate.R",
 		"/home/mihai/ownCloud/PACKAGES/sdb/R/utils.R",
 		"/tmp/tmpMl_Soz/extraparams.cnf",
@@ -353,54 +345,8 @@
 	"groups":
 	[
 		{
-			"selected": 0,
 			"sheets":
 			[
-				{
-					"buffer": 0,
-					"file": "R/dbio_dbcon.R",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 3566,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								2863,
-								2863
-							]
-						],
-						"settings":
-						{
-							"color_helper.box_height": 14,
-							"color_helper.color_scheme": "Packages/Boxy Theme/schemes/Boxy Tomorrow.tmTheme",
-							"color_helper.file_palette":
-							[
-							],
-							"color_helper.preview_meta":
-							{
-							},
-							"color_helper.scan":
-							{
-								"current_ext": ".r",
-								"current_syntax": "R-Box/syntax/R Extended",
-								"enabled": false,
-								"last_updated": 1480790809.68
-							},
-							"syntax": "Packages/R-Box/syntax/R Extended.sublime-syntax",
-							"tab_size": 2,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 432.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 0,
-					"type": "text"
-				}
 			]
 		}
 	],
@@ -439,6 +385,10 @@
 	{
 		"height": 0.0
 	},
+	"output.mdpopups":
+	{
+		"height": 0.0
+	},
 	"pinned_build_system": "",
 	"project": "sdb.sublime-project",
 	"replace":
@@ -467,7 +417,7 @@
 		[
 			[
 				"",
-				"~/ownCloud/PACKAGES/SNB/SNB.sublime-project"
+				"~/ownCloud/PACKAGES/sysmanager/sysmanager.sublime-project"
 			],
 			[
 				"a",
