@@ -191,19 +191,15 @@
 		"side_bar_visible": false,
 		"status_bar_visible": false
 	},
-	"expanded_folders":
-	[
-		"/home/mihai/ownCloud/PACKAGES/sdb"
-	],
 	"file_history":
 	[
-		"/home/mihai/ownCloud/PACKAGES/sdb/DESCRIPTION",
 		"/home/mihai/ownCloud/PACKAGES/sysmanager/R/git.R",
 		"/home/mihai/ownCloud/PACKAGES/sysmanager/DESCRIPTION",
 		"/home/mihai/ownCloud/PACKAGES/sysmanager/notes.md",
 		"/home/mihai/ownCloud/PACKAGES/bib2/DESCRIPTION",
 		"/home/mihai/ownCloud/PACKAGES/tdm/DESCRIPTION",
 		"/home/mihai/ownCloud/PACKAGES/SNB/DESCRIPTION",
+		"/home/mihai/ownCloud/PACKAGES/sdb/DESCRIPTION",
 		"/home/mihai/ownCloud/PACKAGES/gps/DESCRIPTION",
 		"/home/mihai/ownCloud/PACKAGES/geotag/DESCRIPTION",
 		"/home/mihai/ownCloud/PACKAGES/expp/DESCRIPTION",
@@ -520,8 +516,12 @@
 	{
 		"height": 0.0
 	},
+	"output.mdpopups":
+	{
+		"height": 0.0
+	},
 	"pinned_build_system": "",
-	"project": "sdb.sublime-project",
+	"project": "DESCRIPTION.sublime-project",
 	"replace":
 	{
 		"height": 42.0
@@ -539,13 +539,9 @@
 	"select_project":
 	{
 		"height": 669.0,
-		"last_filter": "sys",
+		"last_filter": "sd",
 		"selected_items":
 		[
-			[
-				"sys",
-				"~/ownCloud/PACKAGES/sysmanager/sysmanager.sublime-project"
-			],
 			[
 				"sd",
 				"~/ownCloud/PACKAGES/sdb/sdb.sublime-project"
@@ -557,6 +553,10 @@
 			[
 				"bib2",
 				"~/ownCloud/PACKAGES/bib2/bib2.sublime-project"
+			],
+			[
+				"sys",
+				"~/ownCloud/PACKAGES/sysmanager/sysmanager.sublime-project"
 			],
 			[
 				"s",
