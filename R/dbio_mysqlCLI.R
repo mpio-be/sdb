@@ -124,7 +124,7 @@ mysqldump <- function(db,tables,user,host = 'scidb.mpio.orn.mpg.de', filenam, di
 #'
 mysqlrestore <- function(db, user = 'root', filepath, call = FALSE) {
 	host = 'localhost'
-	con = dbcon(user = user, host = host)
+	con = dbcon(user = user, host = host); 	on.exit(closeCon(con))
 
 	dbq(con, paste('CREATE DATABASE IF NOT EXISTS', db))
 
