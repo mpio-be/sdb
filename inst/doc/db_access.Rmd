@@ -1,6 +1,5 @@
 ---
 title: "Database Access"
-date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{db access}
@@ -30,17 +29,6 @@ Similarly you can access a database using various interfaces.
 ##### R-based interfaces
  *  [sdb (internal package)](http://scidb.mpio.orn.mpg.de)
  * [RMySQL](https://cran.r-project.org/package=RMySQL)
-
-## Interfaces for PostgreSQL
-
-##### Web browser interfaces
-* <a href="http://scidb.mpio.orn.mpg.de/phppgadmin/" target="_blank"> phppgadmin</a>
-
-
-##### Database software installed locally on your PC
-* <a href="http://www.heidisql.com/" target="_blank"> HeidySQL</a>
-* <a href="http://www.pgadmin.org/" target="_blank"> pgadmin </a>
-* <a href="http://www.openoffice.org/dba/drivers/postgresql/" target="_blank"> postgresql for OpenOffice </a> 
 
 
 

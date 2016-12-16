@@ -194,10 +194,13 @@
 	"expanded_folders":
 	[
 		"/home/mihai/ownCloud/PACKAGES/sdb",
-		"/home/mihai/ownCloud/PACKAGES/sdb/R"
+		"/home/mihai/ownCloud/PACKAGES/sdb/R",
+		"/home/mihai/ownCloud/PACKAGES/sdb/inst",
+		"/home/mihai/ownCloud/PACKAGES/sdb/vignettes"
 	],
 	"file_history":
 	[
+		"/home/mihai/ownCloud/PACKAGES/sdb/vignettes/db_access.Rmd",
 		"/home/mihai/ownCloud/PACKAGES/sdb/R/dbio_mysqlCLI.R",
 		"/home/mihai/ownCloud/PACKAGES/sdb/DESCRIPTION",
 		"/home/mihai/ownCloud/PACKAGES/sysmanager/R/git.R",
@@ -324,8 +327,7 @@
 		"/home/mihai/.config/sublime-text-3/Packages/Default/Default (Linux).sublime-keymap",
 		"/home/mihai/ownCloud/SYSTEMS_MANAGEMENT/scidb.orn.mpg.de/MySQL/system.SQL",
 		"/home/mihai/ownCloud/PROJECTS/BLUE_TIT/Egg_Proteomics/R/1_eggMeasurements/eggMeasures.R",
-		"/home/mihai/ownCloud/PROJECTS/BLUE_TIT/Egg_Proteomics/R/2_proteins/by_prot_models.R",
-		"/home/mihai/Desktop/the-lord-of-the-rings-3.txt"
+		"/home/mihai/ownCloud/PROJECTS/BLUE_TIT/Egg_Proteomics/R/2_proteins/by_prot_models.R"
 	],
 	"find":
 	{
