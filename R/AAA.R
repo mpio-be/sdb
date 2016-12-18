@@ -2,7 +2,7 @@
 
 #' \strong{s}cidb \strong{d}ata \strong{b}ase interface
 #'
-#' An interface to \href{http://scidb.mpio.orn.mpg.de:3838}{scidb.mpio.orn.mpg.de} databases
+#' An interface to \href{http://scidb.mpio.orn.mpg.de}{scidb.mpio.orn.mpg.de} databases
 #'
 #'
 #' @name sdb

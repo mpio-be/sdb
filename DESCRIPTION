@@ -1,5 +1,5 @@
 Package: sdb
-Version: 2016.7
+Version: 2016.8
 Type: Package
 Depends:
     R (>= 3.0.0),
@@ -8,7 +8,7 @@ Depends:
     stringr,
     RMySQL
 Suggests:
-    RMySQL,
+    sp,
     rgdal,
     knitr,
     shinyAce,

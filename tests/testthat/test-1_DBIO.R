@@ -98,23 +98,6 @@ context("mysql IO")
 
   })
 
-context("posgres IO")
-
- test_that("dbq returns NULL on non-SELECT and data.table on SELECT", {
-
-  con = dbcon(user, pwd, dbname, drive = driverIni("postgres") ); on.exit(closeCon(con))
-
-  dbWriteTable(con, 'temp', data.table(a = 1:100, b = 'x') )
-
-  expect_true( inherits( dbq(con, "select * from temp"), 'data.table' ))
-
-  expect_null( dbq(con, 'DROP TABLE temp' ) )
-
-  })
-
-
-
-## SELECT postgis_full_version();
 
 
 

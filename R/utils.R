@@ -1,53 +1,4 @@
 
-#' @export
-# source: https://gist.github.com/jslefche/eff85ef06b4705e6efbc
-
-theme_black <- function(base_size = 12, base_family = "") {
-
-      theme_grey(base_size = base_size, base_family = base_family) %+replace%
-
-      theme(
-      # Specify axis options
-      axis.line = element_blank(),
-      axis.text.x = element_text(size = base_size*0.8, color = "white", lineheight = 0.9, vjust = 1),
-      axis.text.y = element_text(size = base_size*0.8, color = "white", lineheight = 0.9, hjust = 1),
-      axis.ticks = element_line(color = "white", size  =  0.2),
-      axis.title.x = element_text(size = base_size, color = "white", vjust = 1),
-      axis.title.y = element_text(size = base_size, color = "white", angle = 90, vjust = 0.5),
-
-      # Specify legend options
-      legend.background = element_rect(color = NA, fill = "#222d32"),
-      legend.key = element_rect(color = "white",  fill = "#222d32"),
-      legend.key.size = unit(1.2, "lines"),
-      legend.key.height = NULL,
-      legend.key.width = NULL,
-      legend.text = element_text(size = base_size*0.8, color = "white"),
-      legend.title = element_text(size = base_size*0.8, face = "bold", hjust = 0, color = "white"),
-      legend.position = "right",
-      legend.text.align = NULL,
-      legend.title.align = NULL,
-      legend.direction = "vertical",
-      legend.box = NULL,
-      # Specify panel options
-      panel.background = element_rect(fill = "#222d32", color  =  NA),
-      panel.border = element_rect(fill = NA, color = "white"),
-      panel.grid.major = element_line(color = "grey35"),
-      panel.grid.minor = element_line(color = "grey20"),
-      panel.margin = unit(0.25, "lines"),
-      # Specify facetting options
-      strip.background = element_rect(fill = "grey30", color = "grey10"),
-      strip.text.x = element_text(size = base_size*0.8, color = "white"),
-      strip.text.y = element_text(size = base_size*0.8, color = "white",angle = -90),
-      # Specify plot options
-      plot.background = element_rect(color = "#222d32", fill = "#222d32"),
-      plot.title = element_text(size = base_size*1.2, color = "white"),
-      plot.margin = unit(c(1, 1, 0.5, 0.5), "lines")
-
-      )
-
-      }
-
-
 #' string_is_mysql_date
 #' @export
 string_is_mysql_date <- function(x) {
@@ -56,11 +7,97 @@ string_is_mysql_date <- function(x) {
     o  
     }
 
-
-
 #' @export    
 I_am_in_Seewiesen <- function() {
 
       str_trim(system('hostname', intern = TRUE)) == "pc3168"
 
       }
+
+#' @title Test database
+#' @description Installs or destroys a mariadb test database
+#' @export 
+#' @note
+#' credentials should be stored in ~/.my.cnf which should contain
+#' [client]
+#' user = 'username'
+#' password = 'pwd'
+#' @examples
+#' /donotrun{
+#' test_db('mihai')
+#' }
+#'
+test_db <- function(user = 'testuser', host = 'localhost', db = 'tests', destroy = FALSE) {
+      sapply(c('rgdal', 'rworldmap'),
+       function(x) suppressPackageStartupMessages(require(x , character.only = TRUE, quietly = TRUE) ) )
+          
+
+      con = dbConnect(RMySQL::MySQL(), user = user); on.exit(dbDisconnect(con))
+      pwd = readLines('~/.my.cnf')[grep('password', readLines('~/.my.cnf'))]
+      pwd = str_extract(pwd, '[^=]*$') %>% str_trim() %>% str_replace_all("'", "") %>% str_replace_all('"', "")
+
+      dbGetQuery(con, paste('DROP DATABASE IF EXISTS', db))
+      
+      if(!destroy) {
+
+        dbGetQuery(con, paste('CREATE DATABASE IF NOT EXISTS', db))
+        dbGetQuery(con, paste('USE', db))
+
+        #t1 [ a table with major types]
+          dbGetQuery(con, "
+              CREATE TABLE t1(
+                id INT NOT NULL auto_increment PRIMARY KEY,    
+                n1  int ,
+                n2  FLOAT ,
+                n3  DOUBLE ,
+                n4  BOOLEAN default 1 ,
+                n5  ENUM ('x','y','q'), 
+                v1  varchar (255) ,
+                v2  char(2) ,
+                dt1 DATE, 
+                dt2 TIME, 
+                dt3 DATETIME
+
+              ); ")
+
+           t1 = data.frame(n1 = rpois(100, 2), n2 = rnorm(100), n3 = rnorm(100, 200), n4 = runif(100, 0, 1), 
+                    n5 = sample(c('x','y','q'), 100, replace = TRUE), 
+                    v1 = replicate(100, paste( sample(letters, size = runif(1, 1, 20) ), collapse = '') ),
+                    v2 = replicate(100, paste(sample(letters, 2), collapse = '')),
+                    dt1 = Sys.Date() + rpois(100, 5),
+                    dt2 = format(Sys.time() + rnorm(100) , '%H:%M:%S'), 
+                    dt3 = Sys.time() + rnorm(100)
+                    )
+
+          dbWriteTable( con, 't1', t1, row.names = FALSE, overwrite = TRUE )
+
+       #t2 [ spatial table (points) ]
+          DSN = paste0('MYSQL:tests,user=mihai,host=localhost,password=', pwd)
+          # ogrListLayers(DSN)
+     
+           t2 = SpatialPointsDataFrame( 
+                  data.frame(latit = runif(20, -80, 80), longit = runif(20, -180, 180) ),
+                  data.frame(id = 1:20), 
+                  proj4string = CRS("+proj=longlat")
+                  )
+
+          writeOGR(t2, DSN, layer = 't2', driver = 'MySQL', layer_options='ENGINE=Aria', overwrite_layer = TRUE)
+
+       #t3 [ spatial table (polygons) ]   
+          t3 = getMap()[1:10, 1:3]
+          t3  =spChFIDs(t3, as.character(1:nrow(t3) ) )
+          writeOGR(t3, DSN, layer = 't3', driver = 'MySQL', layer_options='ENGINE=Aria', overwrite_layer = TRUE)
+      
+       # feedback
+         cat( str_pad('table t1 using dbGetQuery:', 80, 'right', '-'), '\n' )
+         print( dbGetQuery(con, "select * from t1 limit 2") )
+
+         cat( str_pad('table t2 using readOGR:', 80, 'right', '-'), '\n' )
+         names( readOGR(DSN, layer='t2') )
+
+         cat( str_pad('table t3 using readOGR:', 80, 'right', '-'), '\n' )
+         names( readOGR(DSN, layer='t3') )
+
+
+      }
+ }

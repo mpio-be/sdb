@@ -10,7 +10,7 @@
 .onLoad(libname, pkgname)
 }
 \description{
-An interface to \href{http://scidb.mpio.orn.mpg.de:3838}{scidb.mpio.orn.mpg.de} databases
+An interface to \href{http://scidb.mpio.orn.mpg.de}{scidb.mpio.orn.mpg.de} databases
 }
 \author{
 Mihai Valcu \email{valcu@orn.mpg.de}
