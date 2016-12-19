@@ -43,9 +43,9 @@ snipFetch        <- function(id, user, host = "localhost") {
 	con = dbcon(user, host = host); on.exit(dbDisconnect(con))
 
 	x = dbq(con, paste('SELECT * from DBLOG.snippets where ID = ', id) )
-	
-	o = paste('-- ID:', x$ID, '\n', 
-				'-- author:', x$author,'\n', 
+
+	o = paste('-- ID:', x$ID, '\n',
+				'-- author:', x$author,'\n',
 				'-- description:', x$description, '\n',
 				'-- SQL:\n', x$query, '\n'
 			)
@@ -61,7 +61,7 @@ snipFetch        <- function(id, user, host = "localhost") {
 snipDrop         <- function(id, user, host = "localhost") {
 	con = dbcon(user, host = host); on.exit(dbDisconnect(con))
 	dbq(con,  paste('DELETE FROM DBLOG.snippets where ID = ', id, 'and author = ', shQuote(user) ) )
-	
+
 	}
 
 
@@ -72,7 +72,9 @@ snipSearch  <- function(kw, user, host = "localhost") {
 	con = dbcon(user, host = host); on.exit(dbDisconnect(con))
 
 	if(missing(kw) )  res = dbq(con, 'SELECT * from DBLOG.snippets')
-	if(!missing(kw))  res = dbq(con, paste0('SELECT * from DBLOG.snippets where query like "%', kw, '%"') )
+	if(!missing(kw))  res = dbq(con,
+			paste0('SELECT * from DBLOG.snippets
+								WHERE query like "%', kw, '%" OR description like "%', kw, '%"') )
 
 	prt = res; prt$query = unlist(lapply(res$query, headQuery))
 
