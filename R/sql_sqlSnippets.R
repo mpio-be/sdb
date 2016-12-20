@@ -4,6 +4,7 @@
 #' @param description  description
 #' @param host         default to "localhost"
 #' @param user         database user
+#' @param validate     if TRUE, the default then the qury is run prior to upload
 #' @param f            A file
 #' @param id           snip ID
 #' @param kw           keyword
@@ -12,13 +13,14 @@
 #'
 #' @export
 #'
-snipSave         <- function(query, description='', user, host = "localhost") {
+snipSave         <- function(query, description='', user, host = "localhost", validate = TRUE) {
 
 	con = dbcon(user, host = host); on.exit(dbDisconnect(con))
 
-	cat("--> Testing snippet ... \n")
-	#test
-	dbq(con, query) %>% rm
+	if(validate)	 {
+		cat("--> Testing snippet ... \n")
+		dbq(con, query) %>% rm
+		}
 
 
 	cat("\n--> Saving snippet ", paste0( sdb:::headQuery(query)  , "... by ", user) )

@@ -8,8 +8,6 @@ Depends:
     stringr,
     RMySQL
 Suggests:
-    sp,
-    rgdal,
     knitr,
     shinyAce,
     shinydashboard,

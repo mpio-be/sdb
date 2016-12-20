@@ -9,7 +9,7 @@ dbq(con, q, ...)
 \arguments{
 \item{con}{a connection object returned by \code{\link{dbcon}}}
 
-\item{q}{a query string. credentials are storred on disk.}
+\item{q}{a query string. credentials are stored on disk.}
 }
 \value{
 a data.frame or a  Spatial*DataFrame (OGR_PostgreSQLDriver) for a SELECT query, or NULL for non-SELECT queries.
@@ -22,17 +22,22 @@ run an SQL query.
 }
 \examples{
 # A connection is made and used by dbq
- con = dbcon('mihai')
+ con = dbcon('mihai', host = 'localhost')
  d1 = dbq(con, 'SELECT * from BTatWESTERHOLZ.ADULTS')
  d2 = dbq(con, 'SELECT * from BTatWESTERHOLZ.ADULTS', enhance = TRUE)
 
-# A temp. connection is made and closed once the date are retrieved
-dbq(q = 'select now()', user = 'mihai') \%>\% str
-dbq(q = 'select now()', user = 'mihai', enhance = TRUE) \%>\% str
+# A temp. connection is made and closed once the data is retrieved
+dbq(q = 'select now()', user = 'mihai', host = 'localhost') \%>\% str
+dbq(q = 'select now()', user = 'mihai',host = 'localhost',  enhance = TRUE) \%>\% str
 
-# no return
-dbq(user = 'mihai', host = 'localhost', q = 'drop database if exists this_does_not_Exists_ever_123')
-dbq(con, 'drop database if exists this_does_not_Exists_ever_123')
+# null return
+dbq(user = 'mihai', host = 'localhost', q = 'set @c=1')
+dbq(con, 'set @c=1')
+
+spatial return
+con = dbcon('mihai', host = 'localhost', db = 'AVES_ranges', driver = 'spatial_MySQL')
+s = dbq(con, 'ranges_birdlife_v1')
+
 dbDisconnect(con)
 }
 \seealso{

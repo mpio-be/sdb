@@ -68,13 +68,13 @@ getCredentials    <- function(user, db, host, path) {
 
     x = x[x$host == host, ]
 
-    if(!missing(db))   x = x[x$db %in% db, ]
+    # if(!missing(db))   x = x[x$db %in% db, ]
     if(!missing(user)) x = x[x$user == user, ]
 
     if(nrow(x) > 1) {
       xc = x
       xc$pwd = "*****"
-      warning( "For the given arguments multiple credentials are returned.\nOnly the 1st line will be retained." )
+      warning( "For the given arguments multiple credentials are returned.\nOnly the 1st entry will be retained." )
       print(xc)
       x = x[1, ]
       }

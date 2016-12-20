@@ -196,10 +196,14 @@
 		"/home/mihai/ownCloud/PACKAGES/sdb",
 		"/home/mihai/ownCloud/PACKAGES/sdb/R",
 		"/home/mihai/ownCloud/PACKAGES/sdb/inst",
+		"/home/mihai/ownCloud/PACKAGES/sdb/tests",
+		"/home/mihai/ownCloud/PACKAGES/sdb/tests/testthat",
 		"/home/mihai/ownCloud/PACKAGES/sdb/vignettes"
 	],
 	"file_history":
 	[
+		"/home/mihai/ownCloud/PACKAGES/sdb/R/utils.R",
+		"/home/mihai/ownCloud/PACKAGES/sdb/tests/testthat/test-1_DBIO.R",
 		"/home/mihai/ownCloud/PACKAGES/sdb/R/sql_sqlSnippets.R",
 		"/home/mihai/ownCloud/PACKAGES/sdb/vignettes/db_access.Rmd",
 		"/home/mihai/ownCloud/PACKAGES/sdb/R/dbio_mysqlCLI.R",
@@ -325,9 +329,7 @@
 		"/home/mihai/ownCloud/PROJECTS/PECTORAL_SANDPIPER/Exploded_lek/R/sm_MAP_ByID/miniMaps.html",
 		"/home/mihai/.config/sublime-text-3/Packages/Alignment/Default (Linux).sublime-keymap",
 		"/home/mihai/.config/sublime-text-3/Packages/Terminal/Base File.sublime-settings",
-		"/home/mihai/.config/sublime-text-3/Packages/Default/Default (Linux).sublime-keymap",
-		"/home/mihai/ownCloud/SYSTEMS_MANAGEMENT/scidb.orn.mpg.de/MySQL/system.SQL",
-		"/home/mihai/ownCloud/PROJECTS/BLUE_TIT/Egg_Proteomics/R/1_eggMeasurements/eggMeasures.R"
+		"/home/mihai/.config/sublime-text-3/Packages/Default/Default (Linux).sublime-keymap"
 	],
 	"find":
 	{
@@ -351,6 +353,8 @@
 		"case_sensitive": true,
 		"find_history":
 		[
+			"dbname",
+			"testuser",
 			"p_i",
 			"shiny",
 			"\">\n        <script type=\"text/javascript\">",

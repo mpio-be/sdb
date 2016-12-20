@@ -4,22 +4,13 @@
 \alias{test_db}
 \title{Test database}
 \usage{
-test_db(user = "testuser", host = "localhost", db = "tests",
+test_db(user = "testuser", host = "localhost", db = "tests", pwd,
   destroy = FALSE)
 }
 \description{
 Installs or destroys a mariadb test database
 }
 \note{
-credentials should be stored in ~/.my.cnf which should contain
-[client]
-user = 'username'
-password = 'pwd'
-}
-\examples{
-/donotrun{
-test_db('mihai')
-}
-
+the functions works independently or other functions in sdb
 }
 
