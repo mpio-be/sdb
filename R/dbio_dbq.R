@@ -7,7 +7,7 @@
 #' @param q a query string. credentials are stored on disk.
 #' @seealso \code{\link{saveCredentials}},\code{\link{dbcon}}
 #' @export
-#' @return a data.frame or a  Spatial*DataFrame (OGR_PostgreSQLDriver) for a SELECT query, or NULL for non-SELECT queries.
+#' @return a data.frame or a  Spatial*DataFrame (spatial_MySQL) for a SELECT query, or NULL for non-SELECT queries.
 #' @examples
 #' # A connection is made and used by dbq
 #'  con = dbcon('mihai', host = 'localhost')
@@ -21,12 +21,16 @@
 #' # null return
 #' dbq(user = 'mihai', host = 'localhost', q = 'set @c=1')
 #' dbq(con, 'set @c=1')
+#' dbDisconnect(con)
 #' 
 #' spatial return
-#' con = dbcon('mihai', host = 'localhost', db = 'AVES_ranges', driver = 'spatial_MySQL')
-#' s = dbq(con, 'ranges_birdlife_v1')
+#' con = dbcon('mihai', host = 'localhost', db = 'tests', driver = 'spatial_MySQL')
+#' s = dbq(con, q = 't3')
+#' s = dbq(con, q = 'select * from t3 limit 1')
 #' 
-#' dbDisconnect(con)
+#' con = dbcon('mihai', host = 'localhost', db = 'AVES_ranges', driver = 'spatial_MySQL')
+#' s = dbq(con, q = "select * from breeding_ranges_v1 where scinam = 'Parus major'")
+
 
 setGeneric("dbq", function(con,q, ...)   standardGeneric("dbq") )
 
@@ -58,8 +62,6 @@ setMethod("dbq",
           setDT(o)
           if(enhance) enhanceOutput(o)
 
-          if(nrow(o) == 0) o  = NULL  
-
           return(o)
 
            }
@@ -77,15 +79,27 @@ setMethod("dbq",
 
 #' @export
 #' @import rgdal
+#' @import gdalUtils
 #' @import sp
 setOldClass("ogrinfo")
 setMethod("dbq",
           signature  = c(con = "ogrinfo", q = "character"),
           definition = function(con, q, ...) {
 
-          readOGR(con$dsn, q , verbose = FALSE)
+          sqllen = length(str_split(q, ' ', simplify = TRUE))  
+            
+          if( sqllen == 1)  
+            o = readOGR(con$dsn, q , verbose = FALSE)
 
-           }
+          if( sqllen > 1) {
+            tf = tempfile()  
+            ogr2ogr(con$dsn, tf, sql = q,verbose = FALSE, overwrite = TRUE)
+            o = readOGR(tf, 'sql_statement' , verbose = FALSE)
+            } 
+
+           return(o) 
+
+        }
   )
 
 

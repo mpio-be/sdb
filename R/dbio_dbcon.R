@@ -7,7 +7,7 @@
 #' @param password  password ("" or NA means no password e.g. for localhost)
 #' @param database  database to connect to
 #' @param path      to credentials file (if different from the default)
-#' @param driver    MySQL, ... Defaults to MySQL.
+#' @param driver    MySQL or spatial_MySQL, ... Defaults to MySQL.
 #' @param ...       pass to dbConnect
 #' @export
 #' @return          a connection object

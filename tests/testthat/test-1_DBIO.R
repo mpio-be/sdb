@@ -4,7 +4,6 @@ pwd   = 'cs'
 db    = 'tests'
 test_db(user = user, host = host, db = db, pwd = pwd)
 
-
 context("Credentials")
 
  test_that("credentials file exists", {
@@ -63,40 +62,36 @@ context("Connections")
 
   })
 
-
-
 context("mysql IO")
 
  test_that("dbq returns NULL on non-SELECT and data.table on SELECT", {
 
-  con = dbcon(user,host = host, drive = 'MySQL' ); on.exit(closeCon(con))
+    con = dbcon(user,host = host, drive = 'MySQL' ); on.exit(closeCon(con))
 
-  expect_null( dbq(con, paste('USE', db) ) )
-  expect_null( dbq(con, 'DROP TABLE IF EXISTS temp' ) )
+    expect_null( dbq(con, paste('USE', db) ) )
+    expect_null( dbq(con, 'DROP TABLE IF EXISTS temp' ) )
 
-  dbWriteTable(con, 'temp', data.table(a = 1:100, b = 'x') )
+    dbWriteTable(con, 'temp', data.table(a = 1:100, b = 'x') )
 
-  expect_true( inherits( dbq(con, "select * from temp"), 'data.table' ))
+    expect_true( inherits( dbq(con, "select * from temp"), 'data.table' ))
 
-  expect_null( dbq(con, 'DROP TABLE IF EXISTS temp' ) )
+    expect_null( dbq(con, 'DROP TABLE IF EXISTS temp' ) )
 
-  })
+    })
 
  test_that("dbq can return an enhanced output", {
 
-  con = dbcon(user,host = host, drive = 'MySQL' ); on.exit(closeCon(con))
+    con = dbcon(user,host = host, drive = 'MySQL' ); on.exit(closeCon(con))
 
-  dbq(con, paste('USE', db) )
+    dbq(con, paste('USE', db) )
 
-  dbWriteTable(con, 'temp', data.table(a = seq.POSIXt(Sys.time(), by = 10, length.out = 10), ID = 1), overwrite = TRUE )
+    dbWriteTable(con, 'temp', data.table(a = seq.POSIXt(Sys.time(), by = 10, length.out = 10), ID = 1), overwrite = TRUE )
 
-  o = dbq(con, "select * from temp", enhance = F)
+    o = dbq(con, "select * from temp", enhance = F)
 
-  })
+    })
 
-
- test_that("dbq with a ogrinfo con returns a spatial* object ", {
-
+ test_that("dbq with an ogrinfo con returns a spatial* object ", {
     con = dbcon(user, pwd, host = host, db = db, driver = 'spatial_MySQL')
     x = dbq(con, q = 't2')
     expect_that(inherits(x, "Spatial"), is_true())
@@ -104,10 +99,17 @@ context("mysql IO")
     con = dbcon(user, host = host, db = db, driver = 'spatial_MySQL')
     x = dbq(con, q = 't3')
     expect_that(inherits(x, "Spatial"), is_true())
+    })
 
+ test_that("dbq with an ogrinfo con and an sql query returns a subset", {
+    con = dbcon(user, pwd, host = host, db = db, driver = 'spatial_MySQL')
+    x = dbq(con, q = 't2')
+    expect_that(inherits(x, "Spatial"), is_true())
 
-
-  })
+    con = dbcon(user, host = host, db = db, driver = 'spatial_MySQL')
+    x = dbq(con, q = 't3')
+    expect_that(inherits(x, "Spatial"), is_true())
+    })
 
 
 

@@ -12,7 +12,7 @@ dbq(con, q, ...)
 \item{q}{a query string. credentials are stored on disk.}
 }
 \value{
-a data.frame or a  Spatial*DataFrame (OGR_PostgreSQLDriver) for a SELECT query, or NULL for non-SELECT queries.
+a data.frame or a  Spatial*DataFrame (spatial_MySQL) for a SELECT query, or NULL for non-SELECT queries.
 }
 \description{
 query the database using an user-defined connection or a temp connection based on saved credentials.
@@ -33,12 +33,15 @@ dbq(q = 'select now()', user = 'mihai',host = 'localhost',  enhance = TRUE) \%>\
 # null return
 dbq(user = 'mihai', host = 'localhost', q = 'set @c=1')
 dbq(con, 'set @c=1')
+dbDisconnect(con)
 
 spatial return
-con = dbcon('mihai', host = 'localhost', db = 'AVES_ranges', driver = 'spatial_MySQL')
-s = dbq(con, 'ranges_birdlife_v1')
+con = dbcon('mihai', host = 'localhost', db = 'tests', driver = 'spatial_MySQL')
+s = dbq(con, q = 't3')
+s = dbq(con, q = 'select * from t3 limit 1')
 
-dbDisconnect(con)
+con = dbcon('mihai', host = 'localhost', db = 'AVES_ranges', driver = 'spatial_MySQL')
+s = dbq(con, q = "select * from breeding_ranges_v1 where scinam = 'Parus major'")
 }
 \seealso{
 \code{\link{saveCredentials}},\code{\link{dbcon}}

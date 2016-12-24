@@ -4,76 +4,16 @@
 		"selected_items":
 		[
 			[
-				"bre",
-				"breeding_ranges_v1"
-			],
-			[
-				"loc",
-				"locationDate"
-			],
-			[
-				"loca",
-				"locationClass"
-			],
-			[
-				"satt",
-				"satellite"
-			],
-			[
-				"ac",
-				"activity"
-			],
-			[
-				"tra",
-				"transmission_counter"
-			],
-			[
-				"trans",
-				"transmission_counter"
-			],
-			[
-				"tem",
-				"temperature"
-			],
-			[
-				"tepm",
-				"temperature"
-			],
-			[
-				"messa",
-				"messageDate"
-			],
-			[
-				"ex",
-				"exists\t{base}"
-			],
-			[
-				"war",
-				"wart_colour"
-			],
-			[
-				"time",
-				"time_catch"
-			],
-			[
-				"cap",
-				"capture.output\t{utils}"
-			],
-			[
-				"rele",
-				"release_datetime"
-			],
-			[
 				"m",
-				"m-foreach\tforeach parralel loop"
+				"m-require\tload packages"
 			],
 			[
-				"tabl",
-				"table_size_GB"
+				"dat",
+				"datetime_"
 			],
 			[
-				"lab",
-				"lab_ID"
+				"Sys.t",
+				"Sys.time\t{base}"
 			],
 			[
 				"prot",
@@ -131,8 +71,8 @@
 	"build_varint": "",
 	"command_palette":
 	{
-		"height": 374.0,
-		"last_filter": "ins",
+		"height": 267.0,
+		"last_filter": "",
 		"selected_items":
 		[
 			[
@@ -140,45 +80,18 @@
 				"Package Control: Install Package"
 			],
 			[
-				"rem",
-				"Package Control: Remove Package"
-			],
-			[
 				"in",
 				"Package Control: Install Package"
-			],
-			[
-				"remo",
-				"Package Control: Remove Package"
-			],
-			[
-				"u",
-				"Convert Case: Upper Case"
-			],
-			[
-				"al",
-				"Preferences: Alignment Key Bindings – Default"
-			],
-			[
-				"ali",
-				"Preferences: Alignment File Settings – Default"
-			],
-			[
-				"colo",
-				"Color Picker"
-			],
-			[
-				"co",
-				"Color Picker"
 			]
 		],
-		"width": 489.0
+		"width": 335.0
 	},
 	"console":
 	{
 		"height": 139.0,
 		"history":
 		[
+			"sublime.log_commands(True)",
 			"import urllib.request,os,hashlib; h = '2915d1851351e5ee549c20394736b442' + '8bc59f460fa1548d1514676163dafc88'; pf = 'Package Control.sublime-package'; ipp = sublime.installed_packages_path(); urllib.request.install_opener( urllib.request.build_opener( urllib.request.ProxyHandler()) ); by = urllib.request.urlopen( 'http://packagecontrol.io/' + pf.replace(' ', '%20')).read(); dh = hashlib.sha256(by).hexdigest(); print('Error validating download (got %s instead of %s), please try manual install' % (dh, h)) if dh != h else open(os.path.join( ipp, pf), 'wb' ).write(by) "
 		]
 	},
@@ -202,138 +115,121 @@
 	],
 	"file_history":
 	[
-		"/home/mihai/ownCloud/PACKAGES/sdb/R/utils.R",
-		"/home/mihai/ownCloud/PACKAGES/sdb/tests/testthat/test-1_DBIO.R",
-		"/home/mihai/ownCloud/PACKAGES/sdb/R/sql_sqlSnippets.R",
-		"/home/mihai/ownCloud/PACKAGES/sdb/vignettes/db_access.Rmd",
-		"/home/mihai/ownCloud/PACKAGES/sdb/R/dbio_mysqlCLI.R",
-		"/home/mihai/ownCloud/PACKAGES/sdb/DESCRIPTION",
-		"/home/mihai/ownCloud/PACKAGES/sysmanager/R/git.R",
-		"/home/mihai/ownCloud/PACKAGES/sysmanager/DESCRIPTION",
-		"/home/mihai/ownCloud/PACKAGES/sysmanager/notes.md",
-		"/home/mihai/ownCloud/PACKAGES/bib2/DESCRIPTION",
-		"/home/mihai/ownCloud/PACKAGES/tdm/DESCRIPTION",
-		"/home/mihai/ownCloud/PACKAGES/SNB/DESCRIPTION",
-		"/home/mihai/ownCloud/PACKAGES/gps/DESCRIPTION",
-		"/home/mihai/ownCloud/PACKAGES/geotag/DESCRIPTION",
-		"/home/mihai/ownCloud/PACKAGES/expp/DESCRIPTION",
-		"/home/mihai/ownCloud/PACKAGES/DataEntry/DESCRIPTION",
-		"/home/mihai/ownCloud/PACKAGES/bib/DESCRIPTION",
-		"/home/mihai/ownCloud/PACKAGES/sysmanager/R/AAA.R",
-		"/home/mihai/ownCloud/PACKAGES/aves/DESCRIPTION",
-		"/home/mihai/ownCloud/PACKAGES/bib2/inst/settings.R",
-		"/home/mihai/ownCloud/PACKAGES/bib2/R/utils.R",
-		"/home/mihai/ownCloud/SYSTEMS_MANAGEMENT/_project_template/intranet_versioned_Rpackage.R",
-		"/home/mihai/ownCloud/SYSTEMS_MANAGEMENT/_MONITOR/startupFeedback.Rmd",
-		"/home/mihai/ownCloud/SYSTEMS_MANAGEMENT/scidb.mpio.orn.mpg.de/CRONTAB/crontab.sh",
-		"/home/mihai/ownCloud/SYSTEMS_MANAGEMENT/_project_template/simple_nonversioned_project.R",
-		"/home/mihai/ownCloud/SYSTEMS_MANAGEMENT/linux.local/settings_db.R",
+		"/home/mihai/ownCloud/PACKAGES/sdb/R/dbio_dbq.R",
+		"/home/mihai/ownCloud/PACKAGES/sdb/R/dbio_dbcon.R",
 		"/home/mihai/ownCloud/NOTES/current_notes.todo",
-		"/home/mihai/ownCloud/SYSTEMS_MANAGEMENT/scidb.mpio.orn.mpg.de/SYSTEM/update_log.sh",
-		"/home/mihai/ownCloud/SYSTEMS_MANAGEMENT/gitlab.gwdg.de/settings.md",
-		"/home/mihai/ownCloud/SYSTEMS_MANAGEMENT/scidb.mpio.orn.mpg.de/DB/postgres_user_management.SQL",
-		"/home/mihai/ownCloud/SYSTEMS_MANAGEMENT/scicomp.mpio.orn.mpg.de/update_log.sh",
-		"/home/mihai/ownCloud/SYSTEMS_MANAGEMENT/scidb.mpio.orn.mpg.de/SYSTEM/settings.sh",
-		"/home/mihai/ownCloud/SYSTEMS_MANAGEMENT/linux.local/install.sh",
-		"/home/mihai/ownCloud/SYSTEMS_MANAGEMENT/linux.bt.laptop/log.sh",
-		"/home/mihai/ownCloud/SYSTEMS_MANAGEMENT/scidb.mpio.orn.mpg.de/SYSTEM/install_log.sh",
-		"/home/mihai/ownCloud/SYSTEMS_MANAGEMENT/_project_template/simple_private_nonversioned_project.R",
-		"/home/mihai/ownCloud/SYSTEMS_MANAGEMENT/rangemapper.orn.mpg.de/index.html",
-		"/home/mihai/ownCloud/SYSTEMS_MANAGEMENT/rangemapper.orn.mpg.de/gwdg.md",
-		"/home/mihai/ownCloud/SYSTEMS_MANAGEMENT/scidb.mpio.orn.mpg.de/CRONTAB/DATA_by_EMAIL.R",
-		"/home/mihai/ownCloud/SYSTEMS_MANAGEMENT/scicomp.mpio.orn.mpg.de/settings.sh",
-		"/home/mihai/.config/sublime-text-3/Packages/Colorsublime/Colorsublime.sublime-settings",
-		"/home/mihai/Desktop/temp.R",
-		"/home/mihai/ownCloud/SYSTEMS_MANAGEMENT/scidb.mpio.orn.mpg.de/DB/user_management.SQL",
-		"/home/mihai/ownCloud/DATABASE_MANAGEMENT/scidb.mpio.orn.mpg.de/MySQL/EXTRA_EGGSatWESTERHOLZ/protein_functions.R",
-		"/home/mihai/ownCloud/SYSTEMS_MANAGEMENT/_project_template/simple_private_versioned_project.R",
-		"/home/mihai/ownCloud/DATABASE_MANAGEMENT/scidb.mpio.orn.mpg.de/output_datasets.R",
-		"/home/mihai/ownCloud/SYSTEMS_MANAGEMENT/rangemapper.orn.mpg.de/www_gwdg/.freeze/R-forge/www/scripts/galleria/galleria-1.2.8.js",
-		"/home/mihai/ownCloud/DATABASE_MANAGEMENT/scidb.mpio.orn.mpg.de/MySQL/LOGGERSatBARROW/rfid.sql",
-		"/home/mihai/ownCloud/DATABASE_MANAGEMENT/scidb.mpio.orn.mpg.de/MySQL/LOGGERSatBARROW",
-		"/home/mihai/ownCloud/SYSTEMS_MANAGEMENT/behavioural-ecology.orn.mpg.de/LOG.sh",
-		"/home/mihai/ownCloud/SYSTEMS_MANAGEMENT/linux.local/settings_system.sh",
-		"/home/mihai/ownCloud/DATABASE_MANAGEMENT/scidb.mpio.orn.mpg.de/MySQL/DBLOG/ARGOS_dataPackageID.SQL",
-		"/home/mihai/ownCloud/DATABASE_MANAGEMENT/scidb.mpio.orn.mpg.de/MySQL/RUFFatFRIESLAND/ARGOS.R",
-		"/home/mihai/ownCloud/DATABASE_MANAGEMENT/scidb.mpio.orn.mpg.de/MySQL/EXTRA_PESAatBARROW/2016_ARGOS.SQL",
-		"/etc/apt/sources.list",
-		"/home/mihai/ownCloud/PROJECTS/COMPARATIVE/shorebirds_incubation/R/temperature_map_worldClim.R",
-		"/home/mihai/ownCloud/PROJECTS/COMPARATIVE/wall_maps/make_print.R",
-		"/home/mihai/ownCloud/DATABASE_MANAGEMENT/scidb.mpio.orn.mpg.de/MySQL/settings.SQL",
-		"/home/mihai/ownCloud/PROJECTS/COMPARATIVE/wall_maps/make_rangeMapper.R",
-		"/home/mihai/ownCloud/SYSTEMS_MANAGEMENT/linux.bt.laptop/install.sh",
-		"/home/mihai/ownCloud/DATABASE_MANAGEMENT/scidb.mpio.orn.mpg.de/MySQL/RUFFatFRIESLAND/male_type.R",
-		"/home/mihai/ownCloud/DATABASE_MANAGEMENT/scidb.mpio.orn.mpg.de/MySQL/RUFFatFRIESLAND/ARGOS_dataPackageID.R",
-		"/home/mihai/ownCloud/DATABASE_MANAGEMENT/scidb.mpio.orn.mpg.de/MySQL/RUFFatFRIESLAND/CAPTURES.R",
-		"/home/mihai/ownCloud/DATABASE_MANAGEMENT/scidb.mpio.orn.mpg.de/MySQL/EXTRA_EGGSatWESTERHOLZ/carotens_tables.R",
-		"/ds/raw_data_kemp/FIELD/Friesland/Argos_Data/Sep_2014-14_Dec_2015/15520_01.csv",
-		"/ds/raw_data_kemp/FIELD/Friesland/Argos_Data/Sep_2014-14_Dec_2015/15520_11.csv",
-		"/ds/raw_data_kemp/FIELD/Friesland/Argos_Data/Sep_2014-14_Dec_2015/15520_12.csv",
-		"/home/mihai/ownCloud/PROJECTS/Z/actograms_bootstrap/make_actograms.R",
-		"/home/mihai/ownCloud/PROJECTS/Z/actograms_bootstrap/actogram_bootstrap.Rhtml",
-		"/ds/raw_data_kemp/FIELD/Friesland/Argos_Data/Sep_2014-14_Dec_2015/15520_20.csv",
-		"/home/mihai/ownCloud/SYSTEMS_MANAGEMENT/scicomp.mpio.orn.mpg.de/install_log.sh",
-		"/home/mihai/ownCloud/DATABASE_MANAGEMENT/scidb.mpio.orn.mpg.de/MySQL/EXTRA_EGGSatWESTERHOLZ/protein_ptm_tables.R",
-		"/home/mihai/ownCloud/DATABASE_MANAGEMENT/scidb.mpio.orn.mpg.de/MySQL/EXTRA_EGGSatWESTERHOLZ/protein_groups.R",
-		"/home/mihai/ownCloud/SYSTEMS_MANAGEMENT/scidb.mpio.orn.mpg.de/CRONTAB/DATA_FROM_REMOTE_DB.R",
-		"/home/mihai/ownCloud/DATABASE_MANAGEMENT/scidb.mpio.orn.mpg.de/MySQL/BUTEOatEUROPE/buteo_morph.R",
-		"/home/mihai/ownCloud/DATABASE_MANAGEMENT/scidb.mpio.orn.mpg.de/MySQL/BUTEOatEUROPE/MTI_gps_tags.R",
-		"/var/www/html/flare.json",
-		"/var/www/html/index.html",
-		"/home/mihai/Desktop/d3jsbubbles/flare.json",
-		"/home/mihai/Desktop/d3jsbubbles/index.html",
-		"/media/mihai/M/PROJECTS/_published/2014_longevity/R/SPECIES_LEVEL_longevity_Predictors.R",
-		"/home/mihai/ownCloud/SYSTEMS_MANAGEMENT/scidb.orn.mpg.de_ubuntu/CRONTAB/DATA_FROM_REMOTE_DB.R",
-		"/ds/raw_data_kemp/FIELD/Buteo_Morph/dbdump04-02-2016-14-00.backup",
-		"/home/mihai/ownCloud/PROJECTS/BUZZARD/Buteo_Morph/R/buteo_morph_2.R",
-		"/home/mihai/ownCloud/SYSTEMS_MANAGEMENT/scidb.orn.mpg.de_ubuntu/CRONTAB/DATA_by_EMAIL.R",
-		"/home/mihai/ownCloud/DATABASE_MANAGEMENT/scidb.mpio.orn.mpg.de/MySQL/BUTEOatEUROPE/MTI_gps.R",
-		"/home/mihai/ownCloud/DATABASE_MANAGEMENT/scidb.mpio.orn.mpg.de/MySQL/BUTEOatEUROPE",
-		"/home/mihai/ownCloud/PACKAGES/buteo/R/DATA.R",
-		"/ds/raw_data_kemp/FIELD/Buteo_Morph/dbdump04-02-2016-12-07.backup",
-		"/ds/raw_data_kemp/FIELD/Buteo_Morph/dbdump04-02-2016-12-26.backup",
-		"/home/mihai/ownCloud/SYSTEMS_MANAGEMENT/scidb.orn.mpg.de_ubuntu/CRONTAB/crontab.sh",
-		"/home/mihai/ownCloud/SYSTEMS_MANAGEMENT/scicomp.orn.mpg.de/settings.sh",
-		"/home/mihai/ownCloud/DATABASE_MANAGEMENT/scidb.mpio.orn.mpg.de/MySQL/FIELD_BTatWESTERHOLZ/make_FIELD_BTatWESTERHOLZ.R",
-		"/home/mihai/ownCloud/DATABASE_MANAGEMENT/scidb.mpio.orn.mpg.de/MySQL/FIELD_BTatWESTERHOLZ/ADULTS.R",
-		"/home/mihai/ownCloud/SYSTEMS_MANAGEMENT/scidb.orn.mpg.de_suse/SYSTEM/log.md",
-		"/home/mihai/ownCloud/SYSTEMS_MANAGEMENT/scidb.orn.mpg.de_ubuntu/SYSTEM/install_log.sh",
-		"/home/mihai/ownCloud/SYSTEMS_MANAGEMENT/scidb.orn.mpg.de_ubuntu/SYSTEM/settings.sh",
-		"/home/mihai/ownCloud/SYSTEMS_MANAGEMENT/scidb.orn.mpg.de_ubuntu/CRONTAB/RUFFatFRIESLAND.R",
-		"/home/mihai/ownCloud/SYSTEMS_MANAGEMENT/scidb.orn.mpg.de_ubuntu/CRONTAB/Buteo_Morph.R",
-		"/home/mihai/ownCloud/SYSTEMS_MANAGEMENT/scidb.orn.mpg.de_ubuntu/CRONTAB/BUTEOatHOLLAND.R",
-		"/home/mihai/ownCloud/SYSTEMS_MANAGEMENT/scidb.orn.mpg.de_ubuntu/db_migration.sh",
-		"/home/mihai/ownCloud/SYSTEMS_MANAGEMENT/scidb.orn.mpg.de_ubuntu/settings.sh",
-		"/home/mihai/Desktop/temp.sql",
-		"/ds/scidbbackup/migration_backup/LOGGERSatBARROW.sql",
-		"/home/mihai/ownCloud/SYSTEMS_MANAGEMENT/scidb.orn.mpg.de_suse/MySQL/system.SQL",
-		"/home/mihai/ownCloud/SYSTEMS_MANAGEMENT/scidb.orn.mpg.de_suse/docs/scidb.orn.mpg.de/predict_DB_growth.R",
-		"/home/mihai/ownCloud/SYSTEMS_MANAGEMENT/scidb.orn.mpg.de_ubuntu/db_users.SQL",
-		"/home/mihai/ownCloud/DATABASE_MANAGEMENT/scidb.moio.orn.mpg.de/PostgreSQL/AVES/mysql_migration.R",
-		"/home/mihai/ownCloud/SYSTEMS_MANAGEMENT/scidb.orn.mpg.de_ubuntu/install_log.sh",
-		"/home/mihai/ownCloud/DATABASE_MANAGEMENT/scidb.moio.orn.mpg.de/PostgreSQL/AVES/_db_wide.R",
-		"/home/mihai/ownCloud/SYSTEMS_MANAGEMENT/scicomp.orn.mpg.de/install_log.sh",
-		"/home/mihai/ownCloud/DATABASE_MANAGEMENT/scidb.moio.orn.mpg.de/PostgreSQL/AVES/postgis.R",
-		"/home/mihai/ownCloud/SYSTEMS_MANAGEMENT/scidb.orn.mpg.de_suse/postgreSQL/users.sql",
-		"/home/mihai/ownCloud/SYSTEMS_MANAGEMENT/scidb.orn.mpg.de_ubuntu",
-		"/home/mihai/ownCloud/SYSTEMS_MANAGEMENT/scidb.orn.mpg.de/postgreSQL/settings & functions.sql",
-		"/home/mihai/ownCloud/SYSTEMS_MANAGEMENT/scidb.orn.mpg.de/SYSTEM/log.md",
-		"/home/mihai/ownCloud/PROJECTS/BLUE_TIT/EDA/heterozygosity_epp.R",
-		"/home/mihai/ownCloud/SYSTEMS_MANAGEMENT/scidb.orn.mpg.de/MySQL/BTatWESTERHOLZ/MICROSATS.R",
-		"/home/mihai/ownCloud/SYSTEMS_MANAGEMENT/scidb.orn.mpg.de/MySQL/output_datasets.R",
-		"/home/mihai/ownCloud/PROJECTS/BLUE_TIT/EDA/heterosigosity_epp.R",
-		"/home/mihai/ownCloud/PROJECTS/BLUE_TIT/EDA/GENHETv3.1.R",
-		"/home/mihai/ownCloud/PROJECTS/BLUE_TIT/EDA/year_randomEffetcts.R",
-		"/home/mihai/.config/sublime-text-3/Packages/User/bash.sublime-build",
-		"/home/mihai/ownCloud/PROJECTS/PECTORAL_SANDPIPER/Exploded_lek/R/sm_MAP_ByID/miniMaps.Rhtml",
-		"/home/mihai/ownCloud/PROJECTS/PECTORAL_SANDPIPER/Exploded_lek/R/sm_MAP_ByID/miniMaps.html",
-		"/home/mihai/.config/sublime-text-3/Packages/Alignment/Default (Linux).sublime-keymap",
-		"/home/mihai/.config/sublime-text-3/Packages/Terminal/Base File.sublime-settings",
-		"/home/mihai/.config/sublime-text-3/Packages/Default/Default (Linux).sublime-keymap"
+		"/home/mihai/ownCloud/PACKAGES/sdb/tests/testthat/test-1_DBIO.R",
+		"/home/mihai/ownCloud/PACKAGES/sdb/DESCRIPTION",
+		"/home/mihai/ownCloud/PACKAGES/sdb/R/dbio_credentials.R",
+		"/home/mihai/ownCloud/PACKAGES/sdb/R/utils.R",
+		"/home/mihai/ownCloud/PACKAGES/sdb/install.sh",
+		"/home/mihai/ownCloud/PACKAGES/sdb/sdb.sublime-project",
+		"/home/mihai/.my.cnf",
+		"/home/mihai/ownCloud/PACKAGES/sdb/R/AAA.R",
+		"/home/mihai/Desktop/Untitled Document",
+		"/home/mihai/ownCloud/PACKAGES/sdb/vignettes/db_access.Rmd",
+		"/home/mihai/ownCloud/PACKAGES/sdb/R/sql_sqlSnippets.R",
+		"/home/mihai/.config/sublime-text-3/Packages/User/SideBarEnhancements/Open With/Side Bar.sublime-menu",
+		"/home/mihai/Desktop/plotly_example/ui.R",
+		"/home/mihai/Desktop/plotly_example/server.R",
+		"/home/mihai/ownCloud/PACKAGES/sdb/inst/ui/ui.R",
+		"/home/mihai/ownCloud/PACKAGES/sdb/R/admin_OSstate.R",
+		"/tmp/tmpMl_Soz/extraparams.cnf",
+		"/home/mihai/ownCloud/PACKAGES/sdb/inst/ui/server.R",
+		"/home/mihai/ownCloud/PACKAGES/sdb/vignettes/sql_snippets.Rmd",
+		"/home/mihai/ownCloud/PACKAGES/sdb/TODO.md",
+		"/home/mihai/ownCloud/PACKAGES/sdb/inst/doc/db_access.Rmd",
+		"/home/mihai/ownCloud/PACKAGES/SNB/inst/UI/ui.R",
+		"/home/mihai/ownCloud/PACKAGES/SNB/inst/UI/server.R",
+		"/home/mihai/ownCloud/PACKAGES/sdb/R/admin_dbstate.R",
+		"/home/mihai/ownCloud/PACKAGES/sdb/R/admin_sysadmin.R",
+		"/home/mihai/uptime.log",
+		"/home/mihai/ownCloud/PACKAGES/rangeMapper/R/AllClasses.R",
+		"/home/mihai/ownCloud/PACKAGES/rangeMapper/R/AAA.R",
+		"/home/mihai/ownCloud/PACKAGES/sdb/R/db_state_latest.R",
+		"/home/mihai/ownCloud/PACKAGES/sdb/vignettes/scicomp.Rmd",
+		"/home/mihai/ownCloud/PACKAGES/sdb/inst/ui/www/index.html",
+		"/home/mihai/ownCloud/PACKAGES/sdb/R/dbcon.R",
+		"/home/mihai/ownCloud/PACKAGES/sdb/R/sqlSnippets.R",
+		"/home/mihai/ownCloud/PACKAGES/sdb/inst/snippets/man/snippets.Rmd",
+		"/home/mihai/ownCloud/SOFTWARE/sdb/DESCRIPTION",
+		"/home/mihai/.config/sublime-text-3/Packages/Default/Preferences.sublime-settings",
+		"/home/mihai/ownCloud/SOFTWARE/sdb/sdb.sublime-project",
+		"/home/mihai/ownCloud/SYSTEMS_MANAGEMENT/scidb.orn.mpg.de/MySQL/system.SQL",
+		"/home/mihai/ownCloud/PROJECTS/BLUE_TIT/Egg_Proteomics/R/1_eggMeasurements/eggMeasures.R",
+		"/home/mihai/ownCloud/PROJECTS/BLUE_TIT/Egg_Proteomics/R/2_proteins/by_prot_models.R",
+		"/home/mihai/Desktop/the-lord-of-the-rings-3.txt",
+		"/home/mihai/ownCloud/PROJECTS/BLUE_TIT/Egg_Proteomics/R/2_proteins/data.R",
+		"/home/mihai/ownCloud/SOFTWARE/rangeMapper/R/MapPlot-methods.R",
+		"/media/mihai/M/GIT/grpkempenaers/Egg_Proteomics/R/2_proteins/data.R",
+		"/media/mihai/M/GIT/grpkempenaers/Egg_Proteomics/R/2_proteins/by_prot_models.R",
+		"/media/mihai/M/GIT/grpkempenaers/Egg_Proteomics/R/2_proteins/global_models.R",
+		"/media/mihai/M/GIT/grpkempenaers/Egg_Proteomics/R/1_eggMeasurements/eggMeasures.R",
+		"/media/mihai/M/SYSTEMS_MANAGEMENT/scidb.orn.mpg.de/MySQL/EXTRA_EGGSatWESTERHOLZ/protein_tables.R",
+		"/media/mihai/M/GIT/grpkempenaers/Egg_Proteomics/R/settings.R",
+		"/media/mihai/M/GIT/grpkempenaers/Egg_Proteomics/REPORTS/Egg_predictors.png",
+		"/media/mihai/M/GIT/grpkempenaers/Egg_Proteomics/R/functions.R",
+		"/media/mihai/M/GIT/grpkempenaers/Egg_Proteomics/R/1_eggMeasurements/data.R",
+		"/media/mihai/M/GIT/grpkempenaers/Egg_Proteomics/R/1_eggMeasurements/eggMeasures_cv.R",
+		"/media/mihai/M/GIT/grpkempenaers/Egg_Proteomics/R/4_EPP/epp.R",
+		"/media/mihai/M/GIT/grpkempenaers/Egg_Proteomics/R/0_population/yearlyDifferences.R",
+		"/media/mihai/M/GIT/grpkempenaers/Egg_Proteomics/R/1_eggMeasurements/data-incubationStart.R",
+		"/media/mihai/M/GIT/grpkempenaers/Egg_Proteomics/R/1_eggMeasurements/data-incubationStart.csv",
+		"/media/mihai/M/SYSTEMS_MANAGEMENT/scidb.orn.mpg.de/MySQL/EXTRA_EGGSatWESTERHOLZ/egg_tables.R",
+		"/media/mihai/M/GIT/grpkempenaers/Egg_Proteomics/DATA/get_db.R",
+		"/media/mihai/M/GIT/grpkempenaers/Egg_Proteomics/.gitignore",
+		"/home/mihai/github/rangeMapper/R/AAA.R",
+		"/home/mihai/github/rangeMapper/R/MapPlot-methods.R",
+		"/home/mihai/github/rangeMapper/tests/testthat/test-3_output.R",
+		"/home/mihai/github/rangeMapper/tests/testthat/test-2_processRanges.R",
+		"/home/mihai/github/rangeMapper/R/style.R",
+		"/home/mihai/github/rangeMapper/R/MapFetch-methods.R",
+		"/home/mihai/github/rangeMapper/R/AllClasses.R",
+		"/home/mihai/github/rangeMapper/R/utils.R",
+		"/home/mihai/github/rangeMapper/R/utils-spatial.R",
+		"/home/mihai/github/rangeMapper/R/MapProcess-methods.R",
+		"/home/mihai/github/rangeMapper/NAMESPACE",
+		"/home/mihai/github/rangeMapper/tests/testthat/test-1_projectINI.R",
+		"/home/mihai/github/rangeMapper/tests/testthat/test-4_save.R",
+		"/home/mihai/github/rangeMapper/R/projectINI-methods.R",
+		"/home/mihai/github/rangeMapper/tests/testthat/test-projectINI.R",
+		"/home/mihai/github/rangeMapper/NEWS",
+		"/media/mihai/M/GIT/github/rangeMapper/tests/testthat/test-output.R",
+		"/media/mihai/M/GIT/github/rangeMapper/R/AAA.R",
+		"/media/mihai/M/GIT/github/rangeMapper/R/MapFetch-methods.R",
+		"/media/mihai/M/GIT/github/rangeMapper/R/MapProcess-methods.R",
+		"/media/mihai/M/GIT/github/rangeMapper/R/MapPlot-methods.R",
+		"/media/mihai/M/GIT/github/rangeMapper/R/utils-spatial.R",
+		"/media/mihai/M/GIT/github/rangeMapper/R/assemblageFetch-methods.R",
+		"/media/mihai/M/GIT/github/rangeMapper/R/rangeMapper-package.R",
+		"/media/mihai/M/GIT/github/rangeMapper/man/plot.Rd",
+		"/media/mihai/M/GIT/github/rangeMapper/R/projectINI-methods.R",
+		"/media/mihai/M/GIT/github/rangeMapper/R/MapSave-methods.R",
+		"/media/mihai/M/GIT/github/rangeMapper/R/utils.R",
+		"/media/mihai/M/GIT/github/rangeMapper/R/AllClasses.R",
+		"/media/mihai/M/GIT/github/rangeMapper/tests/testthat/test-processRanges.R",
+		"/media/mihai/M/GIT/github/rangeMapper/DESCRIPTION",
+		"/media/mihai/M/GIT/github/rangeMapper/tests/testthat/test-projectINI.R",
+		"/home/mihai/Desktop/MapProcess-methods.diff",
+		"/media/mihai/M/GIT/github/rangeMapper/R/MapExport-methods.R",
+		"/media/mihai/M/GIT/github/rangeMapper/.travis.yml",
+		"/media/mihai/M/GIT/github/rangeMapper/README.md",
+		"/media/mihai/M/GIT/github/rangeMapper/.gitignore",
+		"/media/mihai/M/GIT/github/rangeMapper/.travis.ymlold",
+		"/media/mihai/M/GIT/github/rangeMapper/R/GUI.R",
+		"/media/mihai/M/GIT/github/rangeMapper/inst/GUI/ui.R",
+		"/media/mihai/M/GIT/github/rangeMapper/inst/GUI/functions.R",
+		"/media/mihai/M/GIT/github/rangeMapper/R/MapCanvas-methods.R",
+		"/media/mihai/M/GIT/github/rangeMapper/R/metadataUpdate-methods.R",
+		"/media/mihai/M/GIT/github/rangeMapper/.TESTS.R",
+		"/media/mihai/M/GIT/github/rangeMapper/tests/testthat.R",
+		"/media/mihai/M/GIT/github/rangeMapper/R/MapProcess-methods.Rold",
+		"/home/mihai/.config/sublime-text-3/Packages/Default/Default (Linux).sublime-keymap",
+		"/home/mihai/.config/sublime-text-3/Packages/User/Default (Linux).sublime-keymap"
 	],
 	"find":
 	{
-		"height": 23.0
+		"height": 38.0
 	},
 	"find_in_files":
 	{
@@ -353,51 +249,26 @@
 		"case_sensitive": true,
 		"find_history":
 		[
-			"dbname",
-			"testuser",
-			"p_i",
-			"shiny",
-			"\">\n        <script type=\"text/javascript\">",
-			"argos",
-			"lcarballo",
-			"synonyms",
-			"body_mass_v2",
-			"auto",
-			"loggersatbarrow.rfid",
-			"EXTRA_PESAatWESTERHOLZ",
-			"2016_ARGOS",
-			"EXTRA_PESAatBARROW",
-			"buteo",
-			"trusty",
-			"`",
-			"wart",
-			"collar",
-			"\"",
-			"locationDate",
-			":=",
-			"NULL",
-			"character",
-			"factor",
-			";",
-			"`",
-			"g[i",
-			"basepath",
-			"NULL",
-			"`",
-			", ",
-			"NULL",
-			"if not exists",
-			"IF NOT EXISTS ",
-			"localcon",
-			":",
+			"driverIni(\"MySQL\")",
+			"driver",
+			"scidb.mpio.orn.mpg.de",
+			"length(o) == 0 | ",
+			"nrow(o) == 0",
+			"closeCon",
+			"con2",
+			"on.exit",
+			"on.ex",
+			"##",
+			"#2",
+			"1e282c",
+			"black",
+			"valueBox",
+			"dbState",
+			"updates",
+			"dbaccess",
+			"hours",
 			"=",
-			"migration_backup_27012016_set2",
-			".",
-			"\tloci",
-			"KOLBETERBERG",
-			"`",
-			"lab_ID",
-			"WESTERHOLZ",
+			"(q",
 			"psantema",
 			"O",
 			"6",
@@ -473,7 +344,6 @@
 		"regex": false,
 		"replace_history":
 		[
-			" ",
 			"source('./R/settings.R')",
 			"%trypar%",
 			"con"
@@ -523,7 +393,15 @@
 		]
 	},
 	"menu_visible": true,
+	"output.exec":
+	{
+		"height": 130.0
+	},
 	"output.find_results":
+	{
+		"height": 0.0
+	},
+	"output.mdpopups":
 	{
 		"height": 0.0
 	},
@@ -540,97 +418,57 @@
 		"last_filter": "",
 		"selected_items":
 		[
+			[
+				"",
+				"DESCRIPTION"
+			]
 		],
 		"width": 0.0
 	},
 	"select_project":
 	{
-		"height": 669.0,
+		"height": 500.0,
 		"last_filter": "",
 		"selected_items":
 		[
 			[
 				"",
-				"~/ownCloud/PACKAGES/sysmanager/sysmanager.sublime-project"
+				"~/ownCloud/SYSTEMS_MANAGEMENT/system_management.sublime-project"
+			],
+			[
+				"db_ma",
+				"~/ownCloud/DATABASE_MANAGEMENT/scidb.mpio.orn.mpg.de/scidb_management.sublime-project"
+			],
+			[
+				"db_",
+				"~/ownCloud/DATABASE_MANAGEMENT/scidb.mpio.orn.mpg.de/scidb_management.sublime-project"
 			],
 			[
 				"sys",
 				"~/ownCloud/PACKAGES/sysmanager/sysmanager.sublime-project"
 			],
 			[
-				"sd",
-				"~/ownCloud/PACKAGES/sdb/sdb.sublime-project"
-			],
-			[
-				"bib2",
-				"~/ownCloud/PACKAGES/bib2/bib2.sublime-project"
-			],
-			[
-				"s",
-				"~/ownCloud/PACKAGES/sysmanager/sysmanager.sublime-project"
-			],
-			[
-				"db",
-				"~/ownCloud/PACKAGES/sdb/sdb.sublime-project"
-			],
-			[
 				"d",
-				"~/ownCloud/DATABASE_MANAGEMENT/db_management.sublime-project"
-			],
-			[
-				"tdm",
-				"~/ownCloud/PACKAGES/tdm/tdm.sublime-project"
-			],
-			[
-				"se",
-				"~/ownCloud/PROJECTS/PECTORAL_SANDPIPER/sea_ice_flights/sea_ice_flights.sublime-project"
-			],
-			[
-				"ar",
-				"~/ownCloud/PACKAGES/argos/argos.sublime-workspace"
-			],
-			[
-				"ex",
-				"~/ownCloud/PROJECTS/PECTORAL_SANDPIPER/Exploded_lek/exploded_lek.sublime-project"
-			],
-			[
-				"egg",
-				"~/ownCloud/PROJECTS/BLUE_TIT/Egg_Proteomics/Egg_proteomics.sublime-project"
-			],
-			[
-				"aves",
-				"~/ownCloud/PACKAGES/aves/aves.sublime-project"
-			],
-			[
-				"SNB",
-				"~/ownCloud/PACKAGES/SNB/SNB.sublime-project"
-			],
-			[
-				"g",
-				"~/ownCloud/PACKAGES/geotag/geotag.sublime-project"
-			],
-			[
-				"geo",
-				"~/ownCloud/PACKAGES/geotag/geotag.sublime-project"
+				"~/ownCloud/DATABASE_MANAGEMENT/db_management.sublime-workspace"
 			],
 			[
 				"sni",
 				"~/ownCloud/SNIPPETS/snippets.sublime-project"
 			],
 			[
-				"pesa",
-				"~/ownCloud/PACKAGES/pesa/pesa.sublime-project"
+				"SNB",
+				"~/ownCloud/PACKAGES/SNB/SNB.sublime-project"
 			],
 			[
-				"eg",
-				"~/ownCloud/PROJECTS/BLUE_TIT/Egg_Proteomics/Egg_proteomics.sublime-project"
+				"a",
+				"~/ownCloud/PACKAGES/aves/aves.sublime-project"
 			],
 			[
-				"ru",
-				"~/ownCloud/PACKAGES/ruff/ruff.sublime-project"
+				"sysm",
+				"~/ownCloud/PACKAGES/sysmanager/sysmanager.sublime-project"
 			],
 			[
-				"e",
+				"egg",
 				"~/ownCloud/PROJECTS/BLUE_TIT/Egg_Proteomics/Egg_proteomics.sublime-project"
 			],
 			[
@@ -657,7 +495,7 @@
 	"show_open_files": false,
 	"show_tabs": true,
 	"side_bar_visible": true,
-	"side_bar_width": 239.0,
+	"side_bar_width": 191.0,
 	"status_bar_visible": true,
 	"template_settings":
 	{
