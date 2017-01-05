@@ -13,21 +13,21 @@
 #'  con = dbcon('mihai', host = 'localhost')
 #'  d1 = dbq(con, 'SELECT * from BTatWESTERHOLZ.ADULTS')
 #'  d2 = dbq(con, 'SELECT * from BTatWESTERHOLZ.ADULTS', enhance = TRUE)
-#' 
+#'
 #' # A temp. connection is made and closed once the data is retrieved
 #' dbq(q = 'select now()', user = 'mihai', host = 'localhost') %>% str
 #' dbq(q = 'select now()', user = 'mihai',host = 'localhost',  enhance = TRUE) %>% str
-#' 
+#'
 #' # null return
 #' dbq(user = 'mihai', host = 'localhost', q = 'set @c=1')
 #' dbq(con, 'set @c=1')
 #' dbDisconnect(con)
-#' 
+#'
 #' spatial return
 #' con = dbcon('mihai', host = 'localhost', db = 'tests', driver = 'spatial_MySQL')
 #' s = dbq(con, q = 't3')
 #' s = dbq(con, q = 'select * from t3 limit 1')
-#' 
+#'
 #' con = dbcon('mihai', host = 'localhost', db = 'AVES_ranges', driver = 'spatial_MySQL')
 #' s = dbq(con, q = "select * from breeding_ranges_v1 where scinam = 'Parus major'")
 
@@ -86,18 +86,25 @@ setMethod("dbq",
           signature  = c(con = "ogrinfo", q = "character"),
           definition = function(con, q, ...) {
 
-          sqllen = length(str_split(q, ' ', simplify = TRUE))  
-            
-          if( sqllen == 1)  
+          sqllen = length(str_split(q, ' ', simplify = TRUE))
+
+          if( sqllen == 1)
             o = readOGR(con$dsn, q , verbose = FALSE)
 
-          if( sqllen > 1) {
-            tf = tempfile()  
-            ogr2ogr(con$dsn, tf, sql = q,verbose = FALSE, overwrite = TRUE)
-            o = readOGR(tf, 'sql_statement' , verbose = FALSE)
-            } 
+          if( sqllen > 1) { # will go via ogr
+            tf = tempfile()
+            ogr2ogr(f = 'SQLite',
+                   src_datasource_name = con$dsn,
+                   dst_datasource_name = tf,
+                   dsco = 'SPATIALITE=yes ',
+                   dialect = "sqlite",
+                   nln = 'mysql_query'
+                   sql = q, verbose = FALSE, overwrite = TRUE)
 
-           return(o) 
+            o = readOGR(tf, 'mysql_query' , verbose = FALSE)
+            }
+
+           return(o)
 
         }
   )
