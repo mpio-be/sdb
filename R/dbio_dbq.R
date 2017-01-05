@@ -98,7 +98,7 @@ setMethod("dbq",
                    dst_datasource_name = tf,
                    dsco = 'SPATIALITE=yes ',
                    dialect = "sqlite",
-                   nln = 'mysql_query'
+                   nln = 'mysql_query',
                    sql = q, verbose = FALSE, overwrite = TRUE)
 
             o = readOGR(tf, 'mysql_query' , verbose = FALSE)
