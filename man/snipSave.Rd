@@ -8,14 +8,14 @@
 \alias{snipSearch}
 \title{SQL Snippets}
 \usage{
-snipSave(query, description = "", user, host = "localhost",
+snipSave(query, description = "", user, host = "127.0.0.1",
   validate = TRUE)
 
-snipFetch(id, user, host = "localhost")
+snipFetch(id, user, host = "127.0.0.1")
 
-snipDrop(id, user, host = "localhost")
+snipDrop(id, user, host = "127.0.0.1")
 
-snipSearch(kw, user, host = "localhost")
+snipSearch(kw, user, host = "127.0.0.1")
 
 headQuery(z, nchar = 50)
 }
@@ -26,7 +26,7 @@ headQuery(z, nchar = 50)
 
 \item{user}{database user}
 
-\item{host}{default to "localhost"}
+\item{host}{default to "127.0.0.1"}
 
 \item{validate}{if TRUE, the default then the qury is run prior to upload}
 

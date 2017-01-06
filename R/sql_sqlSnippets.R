@@ -2,7 +2,7 @@
 #'
 #' @param query        An sql query
 #' @param description  description
-#' @param host         default to "localhost"
+#' @param host         default to "127.0.0.1"
 #' @param user         database user
 #' @param validate     if TRUE, the default then the qury is run prior to upload
 #' @param f            A file
@@ -13,7 +13,7 @@
 #'
 #' @export
 #'
-snipSave         <- function(query, description='', user, host = "localhost", validate = TRUE) {
+snipSave         <- function(query, description='', user, host = "127.0.0.1", validate = TRUE) {
 
 	con = dbcon(user, host = host); on.exit(dbDisconnect(con))
 
@@ -40,7 +40,7 @@ snipSave         <- function(query, description='', user, host = "localhost", va
 
 #' @rdname snipSave
 #' @export
-snipFetch        <- function(id, user, host = "localhost") {
+snipFetch        <- function(id, user, host = "127.0.0.1") {
 
 	con = dbcon(user, host = host); on.exit(dbDisconnect(con))
 
@@ -60,7 +60,7 @@ snipFetch        <- function(id, user, host = "localhost") {
 
 #' @rdname snipSave
 #' @export
-snipDrop         <- function(id, user, host = "localhost") {
+snipDrop         <- function(id, user, host = "127.0.0.1") {
 	con = dbcon(user, host = host); on.exit(dbDisconnect(con))
 	dbq(con,  paste('DELETE FROM DBLOG.snippets where ID = ', id, 'and author = ', shQuote(user) ) )
 
@@ -69,7 +69,7 @@ snipDrop         <- function(id, user, host = "localhost") {
 
 #' @rdname snipSave
 #' @export
-snipSearch  <- function(kw, user, host = "localhost") {
+snipSearch  <- function(kw, user, host = "127.0.0.1") {
 
 	con = dbcon(user, host = host); on.exit(dbDisconnect(con))
 
