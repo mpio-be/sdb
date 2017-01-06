@@ -4,10 +4,18 @@
 \alias{mysqlrestore}
 \title{mysqlrestore}
 \usage{
-mysqlrestore(db, user = "root", filepath, call = FALSE)
+mysqlrestore(file, db, user = "root", host = "localhost", verbose = FALSE)
 }
 \arguments{
+\item{file}{sql or sql.gz file}
+
+\item{db}{database name}
+
 \item{user}{user, default to 'root'}
+
+\item{host}{default to 'localhost'}
+
+\item{verbose}{print the mysql cli call (default to FALSE)}
 }
 \description{
 restore sql file locally
@@ -16,10 +24,10 @@ restore sql file locally
 \dontrun{
 db = 'BTatWESTERHOLZ'
 fp = mysqldump(db, 'ADULTS BREEDING', 'mihai' , dir = tempdir() )
-mysqlrestore(filepath = fp, db = db)
+mysqlrestore(file = fp, db = db)
 
 fp = mysqldump(db, user = 'mihai' , dir = tempdir() )
-mysqlrestore(filepath = fp, db = db)
+mysqlrestore(file = fp, db = db)
 }
 
 

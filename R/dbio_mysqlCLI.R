@@ -108,24 +108,30 @@ mysqldump <- function(db,tables,user,host = 'scidb.mpio.orn.mpg.de', filenam, di
 #' mysqlrestore
 #'
 #' restore sql file locally
+#' @param file    sql or sql.gz file
+#' @param db      database name
 #' @param user    user, default to 'root'
+#' @param host    default to 'localhost'
+#' @param verbose print the mysql cli call (default to FALSE)
 #' @export
 #'
 #' @examples
 #' \dontrun{
 #' db = 'BTatWESTERHOLZ'
 #' fp = mysqldump(db, 'ADULTS BREEDING', 'mihai' , dir = tempdir() )
-#' mysqlrestore(filepath = fp, db = db)
+#' mysqlrestore(file = fp, db = db)
 #'
 #' fp = mysqldump(db, user = 'mihai' , dir = tempdir() )
-#' mysqlrestore(filepath = fp, db = db)
+#' mysqlrestore(file = fp, db = db)
 #' }
 #'
 #'
-mysqlrestore <- function(db, user = 'root', filepath, call = FALSE) {
-	host = 'localhost'
+mysqlrestore <- function(file, db, user = 'root', host = 'localhost', verbose = FALSE) {
+
 	con = dbcon(user = user, host = host); 	on.exit(closeCon(con))
 
+
+	if( !missing(db) )
 	dbq(con, paste('CREATE DATABASE IF NOT EXISTS', db))
 
 	crd = getCredentials(user = user, host = host)
@@ -134,8 +140,17 @@ mysqlrestore <- function(db, user = 'root', filepath, call = FALSE) {
 		crd$pwd = paste0('-p', crd$pwd) else
 		crd$pwd = ''
 
-	syscall = paste('mysql',  crd$user , crd$pwd, db, '<', filepath )
-	if(call) cat(syscall, '\n-------')
+	mysqlCall = 	paste('mysql  --max-allowed-packet 1GB', paste0('-h', host),  crd$user , crd$pwd, db)
+
+	if(tools::file_ext(file) == 'sql')
+		syscall = paste(mysqlCall, '<', file )
+
+
+	if(tools::file_ext(file) == 'gz')
+		syscall = paste('gunzip -c', shQuote(file), "|", mysqlCall)
+
+	if(verbose)
+		cat('\n----------\n', syscall, '\n----------\n')
 
 	system(syscall, wait = TRUE)
 
@@ -143,6 +158,38 @@ mysqlrestore <- function(db, user = 'root', filepath, call = FALSE) {
 
 
 
+#' mysqlrestoreSITE
+#'
+#' restore an entire db system or several db-s
+#' @param dir      a directory containing all the sql files (see mysqlrestore).
+#' @param filetype default to .sql.gz
+#' @param progress progress file, default to '/tmp/monitor_progress.txt'. use tail -f /tmp/monitor_progress.txt
+#' @param ...      further options passed to mysqlrestore
+#' @export
+#'
+#' @examples
+#' \dontrun{
+#' mysqlrestoreSITE('/media/mihai/DATA1/scidb_backup_5.01.17/',user = 'mihai', host = 'localhost', verbose = TRUE)
+#' }
+#'
+#'
+mysqlrestoreSITE <- function(dir, filetype = ".sql.gz", progress = '/tmp/monitor_progress.txt', ...) {
+
+	on.exit( file.remove(progress) )
+
+  library(doParallel)
+	cl = makePSOCKcluster(detectCores()); registerDoParallel(cl); on.exit( stopCluster(cl) )
+
+	# restore
+	sqlfiles = list.files(dir, pattern = filetype, full.names = TRUE, recursive = TRUE)
+
+		foreach( i = 1:length(sqlfiles) )  %dopar% {
+			fi = sqlfiles[i]
+ 			write.table(data.frame(i, basename(fi)), file = progress, append = TRUE, quote = FALSE, row.names = FALSE, col.names = FALSE)
+ 			mysqlrestore(file = fi, db = basename(dirname(fi)), ...)
+			}
+
+ }
 
 
 
