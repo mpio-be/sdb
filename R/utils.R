@@ -14,7 +14,7 @@ string_is_mysql_date <- function(x) {
 #' @note
 #' the functions works independently or other functions in sdb
 #'
-test_db <- function(user = 'testuser', host = 'localhost', db = 'tests', pwd, destroy = FALSE) {
+test_db <- function(user = 'testuser', host =  '127.0.0.1', db = 'tests', pwd, destroy = FALSE) {
       sapply(c('rgdal', 'rworldmap'),
        function(x) suppressPackageStartupMessages(require(x , character.only = TRUE, quietly = TRUE) ) )
 

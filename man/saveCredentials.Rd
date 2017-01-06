@@ -35,8 +35,8 @@ credentialsExist checks if credentials are saved for a specified host.
 Credentials are stored in plain text in a hidden file in your home directory. Passwords are saved obfuscated. The obfuscation is settings dependent so it is not possible to use the same credentials file on another machine.
 }
 \examples{
-saveCredentials(user = 'user_a', pwd = 'pwd_a', host = 'localhost')
-saveCredentials('user_b', 'pass_b', host = 'localhost')
+saveCredentials(user = 'user_a', pwd = 'pwd_a', host =  '127.0.0.1')
+saveCredentials('user_b', 'pass_b', host =  '127.0.0.1')
 removeCredentials()
 }
 \seealso{

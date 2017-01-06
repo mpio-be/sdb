@@ -4,7 +4,7 @@
 \alias{test_db}
 \title{Test database}
 \usage{
-test_db(user = "testuser", host = "localhost", db = "tests", pwd,
+test_db(user = "testuser", host = "127.0.0.1", db = "tests", pwd,
   destroy = FALSE)
 }
 \description{

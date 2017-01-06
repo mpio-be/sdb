@@ -5,7 +5,7 @@
 \title{dumps tables between databases (wrapper to mysqldump and mysql CLI)}
 \usage{
 my_remote2local(db, tables, remoteUser, remoteHost = "scidb.mpio.orn.mpg.de",
-  localHost = "localhost", localUser = "root", map = 1,
+  localHost = "127.0.0.1", localUser = "root", map = 1,
   call_only = FALSE, no_data = FALSE)
 }
 \arguments{

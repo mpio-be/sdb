@@ -17,7 +17,7 @@
 #'}
 my_remote2local <- function(db,	tables,	remoteUser,
 	remoteHost = 'scidb.mpio.orn.mpg.de',
-	localHost  = 'localhost',localUser  = 'root',
+	localHost  =  '127.0.0.1', localUser  = 'root',
 	map        = 1,	call_only  = FALSE,
 	no_data    = FALSE	) {
 
@@ -111,7 +111,7 @@ mysqldump <- function(db,tables,user,host = 'scidb.mpio.orn.mpg.de', filenam, di
 #' @param file    sql or sql.gz file
 #' @param db      database name
 #' @param user    user, default to 'root'
-#' @param host    default to 'localhost'
+#' @param host    default to  '127.0.0.1'
 #' @param verbose print the mysql cli call (default to FALSE)
 #' @export
 #'
@@ -126,7 +126,7 @@ mysqldump <- function(db,tables,user,host = 'scidb.mpio.orn.mpg.de', filenam, di
 #' }
 #'
 #'
-mysqlrestore <- function(file, db, user = 'root', host = 'localhost', verbose = FALSE) {
+mysqlrestore <- function(file, db, user = 'root', host =  '127.0.0.1', verbose = FALSE) {
 
 	con = dbcon(user = user, host = host); 	on.exit(closeCon(con))
 
@@ -163,17 +163,20 @@ mysqlrestore <- function(file, db, user = 'root', host = 'localhost', verbose = 
 #' restore an entire db system or several db-s
 #' @param dir      a directory containing all the sql files (see mysqlrestore).
 #' @param filetype default to .sql.gz
+#' @param exclude  db-s to exclude default to c('mysql', 'information_schema', 'performance_schema')
 #' @param progress progress file, default to '/tmp/monitor_progress.txt'. use tail -f /tmp/monitor_progress.txt
 #' @param ...      further options passed to mysqlrestore
 #' @export
 #'
 #' @examples
 #' \dontrun{
-#' mysqlrestoreSITE('/media/mihai/DATA1/scidb_backup_5.01.17/',user = 'mihai', host = 'localhost', verbose = TRUE)
+#' mysqlrestoreSITE('/media/mihai/DATA1/scidb_backup_5.01.17/',user = 'mihai', host =  '127.0.0.1', verbose = TRUE)
 #' }
 #'
 #'
-mysqlrestoreSITE <- function(dir, filetype = ".sql.gz", progress = '/tmp/monitor_progress.txt', ...) {
+mysqlrestoreSITE <- function(dir, filetype = ".sql.gz",
+										exclude = c('mysql', 'information_schema', 'performance_schema'),
+										progress = '/tmp/monitor_progress.txt', ...) {
 
 	on.exit( file.remove(progress) )
 
@@ -185,8 +188,12 @@ mysqlrestoreSITE <- function(dir, filetype = ".sql.gz", progress = '/tmp/monitor
 
 		foreach( i = 1:length(sqlfiles) )  %dopar% {
 			fi = sqlfiles[i]
+			dbi = basename(dirname(fi))
  			write.table(data.frame(i, basename(fi)), file = progress, append = TRUE, quote = FALSE, row.names = FALSE, col.names = FALSE)
- 			mysqlrestore(file = fi, db = basename(dirname(fi)), ...)
+
+ 			if(!dbi%in%exclude)
+ 				mysqlrestore(file = fi, db = dbi, ...)
+
 			}
 
  }

@@ -10,25 +10,25 @@
 #' @return a data.frame or a  Spatial*DataFrame (spatial_MySQL) for a SELECT query, or NULL for non-SELECT queries.
 #' @examples
 #' # A connection is made and used by dbq
-#'  con = dbcon('mihai', host = 'localhost')
+#'  con = dbcon('mihai', host =  '127.0.0.1')
 #'  d1 = dbq(con, 'SELECT * from BTatWESTERHOLZ.ADULTS')
 #'  d2 = dbq(con, 'SELECT * from BTatWESTERHOLZ.ADULTS', enhance = TRUE)
 #'
 #' # A temp. connection is made and closed once the data is retrieved
-#' dbq(q = 'select now()', user = 'mihai', host = 'localhost') %>% str
-#' dbq(q = 'select now()', user = 'mihai',host = 'localhost',  enhance = TRUE) %>% str
+#' dbq(q = 'select now()', user = 'mihai', host =  '127.0.0.1') %>% str
+#' dbq(q = 'select now()', user = 'mihai',host =  '127.0.0.1',  enhance = TRUE) %>% str
 #'
 #' # null return
-#' dbq(user = 'mihai', host = 'localhost', q = 'set @c=1')
+#' dbq(user = 'mihai', host =  '127.0.0.1', q = 'set @c=1')
 #' dbq(con, 'set @c=1')
 #' dbDisconnect(con)
 #'
 #' spatial return
-#' con = dbcon('mihai', host = 'localhost', db = 'tests', driver = 'spatial_MySQL')
+#' con = dbcon('mihai', host =  '127.0.0.1', db = 'tests', driver = 'spatial_MySQL')
 #' s = dbq(con, q = 't3')
 #' s = dbq(con, q = 'select * from t3 limit 1')
 #'
-#' con = dbcon('mihai', host = 'localhost', db = 'AVES_ranges', driver = 'spatial_MySQL')
+#' con = dbcon('mihai', host =  '127.0.0.1', db = 'AVES_ranges', driver = 'spatial_MySQL')
 #' s = dbq(con, q = "select * from breeding_ranges_v1 where scinam = 'Parus major'")
 
 
@@ -76,7 +76,7 @@ setMethod("dbq",
           }
   )
 
-
+#TODO: CHECK and add tests
 #' @export
 #' @import rgdal
 #' @import gdalUtils

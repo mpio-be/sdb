@@ -4,13 +4,16 @@
 \alias{mysqlrestoreSITE}
 \title{mysqlrestoreSITE}
 \usage{
-mysqlrestoreSITE(dir, filetype = ".sql.gz",
+mysqlrestoreSITE(dir, filetype = ".sql.gz", exclude = c("mysql",
+  "information_schema", "performance_schema"),
   progress = "/tmp/monitor_progress.txt", ...)
 }
 \arguments{
 \item{dir}{a directory containing all the sql files (see mysqlrestore).}
 
 \item{filetype}{default to .sql.gz}
+
+\item{exclude}{db-s to exclude default to c('mysql', 'information_schema', 'performance_schema')}
 
 \item{progress}{progress file, default to '/tmp/monitor_progress.txt'. use tail -f /tmp/monitor_progress.txt}
 
@@ -21,7 +24,7 @@ restore an entire db system or several db-s
 }
 \examples{
 \dontrun{
-mysqlrestoreSITE('/media/mihai/DATA1/scidb_backup_5.01.17/AVESatBARROW/',user = 'mihai', host = 'localhost', verbose = TRUE)
+mysqlrestoreSITE('/media/mihai/DATA1/scidb_backup_5.01.17/',user = 'mihai', host =  '127.0.0.1', verbose = TRUE)
 }
 
 

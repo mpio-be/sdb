@@ -15,8 +15,8 @@
 #' Credentials are stored in plain text in a hidden file in your home directory. Passwords are saved obfuscated. The obfuscation is settings dependent so it is not possible to use the same credentials file on another machine.
 
 #' @examples
-#' saveCredentials(user = 'user_a', pwd = 'pwd_a', host = 'localhost')
-#' saveCredentials('user_b', 'pass_b', host = 'localhost')
+#' saveCredentials(user = 'user_a', pwd = 'pwd_a', host =  '127.0.0.1')
+#' saveCredentials('user_b', 'pass_b', host =  '127.0.0.1')
 #' removeCredentials()
 saveCredentials   <- function(user, pwd, host , db, path) {
   if(missing(path)) path = credentialsPath()
@@ -37,7 +37,7 @@ saveCredentials   <- function(user, pwd, host , db, path) {
   }
 
 #' @rdname saveCredentials
-#' @export 
+#' @export
 credentialsExist  <- function(host , path) {
   if(missing(path)) path = credentialsPath()
 
@@ -50,7 +50,7 @@ credentialsExist  <- function(host , path) {
    }
 
 #' @rdname saveCredentials
-#' @export 
+#' @export
 removeCredentials <- function(path ) {
 	 if(missing(path)) path = credentialsPath()
      sapply(rnorm(100), function(x) write(x, file = path) )
@@ -58,7 +58,7 @@ removeCredentials <- function(path ) {
 	 }
 
 #' @rdname saveCredentials
-#' @export 
+#' @export
 getCredentials    <- function(user, db, host, path) {
     if(missing(path)) path = credentialsPath()
 
@@ -86,7 +86,7 @@ getCredentials    <- function(user, db, host, path) {
     }
 
 #' @rdname saveCredentials
-#' @export 
+#' @export
 credentialsPath <- function() {
   file = if(Sys.info()["sysname"] == "Windows") ".sdb." else ".sdb"
   paste( path.expand("~"), file , sep = .Platform$file.sep )
