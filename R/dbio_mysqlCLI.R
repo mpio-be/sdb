@@ -140,7 +140,7 @@ mysqlrestore <- function(file, db, user = 'root', host =  '127.0.0.1', verbose =
 		crd$pwd = paste0('-p', crd$pwd) else
 		crd$pwd = ''
 
-	mysqlCall = 	paste('mysql  --max-allowed-packet 1GB', paste0('-h', host),  crd$user , crd$pwd, db)
+	mysqlCall = 	paste('mysql  --max-allowed-packet 4GB --net_buffer_length=1000000', paste0('-h', host),  crd$user , crd$pwd, db)
 
 	if(tools::file_ext(file) == 'sql')
 		syscall = paste(mysqlCall, '<', file )

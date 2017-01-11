@@ -35,7 +35,7 @@ dbq(user = 'mihai', host =  '127.0.0.1', q = 'set @c=1')
 dbq(con, 'set @c=1')
 dbDisconnect(con)
 
-spatial return
+# spatial return
 con = dbcon('mihai', host =  '127.0.0.1', db = 'tests', driver = 'spatial_MySQL')
 s = dbq(con, q = 't3')
 s = dbq(con, q = 'select * from t3 limit 1')

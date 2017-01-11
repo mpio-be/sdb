@@ -2,6 +2,8 @@ host  = '127.0.0.1'
 user  = 'testuser'
 pwd   = 'cs'
 db    = 'tests'
+#######################################################
+
 test_db(user = user, host = host, db = db, pwd = pwd)
 
 context("Credentials")
@@ -24,14 +26,14 @@ context("Credentials")
 
  test_that("Wrong credentials return error", {
 
-  expect_true( saveCredentials(user, 'wrong pwd', host = host) )
+    expect_true( saveCredentials(user, 'wrong pwd', host = host) )
 
-  expect_error ( dbcon('test', host = host ) )
+    expect_error ( dbcon('test', host = host ) )
 
-  expect_true( saveCredentials(user, pwd, host = host) )
+    expect_true( saveCredentials(user, pwd, host = host) )
 
 
-  })
+    })
 
 context("Connections")
 
@@ -107,7 +109,7 @@ context("mysql IO")
     expect_that(inherits(x, "Spatial"), is_true())
 
     con = dbcon(user, host = host, db = db, driver = 'spatial_MySQL')
-    x = dbq(con, q = 't3')
+    x = dbq(con, q = 'select * from t3 where scalerank = 1')
     expect_that(inherits(x, "Spatial"), is_true())
     })
 

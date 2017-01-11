@@ -10,8 +10,10 @@
 #'
 #' @author Mihai Valcu \email{valcu@@orn.mpg.de}
 #'
-#'
-#' @keywords package
+#' @import data.table
+#' @import rgdal
+#' @import sp
+#' @import gdalUtils
 
 
 .onLoad <- function(libname, pkgname){
@@ -22,4 +24,7 @@
     packageStartupMessage("sdb might not work under", OS)
 
 	}
+
+
+
 

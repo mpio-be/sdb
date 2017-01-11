@@ -15,5 +15,4 @@ An interface to \href{http://scidb.mpio.orn.mpg.de}{scidb.mpio.orn.mpg.de} datab
 \author{
 Mihai Valcu \email{valcu@orn.mpg.de}
 }
-\keyword{package}
 

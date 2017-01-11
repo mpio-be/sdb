@@ -23,7 +23,7 @@
 #' dbq(con, 'set @c=1')
 #' dbDisconnect(con)
 #'
-#' spatial return
+#' # spatial return
 #' con = dbcon('mihai', host =  '127.0.0.1', db = 'tests', driver = 'spatial_MySQL')
 #' s = dbq(con, q = 't3')
 #' s = dbq(con, q = 'select * from t3 limit 1')
@@ -37,9 +37,15 @@ setGeneric("dbq", function(con,q, ...)   standardGeneric("dbq") )
 #' Enhance a data.table by reference
 #' @export
 enhanceOutput <- function(d) {
+    requireNamespace("data.table", quietly=TRUE)
   # find datetime
-    datetime_cols <- d[1 : (if(nrow(d) < 5000) nrow(d) else 5000) ][, sapply(.SD, string_is_mysql_date) ]
+    n = nrow(d)
+    n = if(n < 5000) n else 5000
+
+    datetime_cols <- d[1:n, sapply(.SD, string_is_mysql_date) ]
     datetime_cols <- datetime_cols[which(datetime_cols)] %>% names
+
+
     if(length(datetime_cols) > 0)
     d[ , (datetime_cols) := lapply(.SD, as.POSIXct), .SDcols = datetime_cols ]
 
@@ -62,6 +68,8 @@ setMethod("dbq",
           setDT(o)
           if(enhance) enhanceOutput(o)
 
+          if(nrow(o) == 0 & ncol(o) == 0)  o = NULL
+
           return(o)
 
            }
@@ -78,9 +86,6 @@ setMethod("dbq",
 
 #TODO: CHECK and add tests
 #' @export
-#' @import rgdal
-#' @import gdalUtils
-#' @import sp
 setOldClass("ogrinfo")
 setMethod("dbq",
           signature  = c(con = "ogrinfo", q = "character"),
@@ -91,17 +96,20 @@ setMethod("dbq",
           if( sqllen == 1)
             o = readOGR(con$dsn, q , verbose = FALSE)
 
-          if( sqllen > 1) { # will go via ogr
-            tf = tempfile()
-            ogr2ogr(f = 'SQLite',
+          if( sqllen > 1) {  # will go via ogr
+            tf = tempfile(fileext = '.sqlite')
+
+               gdalUtils::ogr2ogr(f     = 'SQLite',
                    src_datasource_name = con$dsn,
                    dst_datasource_name = tf,
-                   dsco = 'SPATIALITE=yes ',
-                   dialect = "sqlite",
-                   nln = 'mysql_query',
-                   sql = q, verbose = FALSE, overwrite = TRUE)
+                   dsco                = 'SPATIALITE=yes',
+                   dialect             = "sqlite",
+                   nln                 = 'mysql_query',
+                   sql                 = q, verbose = FALSE, overwrite = TRUE)
 
             o = readOGR(tf, 'mysql_query' , verbose = FALSE)
+
+            message(paste('The query was saved on disk to '), tf, ' and its output read with readOGR(tf,"mysql_query")')
             }
 
            return(o)
