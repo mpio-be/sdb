@@ -587,9 +587,13 @@
 	"select_project":
 	{
 		"height": 669.0,
-		"last_filter": "sci",
+		"last_filter": "zz",
 		"selected_items":
 		[
+			[
+				"zz",
+				"~/ownCloud/PACKAGES/zz/zz.sublime-project"
+			],
 			[
 				"sci",
 				"~/ownCloud/DATABASE_MANAGEMENT/scidb.mpio.orn.mpg.de/scidb_management.sublime-project"
