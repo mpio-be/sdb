@@ -2,7 +2,9 @@
 
 #' Connect to a database
 #'
-#' @description     \code{dbcon} returns a database connection. If user and password are not given dbq looks for previously save credentials see(  \code{\link{saveCredentials}} ). \code{\link{closeCon}} closes the connection.
+#' @description     \code{dbcon} returns a database connection.
+#'                   If user and password are not given dbq looks for previously saved credentials
+#'                   see(  \code{\link{saveCredentials}} ). \code{\link{closeCon}} closes the connection.
 #' @param user      username
 #' @param password  password ("" or NA means no password e.g. for localhost)
 #' @param database  database to connect to
@@ -48,8 +50,8 @@ setGeneric("closeCon", function(con)   standardGeneric("closeCon") )
 setMethod("closeCon",
           signature  = c(con = "MySQLConnection"),
           definition = function(con) {
-      dbDisconnect(con) 
-    })     
+      dbDisconnect(con)
+    })
 
 
 

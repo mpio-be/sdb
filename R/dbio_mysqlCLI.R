@@ -170,7 +170,7 @@ mysqlrestore <- function(file, db, user = 'root', host =  '127.0.0.1', verbose =
 #'
 #' @examples
 #' \dontrun{
-#' mysqlrestoreSITE('/media/mihai/DATA1/scidb_backup_5.01.17/',user = 'mihai', host =  '127.0.0.1', verbose = TRUE)
+#' mysqlrestoreSITE('..../scidb_backup_5.01.17/',user = 'mihai', host =  '127.0.0.1', verbose = TRUE)
 #' }
 #'
 #'

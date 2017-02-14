@@ -10,6 +10,7 @@ Imports:
     methods,
     data.table
 Suggests:
+    rgdal,
     gdalUtils,
     knitr,
     shinyAce,
@@ -19,6 +20,6 @@ VignetteBuilder: knitr
 Title: Database tools
 Author: Mihai Valcu
 Maintainer: Mihai Valcu <valcu@orn.mpg.de>
-Description: Database tools (mysql and postgres)
+Description:  MariaDB Database Tools 
 License: MPIO
 RoxygenNote: 5.0.1
