@@ -2,8 +2,8 @@
 % Please edit documentation in R/AAA.R
 \docType{package}
 \name{sdb}
-\alias{.onLoad}
 \alias{sdb}
+\alias{.onLoad}
 \alias{sdb-package}
 \title{\strong{s}cidb \strong{d}ata \strong{b}ase interface}
 \usage{
@@ -15,4 +15,3 @@ An interface to \href{http://scidb.mpio.orn.mpg.de}{scidb.mpio.orn.mpg.de} datab
 \author{
 Mihai Valcu \email{valcu@orn.mpg.de}
 }
-

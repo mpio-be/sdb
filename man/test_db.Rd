@@ -11,6 +11,5 @@ test_db(user = "testuser", host = "127.0.0.1", db = "tests", pwd,
 Installs or destroys a mariadb test database
 }
 \note{
-the functions works independently or other functions in sdb
+test_db() works independently on other functions in sdb
 }
-

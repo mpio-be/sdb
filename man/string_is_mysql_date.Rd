@@ -9,4 +9,3 @@ string_is_mysql_date(x)
 \description{
 string_is_mysql_date
 }
-

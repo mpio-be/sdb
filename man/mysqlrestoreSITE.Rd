@@ -24,9 +24,8 @@ restore an entire db system or several db-s
 }
 \examples{
 \dontrun{
-mysqlrestoreSITE('/media/mihai/DATA1/scidb_backup_5.01.17/',user = 'mihai', host =  '127.0.0.1', verbose = TRUE)
+mysqlrestoreSITE('..../scidb_backup_5.01.17/',user = 'mihai', host =  '127.0.0.1', verbose = TRUE)
 }
 
 
 }
-

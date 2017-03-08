@@ -1,11 +1,12 @@
 Package: sdb
-Version: 2016.8
+Version: 2017.1
 Type: Package
 Depends:
     R (>= 3.0.0),
     magrittr,
     stringr,
-    RMySQL
+    RMySQL,
+    data.table
 Imports:
     methods,
     data.table
@@ -20,6 +21,6 @@ VignetteBuilder: knitr
 Title: Database tools
 Author: Mihai Valcu
 Maintainer: Mihai Valcu <valcu@orn.mpg.de>
-Description:  MariaDB Database Tools 
+Description: MariaDB Database Tools 
 License: MPIO
-RoxygenNote: 5.0.1
+RoxygenNote: 6.0.0

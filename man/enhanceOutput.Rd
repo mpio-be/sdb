@@ -9,4 +9,3 @@ enhanceOutput(d)
 \description{
 Enhance a data.table by reference
 }
-

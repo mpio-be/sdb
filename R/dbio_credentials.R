@@ -24,14 +24,13 @@ saveCredentials   <- function(user, pwd, host , db, path) {
 
   d = data.frame(user, pwd, db, host, stringsAsFactors = FALSE)
   if(  file.exists(path) )  {
-      e = read.table(path, sep = '@', header = TRUE, stringsAsFactors = FALSE)
-      e$pwd = .maskpwd(e$pwd, path = path, mask = FALSE)
+      e = read.table(path, sep = ';', header = TRUE, stringsAsFactors = FALSE)
+
       d = rbind(d, e )
       d =  d[!duplicated( paste(d$user,d$host, d$db)), ]
       }
-  d$pwd = .maskpwd(d$pwd, path = path, mask = TRUE)
 
-  write.table(d, file = path, append = FALSE, sep = "@", row.names = FALSE)
+  write.table(d, file = path, append = FALSE, sep = ';', row.names = FALSE)
   if(Sys.info()["sysname"] == "Windows") system(paste('attrib +h', path) )
    return(TRUE)
   }
@@ -43,7 +42,7 @@ credentialsExist  <- function(host , path) {
 
   if( ! file.exists(path) ) return(FALSE)
   if( file.exists(path ) )  {
-    x =read.table(path, sep = '@', header = TRUE)
+    x =read.table(path, sep = ';', header = TRUE)
     if(host%in%x$host) return(TRUE) else
         return(FALSE)
     }
@@ -53,22 +52,20 @@ credentialsExist  <- function(host , path) {
 #' @export
 removeCredentials <- function(path ) {
 	 if(missing(path)) path = credentialsPath()
-     sapply(rnorm(100), function(x) write(x, file = path) )
-     file.remove(path)
+       file.remove(path)
 	 }
 
 #' @rdname saveCredentials
 #' @export
-getCredentials    <- function(user, db, host, path) {
+getCredentials    <- function(user, db, host, path, show = FALSE) {
     if(missing(path)) path = credentialsPath()
 
     if( !credentialsExist(host, path) ) stop('There are no credentials saved for ', host, ' on ', dirname(path) )
 
-    x = read.table(path, sep = '@', header = TRUE , stringsAsFactors = FALSE)
+    x = read.table(path, sep = ';' , header = TRUE ,  stringsAsFactors = FALSE)
 
     x = x[x$host == host, ]
 
-    # if(!missing(db))   x = x[x$db %in% db, ]
     if(!missing(user)) x = x[x$user == user, ]
 
     if(nrow(x) > 1) {
@@ -79,25 +76,16 @@ getCredentials    <- function(user, db, host, path) {
       x = x[1, ]
       }
 
-     x$pwd = .maskpwd(x$pwd, path = path, mask = FALSE)
-
-     return(invisible(x))
+     if(show) return(x)  else
+      return(invisible(x))
 
     }
 
 #' @rdname saveCredentials
 #' @export
 credentialsPath <- function() {
-  file = if(Sys.info()["sysname"] == "Windows") ".sdb." else ".sdb"
+  file = if(Sys.info()["sysname"] == "Windows") ".sdbcnf." else ".sdbcnf"
   paste( path.expand("~"), file , sep = .Platform$file.sep )
   }
 
-.maskpwd <- function(pwd, path, mask = TRUE) {
-  s = as.numeric(factor(strsplit(path, "")[[1]]))
-  a = c(LETTERS, letters, unique(s), " ")
-  b = a[length(a):1]
-  a = paste(a, collapse = "")
-  b = paste(b, collapse = "")
-  if(mask) chartr(a, b, pwd) else
-  chartr(b, a, pwd)
-  }
+

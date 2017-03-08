@@ -19,7 +19,7 @@ test_db <- function(user = 'testuser', host =  '127.0.0.1', db = 'tests', pwd, d
        function(x) suppressPackageStartupMessages(require(x , character.only = TRUE, quietly = TRUE) ) )
 
       DSN = paste0('MYSQL:',db ,',user=', user, ',host=', host, ',password=', pwd)
-      ogrListLayers(DSN)
+      # ogrListLayers(DSN)
 
       # pwd = readLines('~/.my.cnf')[grep('password', readLines('~/.my.cnf'))]
       # pwd = str_extract(pwd, '[^=]*$') %>% str_trim() %>% str_replace_all("'", "") %>% str_replace_all('"', "")

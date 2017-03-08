@@ -46,4 +46,3 @@ s = dbq(con, q = "select * from breeding_ranges_v1 where scinam = 'Parus major'"
 \seealso{
 \code{\link{saveCredentials}},\code{\link{dbcon}}
 }
-
