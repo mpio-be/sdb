@@ -1,6 +1,6 @@
 ## ------------------------------------------------------------------------
 require(sdb)
-Host = 'scidb.mpio.orn.mpg.de'
+Host = '127.0.0.1'
 
 id = snipSave(query = 'SELECT * FROM BTatWESTERHOLZ.BREEDING limit 1',
             description = 'select the first line of the table', user = 'mihai', host = Host)
