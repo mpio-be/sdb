@@ -63,7 +63,7 @@ enhanceOutput <- function(d) {
 setMethod("dbq",
           signature  = c(con = "MySQLConnection", q = "character"),
           definition = function(con, q, enhance = FALSE, ...) {
-			    o = dbGetQuery(con, q, ...)
+			    o = suppressWarnings( dbGetQuery(con, q, ...) )
 
           setDT(o)
           if(enhance) enhanceOutput(o)

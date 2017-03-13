@@ -82,6 +82,7 @@
 	"expanded_folders":
 	[
 		"/home/mihai/ownCloud/PACKAGES/sdb",
+		"/home/mihai/ownCloud/PACKAGES/sdb/R",
 		"/home/mihai/ownCloud/PACKAGES/sdb/tests",
 		"/home/mihai/ownCloud/PACKAGES/sdb/tests/testthat",
 		"/home/mihai/ownCloud/PACKAGES/sdb/vignettes"
@@ -238,9 +239,13 @@
 	"select_project":
 	{
 		"height": 500.0,
-		"last_filter": "",
+		"last_filter": "data",
 		"selected_items":
 		[
+			[
+				"data",
+				"~/ownCloud/PACKAGES/DataEntry/DataEntry.sublime-project"
+			],
 			[
 				"",
 				"~/ownCloud/SYSTEMS_MANAGEMENT/system_management.sublime-project"
