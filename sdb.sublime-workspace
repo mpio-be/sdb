@@ -239,9 +239,13 @@
 	"select_project":
 	{
 		"height": 500.0,
-		"last_filter": "data",
+		"last_filter": "egg",
 		"selected_items":
 		[
+			[
+				"egg",
+				"~/ownCloud/PROJECTS/BLUE_TIT/Egg_Proteomics/Egg_proteomics.sublime-project"
+			],
 			[
 				"data",
 				"~/ownCloud/PACKAGES/DataEntry/DataEntry.sublime-project"
