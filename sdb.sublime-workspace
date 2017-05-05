@@ -1,0 +1,348 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"relea",
+				"released_time"
+			],
+			[
+				"temp",
+				"tempfile\t{base}"
+			],
+			[
+				"nest",
+				"nests"
+			],
+			[
+				"geom_",
+				"geom_point"
+			]
+		]
+	},
+	"buffers":
+	[
+	],
+	"build_system": "",
+	"build_system_choices":
+	[
+	],
+	"build_varint": "",
+	"command_palette":
+	{
+		"height": 400.0,
+		"last_filter": "del",
+		"selected_items":
+		[
+			[
+				"del",
+				"ANF: Delete File"
+			],
+			[
+				"al",
+				"Preferences: Alignment Key Bindings – Default"
+			],
+			[
+				"align",
+				"Preferences: Alignment Key Bindings – Default"
+			],
+			[
+				"in",
+				"Indent XML"
+			],
+			[
+				"ins",
+				"Package Control: Install Package"
+			],
+			[
+				"color",
+				"Colorsublime: Install Theme"
+			]
+		],
+		"width": 609.0
+	},
+	"console":
+	{
+		"height": 0.0,
+		"history":
+		[
+		]
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"expanded_folders":
+	[
+		"/home/mihai/ownCloud/PACKAGES/sdb",
+		"/home/mihai/ownCloud/PACKAGES/sdb/R",
+		"/home/mihai/ownCloud/PACKAGES/sdb/inst"
+	],
+	"file_history":
+	[
+		"/home/mihai/ownCloud/PACKAGES/sdb/R/dbio_mysqlCLI.R",
+		"/home/mihai/ownCloud/PACKAGES/sdb/DESCRIPTION",
+		"/home/mihai/ownCloud/PACKAGES/wader/README.txt",
+		"/home/mihai/ownCloud/PACKAGES/wader/inst/install_server.R",
+		"/home/mihai/ownCloud/PACKAGES/wader/inst/installed_cronjobs.md",
+		"/home/mihai/ownCloud/SYSTEMS_MANAGEMENT/linux.PCs/linux_alaska.sh",
+		"/home/mihai/ownCloud/PACKAGES/wader/R/AAA.R",
+		"/home/mihai/ownCloud/PACKAGES/wader/README.md",
+		"/home/mihai/ownCloud/PACKAGES/wader/todo.md",
+		"/home/mihai/ownCloud/PACKAGES/wader/inst/install_cronjobs.R",
+		"/home/mihai/ownCloud/PACKAGES/wader/inst/UI/docs/garmin_oregon_450.md",
+		"/home/mihai/ownCloud/PACKAGES/wader/inst/DB_structure/barebone_DB.sql",
+		"/home/mihai/ownCloud/PACKAGES/wader/inst/UI/main/global.R",
+		"/home/mihai/ownCloud/PACKAGES/wader/inst/UI/main/server.R",
+		"/home/mihai/ownCloud/PACKAGES/wader/inst/UI/main/ui.R",
+		"/home/mihai/ownCloud/PACKAGES/wader/DESCRIPTION",
+		"/home/mihai/ownCloud/PACKAGES/wader/R/gps.R",
+		"/home/mihai/ownCloud/PACKAGES/wader/R/utils.R",
+		"/home/mihai/ownCloud/PACKAGES/wader/server_install.R",
+		"/home/mihai/ownCloud/PACKAGES/wader/inst/demo/.install.R",
+		"/home/mihai/ownCloud/PACKAGES/wader/inst/DB_structure/init_data.sql",
+		"/home/mihai/ownCloud/NOTES/current_notes.todo",
+		"/home/mihai/ownCloud/PACKAGES/wader/R/data_elements.R",
+		"/home/mihai/ownCloud/PACKAGES/wader/R/map_elements.R",
+		"/home/mihai/Desktop/temp.R",
+		"/home/mihai/ownCloud/PACKAGES/wader/inst/map_src/_export_to_data.R",
+		"/home/mihai/ownCloud/PACKAGES/wader/inst/UI/DataEntry/NESTS/global.R",
+		"/home/mihai/ownCloud/PACKAGES/wader/inst/demo/tables_definition.sql",
+		"/home/mihai/ownCloud/PACKAGES/wader/inst/UI/DataEntry/EGGS_CHICKS/global.R",
+		"/home/mihai/ownCloud/PACKAGES/wader/inst/UI/DataEntry/CAPTURES/global.R",
+		"/home/mihai/R/x86_64-pc-linux-gnu-library/3.4/wader/demo/tables_definition.sql",
+		"/home/mihai/.config/sublime-text-3/Packages/Alignment/Default (Linux).sublime-keymap",
+		"/home/mihai/reph_dump.sql",
+		"/home/mihai/ownCloud/PACKAGES/wader/inst/UI/DataEntry/RESIGHTINGS/global.R",
+		"/home/mihai/ownCloud/PACKAGES/DataEntry/inst/UI/DB/BTatWESTERHOLZ/ADULTS/global.R",
+		"/home/mihai/ownCloud/PACKAGES/DataEntry/R/ui_helpers.R",
+		"/home/mihai/ownCloud/PACKAGES/DataEntry/notes.md",
+		"/home/mihai/ownCloud/PACKAGES/wader/inst/UI/main/www/text.js",
+		"/media/mihai/GARMIN/.Trash-1000/dummy.gpx",
+		"/home/mihai/ownCloud/PACKAGES/sysmanager/R/install_site.R",
+		"/etc/sh",
+		"/tmp/RtmpqJv7xO/file1c1f410fd7ff.gpx",
+		"/tmp/RtmpCbGZt6/file13557ef6e4bd.gpx",
+		"/tmp/RtmpCbGZt6/file1355127fa1f5.gpx",
+		"/home/mihai/ownCloud/PACKAGES/wader/inst/demo/install_demo.R",
+		"/home/mihai/ownCloud/PACKAGES/bib2/inst/UI/main/server.R",
+		"/home/mihai/ownCloud/PACKAGES/bib2/inst/UI/main/global.R",
+		"/home/mihai/ownCloud/PACKAGES/bib2/R/map_elements.R",
+		"/home/mihai/ownCloud/PACKAGES/bib2/R/plot_elements.R",
+		"/home/mihai/ownCloud/PACKAGES/bib2/inst/UI/main/ui.R",
+		"/home/mihai/R/x86_64-pc-linux-gnu-library/3.4",
+		"/home/mihai/ownCloud/PACKAGES/wader/inst/demo/GARMIN/GPX/Waypoints_18-APR-17.gpx",
+		"/home/mihai/ownCloud/PACKAGES/wader/inst/demo/GARMIN/GPX/POI.gpx",
+		"/home/mihai/.config/sublime-text-3/Packages/User/SideBarEnhancements/Open With/Side Bar.sublime-menu",
+		"/etc/default/locale",
+		"/home/mihai/ownCloud/PACKAGES/wader/R/db_queries.R",
+		"/home/mihai/ownCloud/PACKAGES/wader/inst/gps/garmin_oregon_450.md",
+		"/home/mihai/Desktop/linux_desktops.sh",
+		"/home/mihai/ownCloud/PACKAGES/U/install.sh",
+		"/etc/bash.bashrc",
+		"/home/mihai/ownCloud/PACKAGES/sysmanager/install.R",
+		"/home/mihai/.config/doublecmd/doublecmd.xml[A",
+		"/home/mihai/Desktop/linux_desktops.md"
+	],
+	"find":
+	{
+		"height": 38.0
+	},
+	"find_in_files":
+	{
+		"height": 0.0,
+		"where_history":
+		[
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+			"ML",
+			"; ",
+			"200",
+			"map_layers",
+			"WITH",
+			"Behaviour",
+			"COMMENT",
+			"DEFAULT",
+			"Interaction: AC=Aerial Chase",
+			"Interaction: AC=Aeria",
+			"COMMENT",
+			"DEFAULT",
+			"Interaction: AC=Aerial Chase",
+			"Captured individuals was with",
+			"captured in",
+			"NULL",
+			"COMMENT",
+			"comment",
+			"COMMENT",
+			"NULL",
+			"DEFAULT",
+			"COMMENT",
+			"`",
+			"h",
+			"H",
+			"host",
+			"= ",
+			"=",
+			"nests",
+			"resightings",
+			"nests",
+			"empty",
+			"`",
+			" "
+		],
+		"highlight": false,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+			""
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"sheets":
+			[
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 24.0
+	},
+	"input":
+	{
+		"height": 39.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.find_results":
+	{
+		"height": 0.0
+	},
+	"output.mdpopups":
+	{
+		"height": 0.0
+	},
+	"pinned_build_system": "",
+	"project": "sdb.sublime-project",
+	"replace":
+	{
+		"height": 44.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 500.0,
+		"last_filter": "wa",
+		"selected_items":
+		[
+			[
+				"wa",
+				"~/ownCloud/PACKAGES/wader/wader.sublime-project"
+			],
+			[
+				"sdb",
+				"~/ownCloud/PACKAGES/sdb/sdb.sublime-project"
+			],
+			[
+				"",
+				"~/ownCloud/SYSTEMS_MANAGEMENT/system_management.sublime-project"
+			],
+			[
+				"sys",
+				"~/ownCloud/SYSTEMS_MANAGEMENT/system_management.sublime-project"
+			],
+			[
+				"sy",
+				"~/ownCloud/PACKAGES/sysmanager/sysmanager.sublime-project"
+			],
+			[
+				"sci",
+				"~/ownCloud/DATABASE_MANAGEMENT/scidb.mpio.orn.mpg.de/scidb_management.sublime-project"
+			],
+			[
+				"bib",
+				"~/ownCloud/PACKAGES/bib2/bib2.sublime-project"
+			],
+			[
+				"Data",
+				"~/ownCloud/PACKAGES/DataEntry/DataEntry.sublime-project"
+			],
+			[
+				"data",
+				"~/ownCloud/PACKAGES/DataEntry/DataEntry.sublime-project"
+			]
+		],
+		"width": 380.0
+	},
+	"select_symbol":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"selected_group": 0,
+	"settings":
+	{
+	},
+	"show_minimap": true,
+	"show_open_files": false,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 208.0,
+	"status_bar_visible": true,
+	"template_settings":
+	{
+	}
+}

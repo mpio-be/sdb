@@ -72,7 +72,7 @@ my_remote2local <- function(db,	tables,	remoteUser,
 #' }
 #'
 #'
-mysqldump <- function(db,tables,user,host = 'scidb.mpio.orn.mpg.de', filenam, dir = getwd(), call = FALSE) {
+mysqldump <- function(db,tables,user, pwd, host = 'scidb.mpio.orn.mpg.de', filenam, dir = getwd(), call = FALSE) {
 
   if(missing(filenam))
     filenam = Sys.time() %>%
@@ -83,7 +83,9 @@ mysqldump <- function(db,tables,user,host = 'scidb.mpio.orn.mpg.de', filenam, di
 
 	filepath = paste(dir, filenam, sep = .Platform$file.sep)
 
-	crd = getCredentials(user = user, host = host)
+	if(missing(pwd))
+	crd = getCredentials(user = user, host = host) else
+	crd = data.frame(user = user, pwd = pwd, host = host)
 
 	syscall = paste0('mysqldump        --host=',      crd$host,
 	            ' --user=' ,     crd$user,

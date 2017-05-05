@@ -1,5 +1,5 @@
 Package: sdb
-Version: 2017.1
+Version: 2017.2
 Type: Package
 Depends:
     R (>= 3.0.0),
