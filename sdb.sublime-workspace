@@ -281,9 +281,13 @@
 	"select_project":
 	{
 		"height": 500.0,
-		"last_filter": "wa",
+		"last_filter": "data",
 		"selected_items":
 		[
+			[
+				"data",
+				"~/ownCloud/DATABASE_MANAGEMENT/scidb.mpio.orn.mpg.de/scidb_management.sublime-project"
+			],
 			[
 				"wa",
 				"~/ownCloud/PACKAGES/wader/wader.sublime-project"
@@ -314,10 +318,6 @@
 			],
 			[
 				"Data",
-				"~/ownCloud/PACKAGES/DataEntry/DataEntry.sublime-project"
-			],
-			[
-				"data",
 				"~/ownCloud/PACKAGES/DataEntry/DataEntry.sublime-project"
 			]
 		],
