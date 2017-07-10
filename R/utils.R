@@ -1,4 +1,41 @@
 
+
+
+#' removeDuplicates
+#' @export
+#' @examples \dontrun{
+#' con = dbcon('mihai', host = '127.0.0.1', db = 'BTatWESTERHOLZ')
+#' removeDuplicates(con, 'ADULTS', 'ad_pk')
+#'}
+removeDuplicates <- function(con, table, key = 'pk') {
+
+  n0 = dbq(con, paste("select count(*) n from ", table),enhance= FALSE )$n
+
+  d = dbq(con,paste("SELECT * FROM", table))
+  k = d[, c(key), with = FALSE]
+  d[, c(key) := NULL]
+
+  k[, dupl := duplicated(d) ]
+  duplk = k[(dupl), key, with = FALSE]
+  
+  if(nrow(duplk) > 0) {
+
+    duplk = paste(as.matrix(duplk)[,1], collapse = ',')
+
+    dbq(con,paste("DELETE FROM", table,   "WHERE",  key , "IN (",  duplk, ")" ), enhance= FALSE)
+
+    n1 = dbq(con, paste("select count(*) n from ", table), enhance= FALSE )$n
+    
+    message(n0-n1, ' duplicates removed from ', table)
+    } else  "nothing to remove"
+
+  }
+
+
+
+
+
+
 #' string_is_mysql_date
 #' @export
 string_is_mysql_date <- function(x) {

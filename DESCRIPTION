@@ -1,5 +1,5 @@
 Package: sdb
-Version: 2017.2
+Version: 2017.3
 Type: Package
 Depends:
     R (>= 3.0.0),
@@ -23,4 +23,4 @@ Author: Mihai Valcu
 Maintainer: Mihai Valcu <valcu@orn.mpg.de>
 Description: MariaDB Database Tools 
 License: MPIO
-RoxygenNote: 6.0.0
+RoxygenNote: 6.0.1

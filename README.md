@@ -1,6 +1,11 @@
 
 
 
+Changes in sdb 2017.3
+---------------------
+	* new admin function removeDuplicates()
+
+
 Changes in sdb 2017.1
 ---------------------
 	* saveCredentials() is updated because it did not return the correct password in some particular cases. 

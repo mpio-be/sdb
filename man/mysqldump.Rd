@@ -4,7 +4,7 @@
 \alias{mysqldump}
 \title{mysqldump}
 \usage{
-mysqldump(db, tables, user, host = "scidb.mpio.orn.mpg.de", filenam,
+mysqldump(db, tables, user, pwd, host = "scidb.mpio.orn.mpg.de", filenam,
   dir = getwd(), call = FALSE)
 }
 \arguments{

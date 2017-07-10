@@ -80,12 +80,14 @@
 	},
 	"expanded_folders":
 	[
-		"/home/mihai/ownCloud/PACKAGES/sdb",
-		"/home/mihai/ownCloud/PACKAGES/sdb/R",
-		"/home/mihai/ownCloud/PACKAGES/sdb/inst"
+		"/home/mihai/github/sdb",
+		"/home/mihai/github/sdb/R"
 	],
 	"file_history":
 	[
+		"/home/mihai/github/sdb/R/utils.R",
+		"/home/mihai/github/sdb/README.md",
+		"/home/mihai/github/sdb/DESCRIPTION",
 		"/home/mihai/ownCloud/PACKAGES/sdb/R/dbio_mysqlCLI.R",
 		"/home/mihai/ownCloud/PACKAGES/sdb/DESCRIPTION",
 		"/home/mihai/ownCloud/PACKAGES/wader/README.txt",
@@ -166,6 +168,7 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"idbq",
 			"ML",
 			"; ",
 			"200",
@@ -281,9 +284,17 @@
 	"select_project":
 	{
 		"height": 500.0,
-		"last_filter": "data",
+		"last_filter": "sci",
 		"selected_items":
 		[
+			[
+				"sci",
+				"~/ownCloud/DATABASE_MANAGEMENT/scidb.mpio.orn.mpg.de/scidb_management.sublime-project"
+			],
+			[
+				"",
+				"~/ownCloud/PACKAGES/U/U.sublime-project"
+			],
 			[
 				"data",
 				"~/ownCloud/DATABASE_MANAGEMENT/scidb.mpio.orn.mpg.de/scidb_management.sublime-project"
@@ -297,20 +308,12 @@
 				"~/ownCloud/PACKAGES/sdb/sdb.sublime-project"
 			],
 			[
-				"",
-				"~/ownCloud/SYSTEMS_MANAGEMENT/system_management.sublime-project"
-			],
-			[
 				"sys",
 				"~/ownCloud/SYSTEMS_MANAGEMENT/system_management.sublime-project"
 			],
 			[
 				"sy",
 				"~/ownCloud/PACKAGES/sysmanager/sysmanager.sublime-project"
-			],
-			[
-				"sci",
-				"~/ownCloud/DATABASE_MANAGEMENT/scidb.mpio.orn.mpg.de/scidb_management.sublime-project"
 			],
 			[
 				"bib",
