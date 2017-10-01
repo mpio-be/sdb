@@ -81,10 +81,14 @@
 	"expanded_folders":
 	[
 		"/home/mihai/github/sdb",
-		"/home/mihai/github/sdb/R"
+		"/home/mihai/github/sdb/R",
+		"/home/mihai/github/sdb/inst",
+		"/home/mihai/github/sdb/tests",
+		"/home/mihai/github/sdb/tests/testthat"
 	],
 	"file_history":
 	[
+		"/home/mihai/github/sdb/R/sql_sqlSnippets.R",
 		"/home/mihai/github/sdb/R/utils.R",
 		"/home/mihai/github/sdb/README.md",
 		"/home/mihai/github/sdb/DESCRIPTION",
@@ -154,7 +158,7 @@
 	],
 	"find":
 	{
-		"height": 38.0
+		"height": 24.0
 	},
 	"find_in_files":
 	{
@@ -284,7 +288,7 @@
 	"select_project":
 	{
 		"height": 500.0,
-		"last_filter": "sci",
+		"last_filter": "",
 		"selected_items":
 		[
 			[
@@ -343,7 +347,7 @@
 	"show_open_files": false,
 	"show_tabs": true,
 	"side_bar_visible": true,
-	"side_bar_width": 208.0,
+	"side_bar_width": 276.0,
 	"status_bar_visible": true,
 	"template_settings":
 	{
