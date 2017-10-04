@@ -12,7 +12,6 @@ removeDuplicates
 \examples{
 \dontrun{
 con = dbcon('mihai', host = '127.0.0.1', db = 'BTatWESTERHOLZ')
-sysCall = my_remote2local("dbnam", "table", "user", call_only = TRUE)
-system(paste ("ssh user_at_host", sysCall) )
+removeDuplicates(con, 'ADULTS', 'ad_pk')
 }
 }
