@@ -88,10 +88,13 @@
 	],
 	"file_history":
 	[
+		"/home/mihai/github/sdb/R/dbio_dbWrite.R",
+		"/home/mihai/github/sdb/DESCRIPTION",
+		"/home/mihai/github/sdb/tests/testthat/test-1_DBIO.R",
+		"/home/mihai/github/sdb/install.sh",
 		"/home/mihai/github/sdb/R/sql_sqlSnippets.R",
 		"/home/mihai/github/sdb/R/utils.R",
 		"/home/mihai/github/sdb/README.md",
-		"/home/mihai/github/sdb/DESCRIPTION",
 		"/home/mihai/ownCloud/PACKAGES/sdb/R/dbio_mysqlCLI.R",
 		"/home/mihai/ownCloud/PACKAGES/sdb/DESCRIPTION",
 		"/home/mihai/ownCloud/PACKAGES/wader/README.txt",
@@ -158,7 +161,7 @@
 	],
 	"find":
 	{
-		"height": 24.0
+		"height": 38.0
 	},
 	"find_in_files":
 	{
@@ -172,6 +175,13 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"export",
+			"`",
+			"value",
+			"verbose",
+			"FALSE",
+			"1:n",
+			"`",
 			"idbq",
 			"ML",
 			"; ",
@@ -232,7 +242,7 @@
 	],
 	"incremental_find":
 	{
-		"height": 24.0
+		"height": 27.0
 	},
 	"input":
 	{
@@ -273,7 +283,7 @@
 	"project": "sdb.sublime-project",
 	"replace":
 	{
-		"height": 44.0
+		"height": 50.0
 	},
 	"save_all_on_build": true,
 	"select_file":
@@ -292,12 +302,12 @@
 		"selected_items":
 		[
 			[
-				"sci",
-				"~/ownCloud/DATABASE_MANAGEMENT/scidb.mpio.orn.mpg.de/scidb_management.sublime-project"
+				"",
+				"~/github/scidbadmin/scidbadmin.sublime-project"
 			],
 			[
-				"",
-				"~/ownCloud/PACKAGES/U/U.sublime-project"
+				"sci",
+				"~/ownCloud/DATABASE_MANAGEMENT/scidb.mpio.orn.mpg.de/scidb_management.sublime-project"
 			],
 			[
 				"data",

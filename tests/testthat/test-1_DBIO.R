@@ -1,10 +1,10 @@
 host         = '127.0.0.1'
 user         =    'testuser'
 pwd          =    'cs'
-db            =    'tests'
-credpath  =   tempfile()
+db           =    'tests'
+credpath     =   tempfile()
 
-#  GRANT ALL PRIVILEGES  ON `tests`.* TO 'testuser'@'localhost' ; FLUSH PRIVILEGES;
+
 #######################################################
 
 test_db(user = user, host = host, db = db, pwd = pwd)
