@@ -48,7 +48,7 @@ setGeneric("closeCon", function(con)   standardGeneric("closeCon") )
 
 #' @export
 setMethod("closeCon",
-          signature  = c(con = "MySQLConnection"),
+          signature  = c(con = "MariaDBConnection"),
           definition = function(con) {
       dbDisconnect(con)
     })
