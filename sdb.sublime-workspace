@@ -27,7 +27,8 @@
 			"file": "install.sh",
 			"settings":
 			{
-				"buffer_size": 250,
+				"buffer_size": 501,
+				"encoding": "UTF-8",
 				"line_ending": "Unix"
 			}
 		}
@@ -183,6 +184,7 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"scidbadmin",
 			"export",
 			"`",
 			"value",
@@ -249,18 +251,18 @@
 				{
 					"buffer": 0,
 					"file": "install.sh",
-					"semi_transient": true,
+					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 250,
+						"buffer_size": 501,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								248,
-								248
+								501,
+								501
 							]
 						],
 						"settings":
