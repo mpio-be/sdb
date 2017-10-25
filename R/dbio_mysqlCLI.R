@@ -56,11 +56,12 @@ my_remote2local <- function(db,	tables,	remoteUser,
 
 #' mysqldump
 #'
-#' @param db     db
-#' @param tables tables are given as a "tableName1 tableName2".
+#' @param db      db
+#' @param tables  tables are given as a "tableName1 tableName2".
 #' @param user    user
 #' @param host    default to 'scidb.mpio.orn.mpg.de'
-#' @param call 	 show mysql call
+#' @param dryrun  when TRUE return call only
+#' @param ...     further arguments to mysqldump (e.g. --no-data --no-create-db)
 #'
 #' @return    the file path to the sql file
 #' @export
@@ -72,7 +73,7 @@ my_remote2local <- function(db,	tables,	remoteUser,
 #' }
 #'
 #'
-mysqldump <- function(db,tables,user, pwd, host = 'scidb.mpio.orn.mpg.de', filenam, dir = getwd(), call = FALSE) {
+mysqldump <- function(db,tables,user, pwd, host = 'scidb.mpio.orn.mpg.de', filenam, dir = getwd(), dryrun = FALSE, ...) {
 
   if(missing(filenam))
     filenam = Sys.time() %>%
@@ -94,11 +95,11 @@ mysqldump <- function(db,tables,user, pwd, host = 'scidb.mpio.orn.mpg.de', filen
 	            if(!missing(tables))   paste(' --tables ', paste(tables, collapse = " ") ) else NULL ,
 	            ' --routines ',
 	            ' --result-file=', filepath,
-	            ' --verbose')
+	            ' --verbose ', ...)
 
-	if(call) cat(syscall, '\n-------')
+	if(dryrun)  cat(syscall, '\n-------')
 
-	system(syscall, wait = TRUE)
+	if(!dryrun)	system(syscall, wait = TRUE)
 
 	cat('Output file:', filepath, '\n')
 	cat('File size:', file.size(filepath), '\n')
@@ -114,7 +115,7 @@ mysqldump <- function(db,tables,user, pwd, host = 'scidb.mpio.orn.mpg.de', filen
 #' @param db      database name
 #' @param user    user, default to 'root'
 #' @param host    default to  '127.0.0.1'
-#' @param verbose print the mysql cli call (default to FALSE)
+#' @param dryrun only print the mysql cli call and exit
 #' @export
 #'
 #' @examples
@@ -128,7 +129,7 @@ mysqldump <- function(db,tables,user, pwd, host = 'scidb.mpio.orn.mpg.de', filen
 #' }
 #'
 #'
-mysqlrestore <- function(file, db, user = 'root', host =  '127.0.0.1', verbose = FALSE) {
+mysqlrestore <- function(file, db, user = 'root', host =  '127.0.0.1', dryrun = FALSE) {
 
 	con = dbcon(user = user, host = host); 	on.exit(closeCon(con))
 
@@ -151,9 +152,10 @@ mysqlrestore <- function(file, db, user = 'root', host =  '127.0.0.1', verbose =
 	if(tools::file_ext(file) == 'gz')
 		syscall = paste('gunzip -c', shQuote(file), "|", mysqlCall)
 
-	if(verbose)
+	if(dryrun)
 		cat('\n----------\n', syscall, '\n----------\n')
-
+	
+	if(!dryrun)		
 	system(syscall, wait = TRUE)
 
 	}
