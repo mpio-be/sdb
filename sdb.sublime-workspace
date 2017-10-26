@@ -83,11 +83,14 @@
 		"/home/mihai/github/sdb",
 		"/home/mihai/github/sdb/R",
 		"/home/mihai/github/sdb/inst",
+		"/home/mihai/github/sdb/inst/doc",
 		"/home/mihai/github/sdb/tests",
 		"/home/mihai/github/sdb/tests/testthat"
 	],
 	"file_history":
 	[
+		"/home/mihai/github/sdb/inst/doc/db_access.Rmd",
+		"/home/mihai/github/sdb/inst/doc/sql_snippets.Rmd",
 		"/home/mihai/github/sdb/R/dbio_mysqlCLI.R",
 		"/home/mihai/github/sdb/R/dbio_dbq.R",
 		"/home/mihai/github/sdb/R/dbio_dbcon.R",
@@ -178,6 +181,7 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"RMySQL",
 			"MySQLConnection",
 			"scidbadmin",
 			"export",
@@ -303,9 +307,13 @@
 	"select_project":
 	{
 		"height": 500.0,
-		"last_filter": "",
+		"last_filter": "s",
 		"selected_items":
 		[
+			[
+				"s",
+				"~/github/scidbadmin/scidbadmin.sublime-project"
+			],
 			[
 				"",
 				"~/github/scidbadmin/scidbadmin.sublime-project"

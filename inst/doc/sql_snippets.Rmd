@@ -13,7 +13,7 @@ vignette: >
 #### Save an arbitrary query to DBLOG.snippets with snipSave().
 ```{r}
 require(sdb)
-Host = '127.0.0.1'
+Host = 'scidb.mpio.orn.mpg.de'
 
 id = snipSave(query = 'SELECT * FROM BTatWESTERHOLZ.BREEDING limit 1',
             description = 'select the first line of the table', user = 'mihai', host = Host)
