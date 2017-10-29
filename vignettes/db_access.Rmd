@@ -21,11 +21,10 @@ Similarly you can access a database using various interfaces.
 ##### Database software installed locally on your PC
  * <a href="http://www.heidisql.com/" target="_blank">             HeidySQL - client for MySQL and MariaDB </a>
  * <a href="https://dbeaver.jkiss.org/download/" target="_blank">  DBeaver - Free Universal SQL Client </a>
- 
 
 ##### R-based interfaces
  * [RMariaDB](https://cran.r-project.org/package=RMariaDB)
- *  [sdb (internal package)](http://scidb.mpio.orn.mpg.de)
+ * [sdb (internal package)](http://scidb.mpio.orn.mpg.de)
 
 
 

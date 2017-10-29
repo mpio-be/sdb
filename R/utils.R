@@ -33,9 +33,6 @@ removeDuplicates <- function(con, table, key = 'pk') {
 
 
 
-
-
-
 #' string_is_mysql_date
 #' @export
 string_is_mysql_date <- function(x) {
@@ -55,23 +52,23 @@ test_db <- function(user = 'testuser', host =  '127.0.0.1', db = 'tests', pwd, d
       sapply(c('rgdal', 'rworldmap'),
        function(x) suppressPackageStartupMessages(require(x , character.only = TRUE, quietly = TRUE) ) )
 
-      DSN = paste0('MYSQL:',db ,',user=', user, ',host=', host, ',password=', pwd)
+      DSN = paste0('MySQL:',db ,',user=', user, ',host=', host, ',password=', pwd)
       # ogrListLayers(DSN)
 
       # pwd = readLines('~/.my.cnf')[grep('password', readLines('~/.my.cnf'))]
       # pwd = str_extract(pwd, '[^=]*$') %>% str_trim() %>% str_replace_all("'", "") %>% str_replace_all('"', "")
 
-      con = dbConnect(RMySQL::MySQL(), user = user, password = pwd); on.exit(dbDisconnect(con))
+      con = dbConnect(RMariaDB::MariaDB(), user = user, password = pwd); on.exit(dbDisconnect(con))
 
-      dbGetQuery(con, paste('DROP DATABASE IF EXISTS', db))
+      dbExecute(con, paste('DROP DATABASE IF EXISTS', db))
 
       if(!destroy) {
 
-        dbGetQuery(con, paste('CREATE DATABASE IF NOT EXISTS', db))
-        dbGetQuery(con, paste('USE', db))
+        dbExecute(con, paste('CREATE DATABASE IF NOT EXISTS', db))
+        dbExecute(con, paste('USE', db))
 
         #t1 [ a table with major types]
-          dbGetQuery(con, "
+          dbExecute(con, "
               CREATE TABLE t1(
                 id INT NOT NULL auto_increment PRIMARY KEY,
                 n1  int ,

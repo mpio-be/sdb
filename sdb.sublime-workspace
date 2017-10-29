@@ -31,10 +31,14 @@
 	"build_varint": "",
 	"command_palette":
 	{
-		"height": 400.0,
-		"last_filter": "del",
+		"height": 401.0,
+		"last_filter": "",
 		"selected_items":
 		[
+			[
+				"r-b",
+				"Preferences: R-Box Settings"
+			],
 			[
 				"del",
 				"ANF: Delete File"
@@ -85,10 +89,13 @@
 		"/home/mihai/github/sdb/inst",
 		"/home/mihai/github/sdb/inst/doc",
 		"/home/mihai/github/sdb/tests",
-		"/home/mihai/github/sdb/tests/testthat"
+		"/home/mihai/github/sdb/tests/testthat",
+		"/home/mihai/github/sdb/vignettes"
 	],
 	"file_history":
 	[
+		"/home/mihai/ownCloud/NOTES/notes.todo",
+		"/home/mihai/github/sdb/vignettes/db_access.Rmd",
 		"/home/mihai/github/sdb/inst/doc/db_access.Rmd",
 		"/home/mihai/github/sdb/inst/doc/sql_snippets.Rmd",
 		"/home/mihai/github/sdb/R/dbio_mysqlCLI.R",
@@ -167,7 +174,7 @@
 	],
 	"find":
 	{
-		"height": 24.0
+		"height": 23.0
 	},
 	"find_in_files":
 	{
@@ -251,7 +258,7 @@
 	],
 	"incremental_find":
 	{
-		"height": 24.0
+		"height": 23.0
 	},
 	"input":
 	{
@@ -292,7 +299,7 @@
 	"project": "sdb.sublime-project",
 	"replace":
 	{
-		"height": 44.0
+		"height": 42.0
 	},
 	"save_all_on_build": true,
 	"select_file":
@@ -306,16 +313,16 @@
 	},
 	"select_project":
 	{
-		"height": 500.0,
-		"last_filter": "s",
+		"height": 501.0,
+		"last_filter": "",
 		"selected_items":
 		[
 			[
-				"s",
-				"~/github/scidbadmin/scidbadmin.sublime-project"
+				"",
+				"~/ownCloud/SYSTEMS_MANAGEMENT/system_management.sublime-project"
 			],
 			[
-				"",
+				"s",
 				"~/github/scidbadmin/scidbadmin.sublime-project"
 			],
 			[
@@ -351,7 +358,7 @@
 				"~/ownCloud/PACKAGES/DataEntry/DataEntry.sublime-project"
 			]
 		],
-		"width": 380.0
+		"width": 381.0
 	},
 	"select_symbol":
 	{
