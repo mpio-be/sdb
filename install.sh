@@ -12,6 +12,6 @@ GRANT ALL PRIVILEGES  ON tests.* TO 'testuser'@'localhost' ; FLUSH PRIVILEGES;
 
 
 # github PUSH/PULL
-  Rscript --default-packages=methods,utils,scidbadmin -e 'push_github_all("sdb",rebuild_vignettes = FALSE)' && ssh mihai@scidbadmin.mpio.orn.mpg.de "Rscript --default-packages=methods,utils,scidbadmin -e 'pull_github_all(\"sdb\")'"
+  Rscript --default-packages=methods,utils,scidbadmin -e 'push_github_all("sdb",rebuild_vignettes = TRUE)' 
 
 

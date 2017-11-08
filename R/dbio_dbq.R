@@ -61,7 +61,7 @@ enhanceOutput <- function(d) {
 
 #' @export
 setMethod("dbq",
-          signature  = c(con = "MariaDBConnection", q = "character"),
+          signature  = c(con = "MySQLConnection", q = "character"),
           definition = function(con, q, enhance = FALSE, ...) {
 			    o = suppressWarnings( dbGetQuery(con, q, ...) )
 

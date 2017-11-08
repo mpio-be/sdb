@@ -4,7 +4,7 @@
 \alias{mysqlrestore}
 \title{mysqlrestore}
 \usage{
-mysqlrestore(file, db, user = "root", host = "127.0.0.1", verbose = FALSE)
+mysqlrestore(file, db, user = "root", host = "127.0.0.1", dryrun = FALSE)
 }
 \arguments{
 \item{file}{sql or sql.gz file}
@@ -15,7 +15,7 @@ mysqlrestore(file, db, user = "root", host = "127.0.0.1", verbose = FALSE)
 
 \item{host}{default to  '127.0.0.1'}
 
-\item{verbose}{print the mysql cli call (default to FALSE)}
+\item{dryrun}{only print the mysql cli call and exit}
 }
 \description{
 restore sql file locally

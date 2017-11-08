@@ -5,7 +5,7 @@
 \title{mysqldump}
 \usage{
 mysqldump(db, tables, user, pwd, host = "scidb.mpio.orn.mpg.de", filenam,
-  dir = getwd(), call = FALSE)
+  dir = getwd(), dryrun = FALSE, ...)
 }
 \arguments{
 \item{db}{db}
@@ -16,7 +16,9 @@ mysqldump(db, tables, user, pwd, host = "scidb.mpio.orn.mpg.de", filenam,
 
 \item{host}{default to 'scidb.mpio.orn.mpg.de'}
 
-\item{call}{show mysql call}
+\item{dryrun}{when TRUE return call only}
+
+\item{...}{further arguments to mysqldump (e.g. --no-data --no-create-db)}
 }
 \value{
 the file path to the sql file

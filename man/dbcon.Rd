@@ -15,7 +15,7 @@ closeCon(con)
 
 \item{path}{to credentials file (if different from the default)}
 
-\item{driver}{MySQL or spatial_MySQL, ... Defaults to MySQL.}
+\item{driver}{MySQL or spatial_MySQL, ... Defaults to MySQL}
 
 \item{...}{pass to dbConnect}
 

@@ -58,7 +58,7 @@ test_db <- function(user = 'testuser', host =  '127.0.0.1', db = 'tests', pwd, d
       # pwd = readLines('~/.my.cnf')[grep('password', readLines('~/.my.cnf'))]
       # pwd = str_extract(pwd, '[^=]*$') %>% str_trim() %>% str_replace_all("'", "") %>% str_replace_all('"', "")
 
-      con = dbConnect(RMariaDB::MariaDB(), user = user, password = pwd); on.exit(dbDisconnect(con))
+      con = dbConnect(RMySQL::MySQL(), user = user, password = pwd); on.exit(dbDisconnect(con))
 
       dbExecute(con, paste('DROP DATABASE IF EXISTS', db))
 

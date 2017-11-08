@@ -21,8 +21,8 @@ context("Credentials")
  test_that("Save & remove credentials works - using non-default path", {
 
     expect_true( saveCredentials(user, pwd, host = host, path = credpath) )
-    con = dbcon(user, drive = "MariaDB", host = host, , path = credpath); on.exit(closeCon(con))
-    expect_true( inherits(con, "MariaDBConnection" ) )
+    con = dbcon(user, drive = "MySQL", host = host, path = credpath); on.exit(closeCon(con))
+    expect_true( inherits(con, "MySQLConnection" ) )
     removeCredentials(path = credpath)
 
     })
@@ -55,21 +55,21 @@ context("Credentials")
 context("Connections")
 
  test_that("connections are established and closed properly", {
-  con = dbcon(user, pwd, host = host, drive = "MariaDB" )
-  expect_true( inherits(con, "MariaDBConnection" ) )
+  con = dbcon(user, pwd, host = host, drive = "MySQL" )
+  expect_true( inherits(con, "MySQLConnection" ) )
   expect_true( closeCon(con ) )
   })
 
  test_that("when db is given then the default db is active", {
-  con = dbcon(user, pwd, host = host, driver = "MariaDB", db = db,  path = credpath)
+  con = dbcon(user, pwd, host = host, driver = "MySQL", db = db,  path = credpath)
   expect_true( names(dbq(con, 'show tables')) == paste0('Tables_in_', db))
   closeCon(con )
   })
 
 
- test_that("default dbcon connects to MariaDB", {
+ test_that("default dbcon connects to RMySQL", {
   con = dbcon(user, pwd, host = host,  path = credpath)
-  expect_true( class(con) == "MariaDBConnection" )
+  expect_true( class(con) == "MySQLConnection" )
   closeCon(con)
   })
 
@@ -85,7 +85,8 @@ context("mysql IO")
 
  test_that("dbq returns NULL on non-SELECT and data.table on SELECT", {
 
-    con = dbcon(user,host = host, drive = 'MariaDB' ,  path = credpath); on.exit(closeCon(con))
+
+    con = dbcon(user=user,host = host, path = credpath) ; on.exit(closeCon(con))
 
     expect_null( dbq(con, paste('USE', db) ) )
     expect_null( dbq(con, 'DROP TABLE IF EXISTS temp' ) )
@@ -100,9 +101,8 @@ context("mysql IO")
 
  test_that("dbq can return an enhanced output", {
 
-    con = dbcon(user,host = host, pwd = pwd, db = db, drive = 'MariaDB',  path = credpath ); on.exit(closeCon(con))
+    con = dbcon(user=user,host = host, pwd = pwd, db = db, path = credpath ); on.exit(closeCon(con))
 
-    dbq(con, paste('USE', db) )
 
     dbWriteTable(con, 'temp', data.table(a = seq.POSIXt(Sys.time(), by = 10, length.out = 10), ID = 1), overwrite = TRUE )
 

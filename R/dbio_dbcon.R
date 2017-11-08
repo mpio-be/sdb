@@ -9,20 +9,20 @@
 #' @param password  password ("" or NA means no password e.g. for localhost)
 #' @param database  database to connect to
 #' @param path      to credentials file (if different from the default)
-#' @param driver    MariaDB or spatial_MySQL, ... Defaults to MariaDB
+#' @param driver    MySQL or spatial_MySQL, ... Defaults to MySQL
 #' @param ...       pass to dbConnect
 #' @export
 #' @return          a connection object
 #' @seealso         \code{\link{saveCredentials}}, \code{\link{dbq} }
 
-dbcon <- function(user, pwd = "", db = NA, host = "scidb.mpio.orn.mpg.de", path, driver = "MariaDB" , ...) {
+dbcon <- function(user, pwd = "", db = NA, host = "scidb.mpio.orn.mpg.de", path, driver = "MySQL" , ...) {
 
   if(!missing(user) & !missing(pwd) )
   X = data.frame(user, pwd, db, host, stringsAsFactors = FALSE) else
   X = getCredentials(user = user, host = host, path = path)
   if( nrow(X) == 0 || is.na(X$user) ) stop( "Credentials for user ", dQuote(user), " are not saved!")
 
-  if( driver ==  "MariaDB" ) {
+  if( driver ==  "MySQL" ) {
     if(is.na(X$pwd) | X$pwd == "")
          con = dbConnect( dbDriver(driver) , user = X$user,                   host = X$host, ...) else
          con = dbConnect( dbDriver(driver) , user = X$user, password = X$pwd, host = X$host, ...)
@@ -48,7 +48,7 @@ setGeneric("closeCon", function(con)   standardGeneric("closeCon") )
 
 #' @export
 setMethod("closeCon",
-          signature  = c(con = "MariaDBConnection"),
+          signature  = c(con = "MySQLConnection"),
           definition = function(con) {
       dbDisconnect(con)
     })

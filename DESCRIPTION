@@ -1,17 +1,19 @@
 Package: sdb
-Version: 2017.3
+Version: 2017.4
 Type: Package
 Depends:
     R (>= 3.0.0),
     magrittr,
     stringr,
-    RMariaDB,
+    RMySQL,
     data.table
 Imports:
     methods,
     data.table
 Suggests:
+    RMariaDB,
     rgdal,
+    rworldmap,
     gdalUtils,
     knitr,
     shinyAce,
