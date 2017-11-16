@@ -2,7 +2,7 @@
 % Please edit documentation in R/dbio_dbWrite.R
 \name{dbSafeWriteTable}
 \alias{dbSafeWriteTable}
-\title{Connect to a database}
+\title{dbWriteTable() on small chunks}
 \usage{
 dbSafeWriteTable(con, name, x, append = TRUE, chunkSize = 1000,
   verbose = TRUE, ...)

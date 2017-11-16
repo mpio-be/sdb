@@ -136,18 +136,15 @@ context("spatial")
     expect_that(inherits(x, "Spatial"), is_true())
     })
 
-
-context("dbWriteTable")
+context("dbSafeWriteTable")
 
  test_that("dbSafeWriteTable works as expected", {
 
 
     x = data.table(col1 = rep('a', 10010), col2 = rnorm(10010))
-    con = dbcon(user=user,host = host, path = credpath) ; on.exit(closeCon(con))
+    con = dbcon(user=user,host = host,db = db, path = credpath) ; on.exit(closeCon(con))
 
 
-    
-    con = dbcon('mihai', host = '127.0.0.1', db = 'tests')
     dbExecute(con, 'DROP TABLE IF EXISTS temp')
 
     dbq(con, 'CREATE TABLE temp (col1 VARCHAR(50) NULL,col2 FLOAT NULL)' )
@@ -159,6 +156,27 @@ context("dbWriteTable")
 
 
     })
+
+
+context("dbInsertInto")
+
+ test_that("dbInsertInto works as expected", {
+
+
+    x = data.table(f1 = rep('a', 10), f2 = rnorm(10), f3 = 1)
+    con = dbcon(user=user,host = host,db = db, path = credpath) ; on.exit(closeCon(con))
+    dbq(con, 'CREATE TABLE temp (f1 VARCHAR(50) ,f2 FLOAT , f99 INT)' )
+    
+    expect_equal( dbInsertInto(con, 'temp', x) , 10)
+
+
+    dbq(con, 'DROP TABLE temp')
+
+    
+    })
+
+
+
 
 
 # ====================================================================================
