@@ -2,7 +2,7 @@
 #'
 #' @description    calls dbWriteTable() on small chunks
 #'                
-#' @param     con       a MariaDBConnection object
+#' @param     con       a *Connection object
 #' @param     name       table name
 #' @param     x          data.table
 #' @param     append     default to TRUE
@@ -16,7 +16,7 @@
 #' dbSafeWriteTable(con, 'temp', x)
 #' dbq(con, 'DROP TABLE temp')
 
-dbSafeWriteTable <- function(con, name, x, append = TRUE, chunkSize = 1000, ...) {
+dbSafeWriteTable <- function(con, name, x, append = TRUE, chunkSize = 1000, verbose = TRUE, ...) {
 
   n = nrow(x)
   i.to.n = 1:n
@@ -24,20 +24,17 @@ dbSafeWriteTable <- function(con, name, x, append = TRUE, chunkSize = 1000, ...)
 
   o = vector(length = length(ii))
 
-  pb = txtProgressBar(max = length(ii), style = 3)
+  if(verbose) pb = txtProgressBar(max = length(ii), style = 3)
   for(i in 1:length(ii) )   {
    
     z = x[ (ii[[i]]) ]
     
     o[i] = dbWriteTable(conn = con, name = name, value = z, append = TRUE, row.names = FALSE, ...)
-    setTxtProgressBar(pb, i)
+    if(verbose) setTxtProgressBar(pb, i)
 
   }
-  rm(pb)
+  
   all(o)
-
-
-
 
 }
 

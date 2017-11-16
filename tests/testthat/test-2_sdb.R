@@ -1,20 +1,22 @@
-## ==========================================================================
-# CREATE USER 'testuser'@'%' ;
-# UPDATE mysql.user SET Password=PASSWORD('cs') WHERE User='testuser' AND Host='%' ;
-# GRANT ALL  ON tests.* TO 'testuser'@'%' ;
-# FLUSH PRIVILEGES ;
-# ==========================================================================
+# ====================================================================================
+# TEST BATCH for sdb functions against a localhost db
+# User and DB needs to be in place
+#   CREATE USER 'testuser'@'%' ;
+#   UPDATE mysql.user SET Password=PASSWORD('cs') WHERE User='testuser' AND Host='%' ;
+#   GRANT ALL  ON tests.* TO 'testuser'@'%' ;
+#   FLUSH PRIVILEGES ;
+# ====================================================================================
 
-host         = '127.0.0.1'
-user         =    'testuser'
-pwd          =    'cs'
-db           =    'tests'
-credpath     =   tempfile()
-
-
-#######################################################
+host     =  '127.0.0.1'
+user     =  'testuser'
+pwd      =  'cs'
+db       =  'tests'
+credpath =  tempfile()
 
 test_db(user = user, host = host, db = db, pwd = pwd)
+
+# ====================================================================================
+
 
 context("Credentials")
 
@@ -81,7 +83,7 @@ context("Connections")
 
   })
 
-context("mysql IO")
+context("dbq")
 
  test_that("dbq returns NULL on non-SELECT and data.table on SELECT", {
 
@@ -112,6 +114,8 @@ context("mysql IO")
 
     })
 
+context("spatial")
+
  test_that("dbq with an ogrinfo con returns a spatial* object ", {
     con = dbcon(user, pwd, host = host, db = db, driver = 'spatial_MySQL',  path = credpath)
     x = dbq(con, q = 't2')
@@ -133,13 +137,30 @@ context("mysql IO")
     })
 
 
+context("dbWriteTable")
+
+ test_that("dbSafeWriteTable works as expected", {
+
+
+    x = data.table(col1 = rep('a', 10010), col2 = rnorm(10010))
+    con = dbcon(user=user,host = host, path = credpath) ; on.exit(closeCon(con))
+
+
+    
+    con = dbcon('mihai', host = '127.0.0.1', db = 'tests')
+    dbExecute(con, 'DROP TABLE IF EXISTS temp')
+
+    dbq(con, 'CREATE TABLE temp (col1 VARCHAR(50) NULL,col2 FLOAT NULL)' )
+    
+    expect_true( dbSafeWriteTable(con, 'temp', x, verbose = FALSE) )
+    
+    dbExecute(con, 'DROP TABLE temp')
 
 
 
+    })
 
 
+# ====================================================================================
 
-
-
-
-
+test_db(user = user, host = host, db = db, pwd = pwd, destroy = TRUE)

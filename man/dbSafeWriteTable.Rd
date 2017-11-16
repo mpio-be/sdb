@@ -4,10 +4,11 @@
 \alias{dbSafeWriteTable}
 \title{Connect to a database}
 \usage{
-dbSafeWriteTable(con, name, x, append = TRUE, chunkSize = 1000, ...)
+dbSafeWriteTable(con, name, x, append = TRUE, chunkSize = 1000,
+  verbose = TRUE, ...)
 }
 \arguments{
-\item{con}{a MariaDBConnection object}
+\item{con}{a *Connection object}
 
 \item{name}{table name}
 
