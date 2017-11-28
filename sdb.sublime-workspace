@@ -325,9 +325,13 @@
 	"select_project":
 	{
 		"height": 501.0,
-		"last_filter": "bib",
+		"last_filter": "scid",
 		"selected_items":
 		[
+			[
+				"scid",
+				"~/github/scidbadmin/scidbadmin.sublime-project"
+			],
 			[
 				"bib",
 				"~/github/bib2/bib2.sublime-project"
