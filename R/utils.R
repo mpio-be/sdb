@@ -10,27 +10,24 @@
 #'}
 removeDuplicates <- function(con, table, key = 'pk') {
 
+  t0 = Sys.time()
+
   n0 = dbq(con, paste("select count(*) n from ", table),enhance= FALSE )$n
+  cols = dbq(con, paste("SELECT * FROM", table, "WHERE FALSE" ) )%>% names %>% setdiff(. , key) %>% paste(collapse = ',')
 
-  d = dbq(con,paste("SELECT * FROM", table))
-  k = d[, c(key), with = FALSE]
-  d[, c(key) := NULL]
+  dbExecute(con, "DROP TABLE IF EXISTS temp"  )
+  dbExecute(con, paste("CREATE TABLE temp like", table)  )
+  n1 = dbExecute(con, paste("INSERT INTO temp(", cols, ") SELECT DISTINCT", cols, "FROM", table) )
 
-  k[, dupl := duplicated(d) ]
-  duplk = k[(dupl), key, with = FALSE]
+  o = dbExecute(con, paste("RENAME TABLE", table, "TO temp2, temp TO", table) )
   
-  if(nrow(duplk) > 0) {
+  if(n1 <= n0)
+   dbExecute(con, "DROP TABLE temp2")
 
-    duplk = paste(as.matrix(duplk)[,1], collapse = ',')
+  data.frame(nrows = n0 - n1, mins_run = difftime( Sys.time(), t0) %>% as.numeric)
 
-    dbq(con,paste("DELETE FROM", table,   "WHERE",  key , "IN (",  duplk, ")" ), enhance= FALSE)
 
-    n1 = dbq(con, paste("select count(*) n from ", table), enhance= FALSE )$n
-    
-    message(n0-n1, ' duplicates removed from ', table)
-    } else  "nothing to remove"
-
-  }
+ }
 
 
 
