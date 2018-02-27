@@ -14,6 +14,7 @@
 #' @import rgdal
 #' @import sp
 #' @import gdalUtils
+#' @import anytime
 
 
 .onLoad <- function(libname, pkgname){
