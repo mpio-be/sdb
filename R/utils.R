@@ -10,7 +10,8 @@ removeDuplicates <- function(con, table, key = 'pk') {
   t0 = Sys.time()
 
   n0 = dbq(con, paste("select count(*) n from ", table),enhance= FALSE )$n
-  cols = dbq(con, paste("SELECT * FROM", table, "WHERE FALSE" ) )%>% names %>% setdiff(. , key) %>% paste(collapse = ',')
+  cols = dbq(con, paste("SELECT * FROM", table, "WHERE FALSE" ) )%>% names %>% setdiff(. , key) %>% paste(collapse = '`,`')
+  cols = paste0('`', cols, '`')
 
   dbExecute(con, "DROP TABLE IF EXISTS temp"  )
   dbExecute(con, paste("CREATE TABLE temp like", table)  )
