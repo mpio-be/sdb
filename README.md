@@ -4,7 +4,7 @@ sdb
 ------------
 An interface to MariaDB databases hosted on scidb.mpio.orn.mpg.de
 
-There are methods for:
+`sdb` provides methods for:
 
 - regular database support through [RMySQL]( https://CRAN.R-project.org/package=RMySQL ) 
 - spatial query through  [gdalUtils]( https://CRAN.R-project.org/package=gdalUtils ) with 
