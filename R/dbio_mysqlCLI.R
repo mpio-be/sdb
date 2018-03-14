@@ -4,11 +4,11 @@
 #'
 #' my_remote2local uses mysql CLI and mysqldump to copy tables from remote to localhost
 #'
-#' @return       NULL or the call itself if call_only = TRUE
-#' @param db     database name
+#' @return         NULL or the call itself if call_only = TRUE
+#' @param db       database name
 #' @param tables   tables are given as a "tableName1 tableName2".
-#' @param map    max_allowed_packet in GB (see https://dev.mysql.com/doc/refman/5.5/en/mysql-command-options.html)
-#' @note        non-table objects (views, procedures, etc) are exported by default.
+#' @param map      max_allowed_packet in GB (see https://dev.mysql.com/doc/refman/5.5/en/mysql-command-options.html)
+#' @note           non-table objects (views, procedures, etc) are exported by default.
 #' @export
 #' @examples \dontrun{
 #' my_remote2local("dbnam", "table", "user")

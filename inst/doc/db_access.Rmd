@@ -24,7 +24,7 @@ Similarly you can access a database using various interfaces.
 
 ##### R-based interfaces
  * [RMariaDB](https://cran.r-project.org/package=RMariaDB)
- * [sdb (internal package)](http://scidb.mpio.orn.mpg.de)
+ * [sdb (this package)](http://scidb.mpio.orn.mpg.de)
 
 
 

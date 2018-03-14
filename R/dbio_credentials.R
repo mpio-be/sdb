@@ -1,7 +1,7 @@
 
 #' manage database credentials
 #'
-#' manage database credentials for easier database access
+#' manage database credentials for for different hosts and for different users within a host.
 #'
 #' saveCredentials saves the specified credentials to a default location unless you specify a custom path. This information can be used by \code{\link{dbcon}} and \code{\link{dbq}} to connect to and query the database.
 #' Currently, you can store credentials for different hosts and for different users within a host.
@@ -12,7 +12,7 @@
 #' @aliases credentialsExist removeCredentials
 #' @seealso \code{\link{dbcon}},\code{\link{dbq}}
 #' @section Warning:
-#' Credentials are stored in plain text in a hidden file in your home directory. Passwords are saved obfuscated. The obfuscation is settings dependent so it is not possible to use the same credentials file on another machine.
+#' Credentials are stored in plain text in a hidden file in your home directory. 
 
 #' @examples
 #' saveCredentials(user = 'user_a', pwd = 'pwd_a', host =  '127.0.0.1')

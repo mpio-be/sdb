@@ -40,7 +40,7 @@ dbSafeWriteTable <- function(con, name, x, append = TRUE, chunkSize = 1000, verb
 
 
 
-#' dbWriteTable safe variant
+#' A safe variant of dbWriteTable 
 #'
 #' @description  dbWriteTable(tempTable) --> insert into select .. from --> drop tempTable
 #'                
