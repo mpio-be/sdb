@@ -1,0 +1,16 @@
+language: r
+cache: packages
+sudo: required
+
+warnings_are_errors: false
+
+apt_packages:
+  - libmysqlclient-dev
+  - gdal-bin
+  - libgdal-dev
+  - libgdal1-dev
+  - libproj-dev
+  - libgdal1h
+
+
+  
