@@ -1,4 +1,6 @@
 Package: sdb
+Title: Database tools
+Description: MariaDB Database Tools 
 Version: 2018.2
 Type: Package
 Depends:
@@ -20,10 +22,8 @@ Suggests:
     shinydashboard,
     testthat
 VignetteBuilder: knitr
-Title: Database tools
 Author: Mihai Valcu
 Maintainer: Mihai Valcu <valcu@orn.mpg.de>
-Description: MariaDB Database Tools 
-License: MPIO
+License: GPL-3
 Encoding: UTF-8
 RoxygenNote: 6.0.1
