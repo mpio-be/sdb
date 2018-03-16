@@ -2,7 +2,7 @@
 % Please edit documentation in R/dbio_dbWrite.R
 \name{dbInsertInto}
 \alias{dbInsertInto}
-\title{dbWriteTable safe variant}
+\title{A safe variant of dbWriteTable}
 \usage{
 dbInsertInto(con, name, x)
 }

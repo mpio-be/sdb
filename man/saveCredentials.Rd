@@ -24,7 +24,7 @@ credentialsPath()
 \code{credentialsExist},\code{removeCredentials}, and \code{saveCredentials} return \code{TRUE} if successful
 }
 \description{
-manage database credentials for easier database access
+manage database credentials for for different hosts and for different users within a host.
 }
 \details{
 saveCredentials saves the specified credentials to a default location unless you specify a custom path. This information can be used by \code{\link{dbcon}} and \code{\link{dbq}} to connect to and query the database.
@@ -34,7 +34,7 @@ credentialsExist checks if credentials are saved for a specified host.
 }
 \section{Warning}{
 
-Credentials are stored in plain text in a hidden file in your home directory. Passwords are saved obfuscated. The obfuscation is settings dependent so it is not possible to use the same credentials file on another machine.
+Credentials are stored in plain text in a hidden file in your home directory.
 }
 
 \examples{
