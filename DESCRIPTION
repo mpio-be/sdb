@@ -8,7 +8,8 @@ Depends:
     magrittr,
     stringr,
     RMySQL,
-    data.table
+    data.table,
+    anytime
 Imports:
     methods,
     data.table
