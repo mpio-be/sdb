@@ -4,9 +4,11 @@
 \alias{probeDB}
 \title{Probe a db server}
 \usage{
-probeDB(name = "scidb.mpio.orn.mpg.de", port = 3306)
+probeDB(probe = TRUE, name = "scidb.mpio.orn.mpg.de", port = 3306)
 }
 \arguments{
+\item{probe}{if FALSE, will not probe the db and return ''127.0.0.1'. Default to TRUE.}
+
 \item{name}{default to scidb.mpio.orn.mpg.de}
 
 \item{port}{default to 3306 (mariadb's default port )}

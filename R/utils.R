@@ -39,8 +39,9 @@ string_is_mysql_date <- function(x) {
 
 #' Probe a db server 
 #' @description Fast probe a db server see if it can be reached through a given port. Default to scidb.mpio.orn.mpg.de and port 3306
-#' @param   name default to scidb.mpio.orn.mpg.de
-#' @param   port default to 3306 (mariadb's default port )
+#' @param       probe if FALSE, will not probe the db and return ''127.0.0.1'. Default to TRUE. 
+#' @param       name  default to scidb.mpio.orn.mpg.de
+#' @param       port  default to 3306 (mariadb's default port )
 #' @return when reachable return the name of probed server else falls back to localhost (127.0.0.1)
 #' @export
 #' @examples \dontrun{
@@ -48,9 +49,12 @@ string_is_mysql_date <- function(x) {
 #' 
 #'}
    
-probeDB <- function(name = 'scidb.mpio.orn.mpg.de', port = 3306) {
-  
-    noBash = try(system('bash', intern = TRUE, ignore.stderr = TRUE), silent = TRUE) %>% inherits(.,'try-error') 
+probeDB <- function(probe = TRUE, name = 'scidb.mpio.orn.mpg.de', port = 3306) {
+    
+    if(probe) {
+
+
+    noBash = inherits(try(system('bash', intern = TRUE, ignore.stderr = TRUE), silent = TRUE) ,'try-error') 
 
     if(noBash) {
       warning(paste('bash is not available so I cannot probe', name, '; host is  set to localhost.') )
@@ -58,12 +62,14 @@ probeDB <- function(name = 'scidb.mpio.orn.mpg.de', port = 3306) {
     } else {
 
       syscall = paste0("timeout 0.5  bash -c 'cat < /dev/null > /dev/tcp/", name , "/", port, "'")
-      ans = suppressWarnings( system(syscall, intern = TRUE,ignore.stderr = TRUE) %>% attributes)
+      ans = suppressWarnings( attributes( system(syscall, intern = TRUE,ignore.stderr = TRUE) )   )
       host = if( is.null(ans) ) name else '127.0.0.1'
 
       }
 
-   if (name %in% c('localhost', '127.0.0.1') ) host = '127.0.0.1'   
+    }
+
+   if (name %in% c('localhost', '127.0.0.1') | (!probe) ) host = '127.0.0.1'   
 
   host
  }
