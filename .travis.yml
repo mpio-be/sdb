@@ -1,7 +1,11 @@
 language: r
 cache: packages
+latex: false
+fortran: false
+
 sudo: required
 warnings_are_errors: false
+r_check_args: '--no-tests'
 
 services:
  - mysql
@@ -9,7 +13,6 @@ services:
 before_install:
   - mysql -u root --password="" < tests/testdb.sql 
 
-warnings_are_errors: false
 
 apt_packages:
   - libmysqlclient-dev
