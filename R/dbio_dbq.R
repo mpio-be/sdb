@@ -10,27 +10,21 @@
 #' @export
 #' @return a data.frame or a  Spatial*DataFrame (spatial_MySQL) for a SELECT query, or NULL for non-SELECT queries.
 #' @examples
+#' \dontrun{
 #' # A connection is made and used by dbq
-#'  con = dbcon('mihai', host =  '127.0.0.1')
-#'  d1 = dbq(con, 'SELECT * from BTatWESTERHOLZ.ADULTS')
-#'  d2 = dbq(con, 'SELECT * from BTatWESTERHOLZ.ADULTS', enhance = TRUE)
+#'  con = dbcon('testuser', host =  '127.0.0.1', pwd =  'cs')
+#'  d1 = dbq(con, 'SELECT * from tests.t1')
+#'  d2 = dbq(con, 'SELECT * from tests.t1', enhance = TRUE)
 #'
 #' # A temp. connection is made and closed once the data is retrieved
-#' dbq(q = 'select now()', user = 'mihai', host =  '127.0.0.1') %>% str
-#' dbq(q = 'select now()', user = 'mihai',host =  '127.0.0.1',  enhance = TRUE) %>% str
-#'
-#' # null return
-#' dbq(user = 'mihai', host =  '127.0.0.1', q = 'set @c=1')
-#' dbq(con, 'set @c=1')
-#' dbDisconnect(con)
+#' dbq(q = 'select now()', user = 'testuser', host =  '127.0.0.1', pwd =  'cs') 
+#' dbq(q = 'select now()', user = 'testuser',host =  '127.0.0.1', pwd =  'cs',  enhance = TRUE)%>% print
 #'
 #' # spatial return
-#' con = dbcon('mihai', host =  '127.0.0.1', db = 'tests', driver = 'spatial_MySQL')
+#' con = dbcon('testuser', host =  '127.0.0.1', db = 'tests' , pwd =  'cs', driver = 'spatial_MySQL')
 #' s = dbq(con, q = 't3')
 #' s = dbq(con, q = 'select * from t3 limit 1')
-#'
-#' con = dbcon('mihai', host =  '127.0.0.1', db = 'AVES_ranges', driver = 'spatial_MySQL')
-#' s = dbq(con, q = "select * from breeding_ranges_v1 where scinam = 'Parus major'")
+#' }
 
 
 setGeneric("dbq", function(con,q, ...)   standardGeneric("dbq") )

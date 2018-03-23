@@ -1,6 +1,13 @@
 language: r
 cache: packages
 sudo: required
+warnings_are_errors: false
+
+services:
+ - mysql
+
+before_install:
+  - mysql -u root --password="" < tests/testdb.sql 
 
 warnings_are_errors: false
 

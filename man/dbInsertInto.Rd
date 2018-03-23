@@ -17,9 +17,11 @@ dbInsertInto(con, name, x)
 dbWriteTable(tempTable) --> insert into select .. from --> drop tempTable
 }
 \examples{
+\dontrun{
 x = data.table(f1 = rep('a', 10), f2 = rnorm(10), f3 = 1)
 con = dbcon('mihai', host = '127.0.0.1', db = 'tests')
 dbq(con, 'CREATE TABLE temp (f1 VARCHAR(50) NULL,f2 FLOAT NULL)' )
 dbInsertInto(con, 'temp', x)
 dbq(con, 'DROP TABLE temp')
+}
 }

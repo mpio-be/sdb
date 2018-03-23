@@ -2,8 +2,8 @@
 #' removeDuplicates
 #' @export
 #' @examples \dontrun{
-#' con = dbcon('mihai', host = '127.0.0.1', db = 'BTatWESTERHOLZ')
-#' removeDuplicates(con, 'ADULTS', 'ad_pk')
+#' con = dbcon('mihai', host = '127.0.0.1', db = 'tests')
+#' removeDuplicates(con, 'n1', 'id')
 #'}
 removeDuplicates <- function(con, table, key = 'pk') {
 

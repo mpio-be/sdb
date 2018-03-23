@@ -10,11 +10,13 @@
 #' @param     ...        passed to dbWriteTable
 #' @export
 #' @examples
+#' \dontrun{
 #' x = data.table(col1 = rep('a', 1000010), col2 = rnorm(1000010))
 #' con = dbcon('mihai', host = '127.0.0.1', db = 'tests')
 #' dbq(con, 'CREATE TABLE temp (col1 VARCHAR(50) NULL,col2 FLOAT NULL)' )
 #' dbSafeWriteTable(con, 'temp', x)
 #' dbq(con, 'DROP TABLE temp')
+#' }
 
 dbSafeWriteTable <- function(con, name, x, append = TRUE, chunkSize = 1000, verbose = TRUE, ...) {
 
@@ -49,12 +51,14 @@ dbSafeWriteTable <- function(con, name, x, append = TRUE, chunkSize = 1000, verb
 #' @param     x          data.table
 #' @export
 #' @examples
+#' \dontrun{
 #' x = data.table(f1 = rep('a', 10), f2 = rnorm(10), f3 = 1)
 #' con = dbcon('mihai', host = '127.0.0.1', db = 'tests')
 #' dbq(con, 'CREATE TABLE temp (f1 VARCHAR(50) NULL,f2 FLOAT NULL)' )
 
 #' dbInsertInto(con, 'temp', x)
 #' dbq(con, 'DROP TABLE temp')
+#' }
 
 dbInsertInto <- function(con, name, x) {
 

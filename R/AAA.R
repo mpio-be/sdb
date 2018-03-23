@@ -15,7 +15,8 @@
 #' @import sp
 #' @import gdalUtils
 #' @import anytime
-
+#' @examples
+#' test_db(pwd = 'cs') # make it available for tests
 
 .onLoad <- function(libname, pkgname){
   dcf <- read.dcf(file=system.file("DESCRIPTION", package=pkgname) )

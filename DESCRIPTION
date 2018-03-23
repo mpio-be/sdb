@@ -1,5 +1,5 @@
 Package: sdb
-Title: Database tools
+Title: Database Tools
 Description: MariaDB Database Tools 
 Version: 2018.3
 Type: Package
@@ -13,6 +13,8 @@ Depends:
 Imports:
     methods,
     data.table,
+    rgdal,
+    sp,
     gdalUtils
 Suggests:
     RMariaDB,

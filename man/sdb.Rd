@@ -12,6 +12,9 @@
 \description{
 An interface to \href{http://scidb.mpio.orn.mpg.de}{scidb.mpio.orn.mpg.de} databases
 }
+\examples{
+test_db(pwd = 'cs') # make it available for tests
+}
 \author{
 Mihai Valcu \email{valcu@orn.mpg.de}
 }

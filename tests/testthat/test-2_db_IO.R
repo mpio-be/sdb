@@ -46,7 +46,7 @@ context("dbInsertInto")
     })
 
 
-context("rempve duplicates")
+context("remove duplicates")
 
  test_that("removeDuplicates do", {
 
