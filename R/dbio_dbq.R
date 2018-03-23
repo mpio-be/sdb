@@ -6,6 +6,7 @@
 #' @param con a connection object returned by \code{\link{dbcon}}
 #' @param q a query string. credentials are stored on disk.
 #' @seealso \code{\link{saveCredentials}},\code{\link{dbcon}}
+#' @importFrom gdalUtils ogr2ogr
 #' @export
 #' @return a data.frame or a  Spatial*DataFrame (spatial_MySQL) for a SELECT query, or NULL for non-SELECT queries.
 #' @examples

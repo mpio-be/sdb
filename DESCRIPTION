@@ -1,7 +1,7 @@
 Package: sdb
 Title: Database tools
 Description: MariaDB Database Tools 
-Version: 2018.2
+Version: 2018.3
 Type: Package
 Depends:
     R (>= 3.0.0),
@@ -12,12 +12,12 @@ Depends:
     anytime
 Imports:
     methods,
-    data.table
+    data.table,
+    gdalUtils
 Suggests:
     RMariaDB,
     rgdal,
     rworldmap,
-    gdalUtils,
     knitr,
     shinyAce,
     shinydashboard,
