@@ -10,8 +10,15 @@ r_check_args: '--no-tests'
 services:
  - mysql
 
+r_packages:
+  - covr
+
 before_install:
   - mysql -u root --password="" < tests/testdb.sql 
+
+
+after_success:
+  - Rscript -e 'library(covr); codecov()'
 
 
 apt_packages:
