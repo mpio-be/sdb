@@ -4,7 +4,7 @@
 \alias{dbq}
 \title{query the database}
 \usage{
-dbq(con, q, ...)
+dbq(con, q, geom, ...)
 }
 \arguments{
 \item{con}{a connection object returned by \code{\link{dbcon}}}
@@ -23,18 +23,20 @@ run an SQL query.
 \examples{
 \dontrun{
 # A connection is made and used by dbq
- con = dbcon('testuser', host =  '127.0.0.1', pwd =  'cs')
+ con = dbcon('testuser', host =  '127.0.0.1', pwd =  askpass::askpass() )
  d1 = dbq(con, 'SELECT * from tests.t1')
  d2 = dbq(con, 'SELECT * from tests.t1', enhance = TRUE)
 
 # A temp. connection is made and closed once the data is retrieved
 dbq(q = 'select now()', user = 'testuser', host =  '127.0.0.1', pwd =  'cs') 
-dbq(q = 'select now()', user = 'testuser',host =  '127.0.0.1', pwd =  'cs',  enhance = TRUE)\%>\% print
+dbq(q = 'select now()', user = 'testuser',host =  '127.0.0.1', pwd =  'cs',  
+	enhance = TRUE)\%>\% print
 
 # spatial return
-con = dbcon('testuser', host =  '127.0.0.1', db = 'tests' , pwd =  'cs', driver = 'spatial_MySQL')
-s = dbq(con, q = 't3')
-s = dbq(con, q = 'select * from t3 limit 1')
+s = dbq(con, q = 'select * from tests.t3', geom = 'SHAPE')
+s = dbq(con, q = 'select SHAPE from tests.t3', geom = 'SHAPE')
+s = dbq(con, q = 'select * from tests.t2', geom = 'SHAPE')
+
 }
 }
 \seealso{

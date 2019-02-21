@@ -1,32 +1,34 @@
 Package: sdb
 Title: Database Tools
-Description: MariaDB Database Tools 
-Version: 2018.3
+Description: An interface to databases hosted on scidb.mpio.orn.mpg.de.
+Version: 2019.1
 Type: Package
 Depends:
     R (>= 3.0.0),
-    magrittr,
-    stringr,
-    RMySQL,
-    data.table,
-    anytime
+    RMariaDB,
+    data.table
 Imports:
     methods,
-    data.table,
+    utils,
+    DBI,
+    anytime,
+    magrittr,
+    stringr,
     rgdal,
     sp,
-    gdalUtils
+    sf,
+    gdalUtils,
+    askpass,
+    foreach,
+    doFuture,
+    future
 Suggests:
-    RMariaDB,
-    rgdal,
-    rworldmap,
     knitr,
-    shinyAce,
-    shinydashboard,
-    testthat
+    testthat,
+    rworldmap
 VignetteBuilder: knitr
 Author: Mihai Valcu
 Maintainer: Mihai Valcu <valcu@orn.mpg.de>
 License: GPL-3
 Encoding: UTF-8
-RoxygenNote: 6.0.1
+RoxygenNote: 6.1.1

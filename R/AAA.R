@@ -11,23 +11,24 @@
 #' @author Mihai Valcu \email{valcu@@orn.mpg.de}
 #'
 #' @import data.table
-#' @import rgdal
-#' @import sp
-#' @import gdalUtils
-#' @import anytime
+#' @import RMariaDB
+#' @importFrom magrittr %>%
+#' @importFrom askpass askpass
+#' 
+#' 
+#' @importFrom stats rnorm rpois runif
+#' @importFrom utils read.table setTxtProgressBar txtProgressBar write.table
+#' 
+#' 
+#' 
 #' @examples \dontrun{
-#' test_db(pwd = 'cs') # make it available for tests
+#' test_db(pwd = askpass::askpass() ) # make it available for tests
 #' }
 #' 
-.onLoad <- function(libname, pkgname){
-  dcf <- read.dcf(file=system.file("DESCRIPTION", package=pkgname) )
-  packageStartupMessage(paste('This is', pkgname, dcf[, "Version"] ))
 
-  if( ! Sys.info()["sysname"] %in% c("Linux", "Windows"))
-    packageStartupMessage("sdb might not work under", OS)
-
-	}
-
-
+.onAttach <- function(libname, pkgname) {
+	dcf <- read.dcf(file=system.file("DESCRIPTION", package=pkgname) )
+	packageStartupMessage(paste( pkgname, dcf[, "Version"] ))
+    }
 
 

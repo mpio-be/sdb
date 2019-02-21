@@ -171,7 +171,11 @@ mysqlrestore <- function(file, db, user = 'root', host =  '127.0.0.1', dryrun = 
 #' @param progress progress file, default to '/tmp/monitor_progress.txt'. use tail -f /tmp/monitor_progress.txt
 #' @param ...      further options passed to mysqlrestore
 #' @export
-#'
+#' 
+#' @importFrom foreach foreach %dopar% 
+#' @importFrom future  plan 
+#' @importFrom doFuture registerDoFuture  
+#' 
 #' @examples
 #' \dontrun{
 #' mysqlrestoreSITE('..../scidb_backup_5.01.17/',user = 'mihai', host =  '127.0.0.1', verbose = TRUE)
@@ -184,12 +188,13 @@ mysqlrestoreSITE <- function(dir, filetype = ".sql.gz",
 
 	on.exit( file.remove(progress) )
 
-  library(doParallel)
-	cl = makePSOCKcluster(detectCores()); registerDoParallel(cl); on.exit( stopCluster(cl) )
+	registerDoFuture()
+	plan(multiprocess)
 
 	# restore
 	sqlfiles = list.files(dir, pattern = filetype, full.names = TRUE, recursive = TRUE)
 
+		# TODO: change to doFuture
 		foreach( i = 1:length(sqlfiles) )  %dopar% {
 			fi = sqlfiles[i]
 			dbi = basename(dirname(fi))

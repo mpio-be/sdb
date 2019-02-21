@@ -9,6 +9,7 @@
 #' @param     chunkSize default 1000 rows
 #' @param     ...        passed to dbWriteTable
 #' @export
+#' @importFrom DBI make.db.names
 #' @examples
 #' \dontrun{
 #' x = data.table(col1 = rep('a', 1000010), col2 = rnorm(1000010))
@@ -31,7 +32,7 @@ dbSafeWriteTable <- function(con, name, x, append = TRUE, chunkSize = 1000, verb
    
     z = x[ (ii[[i]]) ]
     
-    o[i] = dbWriteTable(conn = con, name = name, value = z, append = TRUE, row.names = FALSE, ...)
+    o[i] = RMariaDB::dbWriteTable(conn = con, name = name, value = z, append = TRUE, row.names = FALSE, ...)
     if(verbose) setTxtProgressBar(pb, i)
 
   }
@@ -64,11 +65,11 @@ dbInsertInto <- function(con, name, x) {
 
 
       temp000 = make.db.names(con, as.character(Sys.time() ) )
-      o = dbWriteTable(con, temp000, x, row.names = FALSE)
+      o = RMariaDB::dbWriteTable(con, temp000, x, row.names = FALSE)
       if(o) message('data.table x saved as ', temp000)
 
 
-      targetNams = names( dbGetQuery(con, paste('select * from', name, 'limit 0') ) )
+      targetNams = names( RMariaDB::dbGetQuery(con, paste('select * from', name, 'limit 0') ) )
       selectTargetNams = intersect(targetNams, names(x))
 
       
@@ -77,17 +78,17 @@ dbInsertInto <- function(con, name, x) {
       insql =  paste('INSERT INTO', name, '(', infields, ')',
                 'SELECT', infields, 'FROM', temp000)
 
-      o = dbExecute(con, insql )
+      o = RMariaDB::dbExecute(con, insql )
       if(o > 0) {
         return(o)
         message(o, ' rows inserted into ', name)
       }
 
 
-      dbExecute(con, paste('REPAIR TABLE', name)  )
+      RMariaDB::dbExecute(con, paste('REPAIR TABLE', name)  )
       
-      dbExecute(con, paste('DROP TABLE if exists', temp000)  )
+      RMariaDB::dbExecute(con, paste('DROP TABLE if exists', temp000)  )
 
-      dbDisconnect(con)
+      RMariaDB::dbDisconnect(con)
 
 }

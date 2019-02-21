@@ -6,7 +6,7 @@
 \title{Connect to a database}
 \usage{
 dbcon(user, pwd = "", db = NA, host = "scidb.mpio.orn.mpg.de", path,
-  driver = "MySQL", ...)
+  driver = "MariaDB", ...)
 
 closeCon(con)
 }
@@ -15,7 +15,7 @@ closeCon(con)
 
 \item{path}{to credentials file (if different from the default)}
 
-\item{driver}{MySQL or spatial_MySQL, ... Defaults to MySQL}
+\item{driver}{MariaDB or spatialMDB, ... Defaults to MariaDB}
 
 \item{...}{pass to dbConnect}
 

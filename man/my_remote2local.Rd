@@ -4,9 +4,9 @@
 \alias{my_remote2local}
 \title{dumps tables between databases (wrapper to mysqldump and mysql CLI)}
 \usage{
-my_remote2local(db, tables, remoteUser, remoteHost = "scidb.mpio.orn.mpg.de",
-  localHost = "127.0.0.1", localUser = "root", map = 1,
-  call_only = FALSE, no_data = FALSE)
+my_remote2local(db, tables, remoteUser,
+  remoteHost = "scidb.mpio.orn.mpg.de", localHost = "127.0.0.1",
+  localUser = "root", map = 1, call_only = FALSE, no_data = FALSE)
 }
 \arguments{
 \item{db}{database name}

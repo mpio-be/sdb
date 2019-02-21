@@ -23,8 +23,8 @@ context("Credentials")
  test_that("Save & remove credentials works - using non-default path", {
 
     expect_true( saveCredentials(user, pwd, host = host, path = credpath) )
-    con = dbcon(user, drive = "MySQL", host = host, path = credpath); on.exit(closeCon(con))
-    expect_true( inherits(con, "MySQLConnection" ) )
+    con = dbcon(user, drive = "MariaDB", host = host, path = credpath); on.exit(closeCon(con))
+    expect_true( inherits(con, "MariaDBConnection" ) )
     removeCredentials(path = credpath)
 
     })
@@ -57,30 +57,22 @@ context("Credentials")
 context("Connections")
 
  test_that("connections are established and closed properly", {
-  con = dbcon(user, pwd, host = host, drive = "MySQL" )
-  expect_true( inherits(con, "MySQLConnection" ) )
+  con = dbcon(user, pwd, host = host, driver = "MariaDB" )
+  expect_true( inherits(con, "MariaDBConnection" ) )
   expect_true( closeCon(con ) )
   })
 
  test_that("when db is given then the default db is active", {
-  con = dbcon(user, pwd, host = host, driver = "MySQL", db = db,  path = credpath)
+  con = dbcon(user, pwd, host = host, driver = "MariaDB", db = db,  path = credpath)
   expect_true( names(dbq(con, 'show tables')) == paste0('Tables_in_', db))
   closeCon(con )
   })
 
 
- test_that("default dbcon connects to RMySQL", {
+ test_that("default dbcon connects to MariaDB", {
   con = dbcon(user, pwd, host = host,  path = credpath)
-  expect_true( class(con) == "MySQLConnection" )
+  expect_true( class(con) == "MariaDBConnection" )
   closeCon(con)
-  })
-
- test_that("spatial_MySQL driver returns an ogrinfo object", {
-  expect_error( dbcon(user, pwd, host = host, driver = 'spatial_MySQL',  path = credpath) )
-
-  con = dbcon(user, pwd, host = host, db = db, driver = 'spatial_MySQL',  path = credpath)
-  expect_true( class(con) == "ogrinfo" )
-
   })
 
 context("dbq")
@@ -113,30 +105,6 @@ context("dbq")
     expect_is(o$a, 'POSIXt'  )
 
     })
-
-context("spatial")
-
- test_that("dbq with an ogrinfo con returns a spatial* object ", {
-    con = dbcon(user, pwd, host = host, db = db, driver = 'spatial_MySQL',  path = credpath)
-    x = dbq(con, q = 't2')
-    expect_that(inherits(x, "Spatial"), is_true())
-
-    con = dbcon(user, host = host, db = db, driver = 'spatial_MySQL',  path = credpath)
-    x = dbq(con, q = 't3')
-    expect_that(inherits(x, "Spatial"), is_true())
-    })
-
- test_that("dbq with an ogrinfo con and an sql query returns a subset", {
-    con = dbcon(user, pwd, host = host, db = db, driver = 'spatial_MySQL',  path = credpath)
-    x = dbq(con, q = 't2')
-    expect_that(inherits(x, "Spatial"), is_true())
-
-    con = dbcon(user, host = host, db = db, driver = 'spatial_MySQL',  path = credpath)
-    x = dbq(con, q = 'select * from t3 where scalerank = 1')
-    expect_that(inherits(x, "Spatial"), is_true())
-    })
-
-
 
 
 

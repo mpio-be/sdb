@@ -30,6 +30,7 @@ context("dbSafeWriteTable")
 
     })
 
+
 context("dbInsertInto")
 
  test_that("dbInsertInto works as expected", {

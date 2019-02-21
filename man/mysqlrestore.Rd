@@ -4,7 +4,8 @@
 \alias{mysqlrestore}
 \title{mysqlrestore}
 \usage{
-mysqlrestore(file, db, user = "root", host = "127.0.0.1", dryrun = FALSE)
+mysqlrestore(file, db, user = "root", host = "127.0.0.1",
+  dryrun = FALSE)
 }
 \arguments{
 \item{file}{sql or sql.gz file}

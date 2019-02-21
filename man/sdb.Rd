@@ -3,18 +3,18 @@
 \docType{package}
 \name{sdb}
 \alias{sdb}
-\alias{.onLoad}
+\alias{.onAttach}
 \alias{sdb-package}
 \title{\strong{s}cidb \strong{d}ata \strong{b}ase interface}
 \usage{
-.onLoad(libname, pkgname)
+.onAttach(libname, pkgname)
 }
 \description{
 An interface to \href{http://scidb.mpio.orn.mpg.de}{scidb.mpio.orn.mpg.de} databases
 }
 \examples{
 \dontrun{
-test_db(pwd = 'cs') # make it available for tests
+test_db(pwd = askpass::askpass() ) # make it available for tests
 }
 
 }

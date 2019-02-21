@@ -73,3 +73,31 @@ probeDB <- function(probe = TRUE, name = 'scidb.mpio.orn.mpg.de', port = 3306) {
 
   host
  }
+
+
+
+
+
+
+#' getCRSfromDB
+#' @importFrom stringr str_trim
+getCRSfromDB <- function(con, tab) {
+  #table name without db
+  x = stringr::str_split(tab, '\\.', simplify = TRUE)
+  if(length(x) > 1) {
+    
+    tnam = stringr::str_trim(x[2])
+    db   = stringr::str_trim(x[1])
+
+    dbq(con, paste('USE', db))
+    }
+
+
+  SRID = dbq(con, paste('SELECT SRID FROM geometry_columns where F_TABLE_NAME = ', shQuote(tnam)   ) )$SRID
+
+  SRTEXT = dbq(con, paste('SELECT SRTEXT FROM spatial_ref_sys where SRID = ', SRID))$SRTEXT
+
+  sf::st_crs(wkt = SRTEXT)
+
+
+}

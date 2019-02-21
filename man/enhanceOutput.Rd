@@ -4,7 +4,10 @@
 \alias{enhanceOutput}
 \title{Enhance a data.table by reference}
 \usage{
-enhanceOutput(d)
+enhanceOutput(d, ...)
+}
+\arguments{
+\item{...}{optional parameters to anytime}
 }
 \description{
 Enhance a data.table by reference
