@@ -14,7 +14,13 @@ mysqldump(db, tables, user, pwd, host = "scidb.mpio.orn.mpg.de", filenam,
 
 \item{user}{user}
 
+\item{pwd}{pwd}
+
 \item{host}{default to 'scidb.mpio.orn.mpg.de'}
+
+\item{filenam}{filenam. If missing then constructed from Sys.time()}
+
+\item{dir}{saving location on disk.}
 
 \item{dryrun}{when TRUE return call only}
 

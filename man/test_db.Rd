@@ -7,6 +7,17 @@
 test_db(user = "testuser", host = "127.0.0.1", db = "tests", pwd,
   destroy = FALSE)
 }
+\arguments{
+\item{user}{default to 'testuser'}
+
+\item{host}{default to '127.0.0.1'}
+
+\item{db}{default to 'tests'}
+
+\item{pwd}{pwd}
+
+\item{destroy}{default to FALSE}
+}
 \description{
 Installs or destroys a mariadb test database
 }

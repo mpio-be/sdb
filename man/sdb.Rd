@@ -3,12 +3,8 @@
 \docType{package}
 \name{sdb}
 \alias{sdb}
-\alias{.onAttach}
 \alias{sdb-package}
 \title{\strong{s}cidb \strong{d}ata \strong{b}ase interface}
-\usage{
-.onAttach(libname, pkgname)
-}
 \description{
 An interface to \href{http://scidb.mpio.orn.mpg.de}{scidb.mpio.orn.mpg.de} databases
 }

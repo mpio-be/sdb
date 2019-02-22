@@ -7,9 +7,18 @@
 #' Currently, you can store credentials for different hosts and for different users within a host.
 #' \code{removeCredentials} removes the credentials file.
 #' credentialsExist checks if credentials are saved for a specified host.
+#' 
+#' @param user  user
+#' @param pwd   pwd
+#' @param host  host
+#' @param db    db
+#' @param path  when missing s detected by credentialsPath ()
+#' @param show  default to FALSE
+#' 
 #' @return \code{credentialsExist},\code{removeCredentials}, and \code{saveCredentials} return \code{TRUE} if successful
 #' @export
 #' @aliases credentialsExist removeCredentials
+#' 
 #' @seealso \code{\link{dbcon}},\code{\link{dbq}}
 #' @section Warning:
 #' Credentials are stored in plain text in a hidden file in your home directory. 
@@ -18,6 +27,7 @@
 #' saveCredentials(user = 'user_a', pwd = 'pwd_a', host =  '127.0.0.1')
 #' saveCredentials('user_b', 'pass_b', host =  '127.0.0.1')
 #' removeCredentials()
+#' 
 saveCredentials   <- function(user, pwd, host , db, path) {
   if(missing(path)) path = credentialsPath()
   if(missing(db)) db = NA

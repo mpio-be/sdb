@@ -18,6 +18,8 @@ dbSafeWriteTable(con, name, x, append = TRUE, chunkSize = 1000,
 
 \item{chunkSize}{default 1000 rows}
 
+\item{verbose}{default to TRUE}
+
 \item{...}{passed to dbWriteTable}
 }
 \description{

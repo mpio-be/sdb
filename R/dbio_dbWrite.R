@@ -7,6 +7,7 @@
 #' @param     x          data.table
 #' @param     append     default to TRUE
 #' @param     chunkSize default 1000 rows
+#' @param     verbose   default to TRUE
 #' @param     ...        passed to dbWriteTable
 #' @export
 #' @importFrom DBI make.db.names

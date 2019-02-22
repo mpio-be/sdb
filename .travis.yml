@@ -5,7 +5,7 @@ latex: false
 fortran: false
 
 sudo: required
-warnings_are_errors: false
+warnings_are_errors: true
 
 before_install:
   - sudo apt-get install -y libproj-dev libgeos-dev gdal-bin libgdal-dev

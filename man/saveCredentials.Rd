@@ -18,6 +18,19 @@ getCredentials(user, db, host, path, show = FALSE)
 
 credentialsPath()
 }
+\arguments{
+\item{user}{user}
+
+\item{pwd}{pwd}
+
+\item{host}{host}
+
+\item{db}{db}
+
+\item{path}{when missing s detected by credentialsPath ()}
+
+\item{show}{default to FALSE}
+}
 \value{
 \code{credentialsExist},\code{removeCredentials}, and \code{saveCredentials} return \code{TRUE} if successful
 }
@@ -39,6 +52,7 @@ Credentials are stored in plain text in a hidden file in your home directory.
 saveCredentials(user = 'user_a', pwd = 'pwd_a', host =  '127.0.0.1')
 saveCredentials('user_b', 'pass_b', host =  '127.0.0.1')
 removeCredentials()
+
 }
 \seealso{
 \code{\link{dbcon}},\code{\link{dbq}}

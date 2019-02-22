@@ -64,7 +64,7 @@ context("Connections")
 
  test_that("when db is given then the default db is active", {
   con = dbcon(user, pwd, host = host, driver = "MariaDB", db = db,  path = credpath)
-  expect_true( names(dbq(con, 'show tables')) == paste0('Tables_in_', db))
+  expect_true( names(dbGetQuery(con, 'show tables')) == paste0('Tables_in_', db))
   closeCon(con )
   })
 
@@ -77,21 +77,6 @@ context("Connections")
 
 context("dbq")
 
- test_that("dbq returns NULL on non-SELECT and data.table on SELECT", {
-
-
-    con = dbcon(user=user,host = host, path = credpath) ; on.exit(closeCon(con))
-
-    expect_null( dbq(con, paste('USE', db) ) )
-    expect_null( dbq(con, 'DROP TABLE IF EXISTS temp' ) )
-
-    dbWriteTable(con, 'temp', data.table(a = 1:100, b = 'x') )
-
-    expect_true( inherits( dbq(con, "select * from temp"), 'data.table' ))
-
-    expect_null( dbq(con, 'DROP TABLE IF EXISTS temp' ) )
-
-    })
 
  test_that("dbq can return an enhanced output", {
 
@@ -110,4 +95,4 @@ context("dbq")
 
 # ====================================================================================
 
-test_db(user = user, host = host, db = db, pwd = pwd, destroy = TRUE)
+# test_db(user = user, host = host, db = db, pwd = pwd, destroy = TRUE)

@@ -6,6 +6,9 @@
 \usage{
 string_is_mysql_date(x)
 }
+\arguments{
+\item{x}{A string}
+}
 \description{
 string_is_mysql_date
 }

@@ -6,6 +6,13 @@
 \usage{
 removeDuplicates(con, table, key = "pk")
 }
+\arguments{
+\item{con}{con}
+
+\item{table}{table}
+
+\item{key}{key. default to 'pk'.}
+}
 \description{
 removeDuplicates
 }

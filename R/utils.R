@@ -1,5 +1,10 @@
 
 #' removeDuplicates
+#' 
+#' @param con    con
+#' @param table  table
+#' @param key  key. default to 'pk'.
+#' 
 #' @export
 #' @examples \dontrun{
 #' con = dbcon('mihai', host = '127.0.0.1', db = 'tests')
@@ -29,6 +34,9 @@ removeDuplicates <- function(con, table, key = 'pk') {
 
 
 #' string_is_mysql_date
+#' 
+#' @param x    A string
+#' 
 #' @export
 string_is_mysql_date <- function(x) {
   o = str_detect(x, pattern = '(\\d{2}|\\d{4})(?:\\-)?([0]{1}\\d{1}|[1]{1}[0-2]{1})(?:\\-)?([0-2]{1}\\d{1}|[3]{1}[0-1]{1})(?:\\s)?([0-1]{1}\\d{1}|[2]{1}[0-3]{1})(?::)?([0-5]{1}\\d{1})(?::)?([0-5]{1}\\d{1})')
@@ -79,25 +87,3 @@ probeDB <- function(probe = TRUE, name = 'scidb.mpio.orn.mpg.de', port = 3306) {
 
 
 
-#' getCRSfromDB
-#' @importFrom stringr str_trim
-getCRSfromDB <- function(con, tab) {
-  #table name without db
-  x = stringr::str_split(tab, '\\.', simplify = TRUE)
-  if(length(x) > 1) {
-    
-    tnam = stringr::str_trim(x[2])
-    db   = stringr::str_trim(x[1])
-
-    dbq(con, paste('USE', db))
-    }
-
-
-  SRID = dbq(con, paste('SELECT SRID FROM geometry_columns where F_TABLE_NAME = ', shQuote(tnam)   ) )$SRID
-
-  SRTEXT = dbq(con, paste('SELECT SRTEXT FROM spatial_ref_sys where SRID = ', SRID))$SRTEXT
-
-  sf::st_crs(wkt = SRTEXT)
-
-
-}

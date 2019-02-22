@@ -20,7 +20,7 @@ context("dbSafeWriteTable")
 
     dbExecute(con, 'DROP TABLE IF EXISTS temp')
 
-    dbq(con, 'CREATE TABLE temp (col1 VARCHAR(50) NULL,col2 FLOAT NULL)' )
+    dbExecute(con, 'CREATE TABLE temp (col1 VARCHAR(50) NULL,col2 FLOAT NULL)' )
     
     expect_true( dbSafeWriteTable(con, 'temp', x, verbose = FALSE) )
     
@@ -37,12 +37,12 @@ context("dbInsertInto")
 
     x = data.table(f1 = rep('a', 10), f2 = rnorm(10), f3 = 1)
     con = dbcon(user=user,host = host,db = db, path = credpath) ; on.exit(closeCon(con))
-    dbq(con, 'CREATE TABLE temp (f1 VARCHAR(50) ,f2 FLOAT , f99 INT)' )
+    dbExecute(con, 'CREATE TABLE temp (f1 VARCHAR(50) ,f2 FLOAT , f99 INT)' )
     
     expect_equal( dbInsertInto(con, 'temp', x) , 10)
 
 
-    dbq(con, 'DROP TABLE temp')
+    dbExecute(con, 'DROP TABLE temp')
     
     })
 
@@ -62,7 +62,7 @@ context("remove duplicates")
     expect_is( removeDuplicates(con, 'temp_test', 'id'), 'data.frame')
 
 
-    dbq(con, 'DROP TABLE temp_test')
+    dbExecute(con, 'DROP TABLE temp_test')
     
     })
 
@@ -74,4 +74,4 @@ context("remove duplicates")
 
 
 
-test_db(user = user, host = host, db = db, pwd = pwd, destroy = TRUE)
+# test_db(user = user, host = host, db = db, pwd = pwd, destroy = TRUE)

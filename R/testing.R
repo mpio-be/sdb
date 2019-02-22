@@ -1,5 +1,15 @@
+
+
+
 #' @title Test database
 #' @description Installs or destroys a mariadb test database
+#' 
+#' @param  user        default to 'testuser'
+#' @param  host        default to '127.0.0.1'
+#' @param  db          default to 'tests'
+#' @param  pwd         pwd
+#' @param  destroy     default to FALSE
+#' 
 #' @export
 #' @note
 #' test_db() works independently on other functions in sdb
@@ -68,3 +78,6 @@ test_db <- function(user = 'testuser', host =  '127.0.0.1', db = 'tests', pwd, d
 
       }
  }
+
+
+

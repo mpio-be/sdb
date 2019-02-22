@@ -4,11 +4,19 @@
 #'
 #' my_remote2local uses mysql CLI and mysqldump to copy tables from remote to localhost
 #'
-#' @return         NULL or the call itself if call_only = TRUE
-#' @param db       database name
-#' @param tables   tables are given as a "tableName1 tableName2".
-#' @param map      max_allowed_packet in GB (see https://dev.mysql.com/doc/refman/5.5/en/mysql-command-options.html)
-#' @note           non-table objects (views, procedures, etc) are exported by default.
+#' @return              NULL or the call itself if call_only = TRUE
+#' 
+#' @param db            database name
+#' @param tables        tables are given as a "tableName1 tableName2".
+#' @param remoteUser    remoteUser
+#' @param remoteHost    remoteHost
+#' @param localHost     localHost Default to '127.0.0.1'
+#' @param localUser     localUser. Default to 'root'
+#' @param map      		max_allowed_packet in GB (see https://dev.mysql.com/doc/refman/5.5/en/mysql-command-options.html)
+#' @param call_only     Default to FALSE
+#' @param no_data       Default to FALSE
+#' 
+#' @note           		non-table objects (views, procedures, etc) are exported by default.
 #' @export
 #' @examples \dontrun{
 #' my_remote2local("dbnam", "table", "user")
@@ -18,7 +26,8 @@
 my_remote2local <- function(db,	tables,	remoteUser,
 	remoteHost = 'scidb.mpio.orn.mpg.de',
 	localHost  =  '127.0.0.1', localUser  = 'root',
-	map        = 1,	call_only  = FALSE,
+	map        = 1,	
+	call_only  = FALSE,
 	no_data    = FALSE	) {
 
 	localhost = getCredentials(user = localUser, host = localHost)
@@ -59,7 +68,10 @@ my_remote2local <- function(db,	tables,	remoteUser,
 #' @param db      db
 #' @param tables  tables are given as a "tableName1 tableName2".
 #' @param user    user
+#' @param pwd     pwd
 #' @param host    default to 'scidb.mpio.orn.mpg.de'
+#' @param filenam filenam. If missing then constructed from Sys.time()
+#' @param dir     saving location on disk.
 #' @param dryrun  when TRUE return call only
 #' @param ...     further arguments to mysqldump (e.g. --no-data --no-create-db)
 #'

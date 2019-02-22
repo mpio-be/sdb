@@ -13,7 +13,19 @@ my_remote2local(db, tables, remoteUser,
 
 \item{tables}{tables are given as a "tableName1 tableName2".}
 
+\item{remoteUser}{remoteUser}
+
+\item{remoteHost}{remoteHost}
+
+\item{localHost}{localHost Default to '127.0.0.1'}
+
+\item{localUser}{localUser. Default to 'root'}
+
 \item{map}{max_allowed_packet in GB (see https://dev.mysql.com/doc/refman/5.5/en/mysql-command-options.html)}
+
+\item{call_only}{Default to FALSE}
+
+\item{no_data}{Default to FALSE}
 }
 \value{
 NULL or the call itself if call_only = TRUE
