@@ -1,11 +1,15 @@
-language: r
+
+language: R
 cache: packages
 latex: false
 fortran: false
 
 sudo: required
 warnings_are_errors: false
-r_check_args: '--no-tests'
+
+before_install:
+  - sudo apt-get install -y libproj-dev libgeos-dev gdal-bin libgdal-dev
+  
 
 services:
  - mysql
@@ -21,13 +25,6 @@ after_success:
   - Rscript -e 'library(covr); codecov()'
 
 
-apt_packages:
-  - libmysqlclient-dev
-  - gdal-bin
-  - libgdal-dev
-  - libgdal1-dev
-  - libproj-dev
-  - libgdal1h
 
 
   
