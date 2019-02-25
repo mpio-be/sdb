@@ -11,7 +11,7 @@
 #' @param db        database to connect to
 #' @param host      default to "scidb.mpio.orn.mpg.de"
 #' @param path      to credentials file (if different from the default)
-#' @param driver    MariaDB or spatialMDB, ... Defaults to MariaDB
+#' @param driver    MariaDB or mysql_gdal, ... Defaults to MariaDB
 #' @param ...       pass to dbConnect
 #' @param con       a connection made with dbcon or \code{\link{dbConnect} }
 #' 
