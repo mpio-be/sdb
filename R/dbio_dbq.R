@@ -51,7 +51,7 @@ setMethod("dbq",signature  = c(con = "MariaDBConnection", q = "character"),
 			stop('Only SELECT queries are supported. Use dbExecute() for non-SELECT queries.')
 
 	
-		o = suppressWarnings( dbGetQuery(con, q, ...) )
+		o =  dbGetQuery(con, q, ...) 
 
 		setDT(o)
 		if(enhance) enhanceOutput(o)
@@ -69,9 +69,15 @@ setMethod("dbq",signature  = c(con = "missing", q = "character"),
 		if( isNotSelect(q) )
 			stop('Only SELECT queries are supported. Use dbExecute() for non-SELECT queries.')
 
-
 		con = dbcon(...); on.exit(closeCon(con))
-		dbq(con, q, enhance = enhance)
+		o = dbGetQuery(con, q) 
+		setDT(o)
+		if(enhance) enhanceOutput(o)
+
+		o
+
+
+
 		}
 		)
 
@@ -89,7 +95,7 @@ setMethod("dbq",signature  = c(con = "MariaDBConnection", q = "character", geom 
 		newq = SQL2spatialSQL(q, geometry = geom)
 
 		# get data
-		o = suppressWarnings( dbGetQuery(con, newq) )
+		o =  dbGetQuery(con, newq) 
 		setDT(o)
 		setnames(o, geom, 'geometry')
 		o[, geometry := list(st_as_sfc(geometry)) ]

@@ -78,6 +78,10 @@ context("Connections")
 context("dbq")
 
 
+
+
+
+
  test_that("dbq can return an enhanced output", {
 
     con = dbcon(user=user,host = host, pwd = pwd, db = db, path = credpath ); on.exit(closeCon(con))
@@ -90,6 +94,19 @@ context("dbq")
     expect_is(o$a, 'POSIXt'  )
 
     })
+
+
+ test_that("dbq works through an internal connection", {
+
+    o = dbq(user=user,host = host, pwd = pwd, db = db, path = credpath , q = "select * from temp")
+    expect_is(o, 'data.table'  )
+
+
+    })
+
+
+
+
 
 
 

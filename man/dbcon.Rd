@@ -25,7 +25,7 @@ closeCon(con)
 
 \item{path}{to credentials file (if different from the default)}
 
-\item{driver}{MariaDB or spatialMDB, ... Defaults to MariaDB}
+\item{driver}{MariaDB or mysql_gdal, ... Defaults to MariaDB}
 
 \item{...}{pass to dbConnect}
 
