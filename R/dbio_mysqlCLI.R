@@ -37,7 +37,7 @@ my_remote2local <- function(db,	tables,	remoteUser,
 	on.exit(closeCon(localCon))
 
 	#DB INI
-	dbq(localCon, paste('CREATE DATABASE IF NOT EXISTS', db )  )
+	dbExecute(localCon, paste('CREATE DATABASE IF NOT EXISTS', db )  )
 
 
 	mysqldump = paste0('mysqldump --host=',      remote$host,
