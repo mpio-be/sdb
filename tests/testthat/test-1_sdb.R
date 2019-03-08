@@ -42,7 +42,6 @@ context("Credentials")
   })
 
 
-
  test_that("Wrong credentials return error", {
 
     expect_true( saveCredentials(user, 'wrong pwd', host = host, path = credpath) )
@@ -79,9 +78,6 @@ context("dbq")
 
 
 
-
-
-
  test_that("dbq can return an enhanced output", {
 
     con = dbcon(user=user,host = host, pwd = pwd, db = db, path = credpath ); on.exit(closeCon(con))
@@ -105,6 +101,21 @@ context("dbq")
     })
 
 
+
+ test_that("dbq can fetch a view", {
+
+    con = dbcon(user=user,host = host, pwd = pwd, db = db, path = credpath ); on.exit(closeCon(con))
+
+
+    dbWriteTable(con, 'temp', data.table(a = seq.POSIXt(Sys.time(), by = 10, length.out = 10), ID = 1), overwrite = TRUE )
+
+    dbExecute(con, "create view vvv as select * from temp")
+
+    o = dbq(con, "select * from vvv")
+    expect_is(o, 'data.table'  )
+
+
+    })
 
 
 

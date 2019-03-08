@@ -1,4 +1,7 @@
-
+Changes in sdb 2019.3
+---------------------
+    * removed RMySQL dependency. Depends on RMariaDB now.
+    * new tests added.
 
 
 Changes in sdb 2017.3
