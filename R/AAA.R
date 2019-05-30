@@ -16,7 +16,7 @@ NULL
 #' @author Mihai Valcu \email{valcu@@orn.mpg.de}
 #'
 #' @import     data.table
-#' @import     RMariaDB
+#' @import     RMariaDB RMySQL
 #' 
 #' @importFrom magrittr %>%
 #' @importFrom askpass askpass

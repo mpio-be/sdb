@@ -14,7 +14,7 @@ context("spatial")
 
  test_that("dbq with an mysql-gdal driver returns a  DNS string ", {
 	con = dbcon(user, pwd, host = host, db = db, driver = 'mysql_gdal',  path = credpath)
-	expect_that(inherits(con, "character"), is_true())
+	expect_true(inherits(con, "character") )
 	
 
 	})
@@ -23,7 +23,7 @@ context("spatial")
  test_that("spatial dbq returns a sf object when geom is given", {
 	
 	s = dbq(con, 'select SHAPE from tests.t3', geom = 'SHAPE')
-	expect_that(inherits(s, "sf"), is_true())
+	expect_true(inherits(s, "sf") )
 
 	}) 
 

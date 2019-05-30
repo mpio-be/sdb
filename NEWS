@@ -1,3 +1,9 @@
+Changes in sdb 2019.4
+---------------------
+    * return to RMySQL (default driver) but RMariaDB is supported with driver =  "MariaDB".
+      Once MariaDB plays well with dates we'll make it default again.
+
+
 Changes in sdb 2019.3
 ---------------------
     * removed RMySQL dependency. Depends on RMariaDB now.

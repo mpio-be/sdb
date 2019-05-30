@@ -11,7 +11,7 @@
 dbq(con, q, geom, ...)
 
 \S4method{dbq}{MariaDBConnection,character,ANY}(con, q, enhance = FALSE,
-  ...)
+  asUTC = TRUE, ...)
 
 \S4method{dbq}{missing,character,ANY}(q, enhance = FALSE, ...)
 

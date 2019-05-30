@@ -5,14 +5,17 @@
 \alias{dbcon}
 \alias{closeCon}
 \alias{closeCon,MariaDBConnection-method}
+\alias{closeCon,RMySQLConnection-method}
 \title{Connect to a database}
 \usage{
 dbcon(user, pwd = "", db = NA, host = "scidb.mpio.orn.mpg.de", path,
-  driver = "MariaDB", ...)
+  driver = "MySQL", ...)
 
 closeCon(con)
 
 \S4method{closeCon}{MariaDBConnection}(con)
+
+\S4method{closeCon}{RMySQLConnection}(con)
 }
 \arguments{
 \item{user}{username}
@@ -25,7 +28,7 @@ closeCon(con)
 
 \item{path}{to credentials file (if different from the default)}
 
-\item{driver}{MariaDB or mysql_gdal, ... Defaults to MariaDB}
+\item{driver}{MySQL, MariaDB or mysql_gdal, ... Defaults to MySQL}
 
 \item{...}{pass to dbConnect}
 

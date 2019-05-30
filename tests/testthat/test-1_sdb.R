@@ -13,7 +13,7 @@ pwd      =  'cs'
 db       =  'tests'
 credpath =  tempfile()
 
-test_db(user = user, host = host, db = db, pwd = pwd)
+sdb::test_db(user = user, host = host, db = db, pwd = pwd)
 
 # ====================================================================================
 
@@ -56,21 +56,26 @@ context("Credentials")
 context("Connections")
 
  test_that("connections are established and closed properly", {
+  con = dbcon(user, pwd, host = host, driver = "MySQL" )
+  expect_true( inherits(con, "MySQLConnection" ) )
+  expect_true( closeCon(con ) )
+  })
+ test_that("connections are established and closed properly", {
   con = dbcon(user, pwd, host = host, driver = "MariaDB" )
   expect_true( inherits(con, "MariaDBConnection" ) )
   expect_true( closeCon(con ) )
   })
 
  test_that("when db is given then the default db is active", {
-  con = dbcon(user, pwd, host = host, driver = "MariaDB", db = db,  path = credpath)
+  con = dbcon(user, pwd, host = host, driver = "MySQL", db = db,  path = credpath)
   expect_true( names(dbGetQuery(con, 'show tables')) == paste0('Tables_in_', db))
   closeCon(con )
   })
 
 
- test_that("default dbcon connects to MariaDB", {
+ test_that("default dbcon connects to MySQL", {
   con = dbcon(user, pwd, host = host,  path = credpath)
-  expect_true( class(con) == "MariaDBConnection" )
+  expect_true( class(con) == "MySQLConnection" )
   closeCon(con)
   })
 
@@ -92,6 +97,22 @@ context("dbq")
     })
 
 
+
+ test_that("dbq can return an enhanced output", {
+
+    con = dbcon(user=user,host = host, pwd = pwd, db = db, path = credpath ); on.exit(closeCon(con))
+
+
+    dbWriteTable(con, 'temp', data.table(a = seq.POSIXt(Sys.time(), by = 10, length.out = 10), ID = 1), overwrite = TRUE )
+
+    o = dbq(con, "select * from temp", enhance = TRUE)
+    expect_is(o, 'data.table'  )
+    expect_is(o$a, 'POSIXt'  )
+
+    })
+
+
+
  test_that("dbq works through an internal connection", {
 
     o = dbq(user=user,host = host, pwd = pwd, db = db, path = credpath , q = "select * from temp")
@@ -106,12 +127,12 @@ context("dbq")
 
     con = dbcon(user=user,host = host, pwd = pwd, db = db, path = credpath ); on.exit(closeCon(con))
 
+    x = data.table(a = seq.POSIXt(Sys.time(), by = 10, length.out = 10), ID = 1)
+    dbWriteTable(con, 'temp', x, overwrite = TRUE )
 
-    dbWriteTable(con, 'temp', data.table(a = seq.POSIXt(Sys.time(), by = 10, length.out = 10), ID = 1), overwrite = TRUE )
+    o = dbq(con, "select * from temp", enhance = FALSE)
 
-    dbExecute(con, "create view vvv as select * from temp")
 
-    o = dbq(con, "select * from vvv")
     expect_is(o, 'data.table'  )
 
 

@@ -14,7 +14,7 @@ enhanceOutput <- function(d, ...) {
 
 
 	if(length(datetime_cols) > 0)
-		d[ , (datetime_cols) := lapply(.SD, anytime, ... ), .SDcols = datetime_cols ]
+		d[ , (datetime_cols) := lapply(.SD, FUN = anytime , ... ), .SDcols = datetime_cols ]
 
 	# key cols
 	kc = c('ID', 'IDmale', 'IDfemale', 'transp', 'transponder',  datetime_cols)

@@ -11,7 +11,7 @@
 #' @param db        database to connect to
 #' @param host      default to "scidb.mpio.orn.mpg.de"
 #' @param path      to credentials file (if different from the default)
-#' @param driver    MariaDB or mysql_gdal, ... Defaults to MariaDB
+#' @param driver    MySQL, MariaDB or mysql_gdal, ... Defaults to MySQL
 #' @param ...       pass to dbConnect
 #' @param con       a connection made with dbcon or \code{\link{dbConnect} }
 #' 
@@ -19,20 +19,34 @@
 #' @return          a connection object
 #' @seealso         \code{\link{saveCredentials}}, \code{\link{dbq} }
 
-dbcon <- function(user, pwd = "", db = NA, host = "scidb.mpio.orn.mpg.de", path, driver = "MariaDB" , ...) {
+dbcon <- function(user, pwd = "", db = NA, host = "scidb.mpio.orn.mpg.de", path, driver = "MySQL" , ...) {
 
   if(!missing(user) & !missing(pwd) )
   X = data.frame(user, pwd, db, host, stringsAsFactors = FALSE) else
   X = getCredentials(user = user, host = host, path = path)
   if( nrow(X) == 0 || is.na(X$user) ) stop( "Credentials for user ", dQuote(user), " are not saved!")
 
-  if( driver ==  "MariaDB" ) {
+  if( driver ==  "MySQL" ) {
     if(is.na(X$pwd) | X$pwd == "")
-         con = dbConnect( dbDriver(driver) , user = X$user,                   host = X$host, ...) else
-         con = dbConnect( dbDriver(driver) , user = X$user, password = X$pwd, host = X$host, ...)
+         con = dbConnect( RMySQL::MySQL() , user = X$user,                   host = X$host, ...) else
+         con = dbConnect( RMySQL::MySQL() , user = X$user, password = X$pwd, host = X$host, ...)
 
     if(!is.na(db)) dbExecute(con, paste('USE', db))
     }
+
+  if( driver ==  "MariaDB" ) {
+    if(is.na(X$pwd) | X$pwd == "")
+         con = dbConnect( RMariaDB::MariaDB() , user = X$user,                   host = X$host, ...) else
+         con = dbConnect( RMariaDB::MariaDB() , user = X$user, password = X$pwd, host = X$host, ...)
+
+    if(!is.na(db)) dbExecute(con, paste('USE', db))
+    }
+
+
+
+
+
+
 
   if(driver == 'mysql_gdal') {
     if(missing(db)) stop ('database name is required for mysql_gdal')
@@ -53,6 +67,15 @@ setGeneric("closeCon", function(con)   standardGeneric("closeCon") )
 #' @rdname dbcon
 setMethod("closeCon",
           signature  = c(con = "MariaDBConnection"),
+          definition = function(con) {
+      dbDisconnect(con)
+    })
+
+
+#' @export
+#' @rdname dbcon
+setMethod("closeCon",
+          signature  = c(con = "MySQLConnection"),
           definition = function(con) {
       dbDisconnect(con)
     })

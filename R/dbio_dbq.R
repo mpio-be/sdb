@@ -5,6 +5,7 @@
 #' @param con 		 a connection object returned by \code{\link{dbcon}}
 #' @param q 		 a query string. credentials are stored on disk.
 #' @param enhance	 FALSE. if TRUE then enhanceOutput() is applied by reference on the output.
+#' @param asUTC		 for MariaDBConnection. not yet implemented
 #' @param geom 		 name of the geometry column. Default to 'SHAPE'
 #' @param tableNam   name of the table containing the geometry. 
 #' @param ...        pass to dbGetQuery
@@ -43,12 +44,12 @@ setGeneric("dbq", function(con,q, geom, ...)   standardGeneric("dbq") )
 
 #' @rdname dbq
 #' @export
-setMethod("dbq",signature  = c(con = "MariaDBConnection", q = "character"),
-		definition = function(con, q, enhance = FALSE, ...) {
+setMethod("dbq",signature  = c(con = "MySQLConnection", q = "character"),
+		definition = function(con, q, enhance = TRUE, asUTC = TRUE, ...) {
 		
 
 		if( isNotSelect(q) )
-			stop('Only SELECT queries are supported. Use dbExecute() for non-SELECT queries.')
+			warning('Only SELECT queries are supported. Use dbExecute() for non-SELECT queries.')
 
 	
 		o =  dbGetQuery(con, q, ...) 
@@ -61,13 +62,32 @@ setMethod("dbq",signature  = c(con = "MariaDBConnection", q = "character"),
 		 }
 		)
 
+
+#' @rdname dbq
+#' @export
+setMethod("dbq",signature  = c(con = "MariaDBConnection", q = "character"),
+		definition = function(con, q, asUTC = TRUE, ...) {
+		
+
+		if( isNotSelect(q) )
+			warning('Only SELECT queries are supported. Use dbExecute() for non-SELECT queries.')
+
+	
+		o =  dbGetQuery(con, q, ...) 
+
+
+		o
+
+		 }
+		)
+
 #' @rdname dbq
 #' @export
 setMethod("dbq",signature  = c(con = "missing", q = "character"),
-		definition = function(q, enhance = FALSE, ...) {
+		definition = function(q, enhance = TRUE, ...) {
 		
 		if( isNotSelect(q) )
-			stop('Only SELECT queries are supported. Use dbExecute() for non-SELECT queries.')
+			warning('Use dbExecute() for non-SELECT queries.')
 
 		con = dbcon(...); on.exit(closeCon(con))
 		o = dbGetQuery(con, q) 
@@ -84,7 +104,7 @@ setMethod("dbq",signature  = c(con = "missing", q = "character"),
 
 #' @rdname dbq
 #' @export
-setMethod("dbq",signature  = c(con = "MariaDBConnection", q = "character", geom = 'character'),
+setMethod("dbq",signature  = c(con = "MySQLConnection", q = "character", geom = 'character'),
 		definition = function(con, q, geom = 'SHAPE', tableNam , ...) {
 		
 		if( isNotSelect(q) )

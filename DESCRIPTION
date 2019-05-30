@@ -1,16 +1,17 @@
 Package: sdb
 Title: Database Tools
 Description: An interface to databases hosted on scidb.mpio.orn.mpg.de.
-Version: 2019.3
+Version: 2019.4
 Type: Package
 Depends:
     R (>= 3.5.0),
-    RMariaDB (>= 1.0.6),
     data.table
 Imports:
     methods,
     utils,
     DBI,
+    RMariaDB (>= 1.0.6),
+    RMySQL ,
     anytime,
     magrittr,
     stringr,
