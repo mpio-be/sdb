@@ -5,7 +5,7 @@
 \alias{dbcon}
 \alias{closeCon}
 \alias{closeCon,MariaDBConnection-method}
-\alias{closeCon,RMySQLConnection-method}
+\alias{closeCon,MySQLConnection-method}
 \title{Connect to a database}
 \usage{
 dbcon(user, pwd = "", db = NA, host = "scidb.mpio.orn.mpg.de", path,
@@ -15,7 +15,7 @@ closeCon(con)
 
 \S4method{closeCon}{MariaDBConnection}(con)
 
-\S4method{closeCon}{RMySQLConnection}(con)
+\S4method{closeCon}{MySQLConnection}(con)
 }
 \arguments{
 \item{user}{username}

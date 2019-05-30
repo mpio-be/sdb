@@ -3,19 +3,23 @@
 \docType{methods}
 \name{dbq}
 \alias{dbq}
+\alias{dbq,MySQLConnection,character,ANY-method}
 \alias{dbq,MariaDBConnection,character,ANY-method}
 \alias{dbq,missing,character,ANY-method}
-\alias{dbq,MariaDBConnection,character,character-method}
+\alias{dbq,MySQLConnection,character,character-method}
 \title{query the database}
 \usage{
 dbq(con, q, geom, ...)
 
-\S4method{dbq}{MariaDBConnection,character,ANY}(con, q, enhance = FALSE,
+\S4method{dbq}{MySQLConnection,character,ANY}(con, q, enhance = TRUE,
   asUTC = TRUE, ...)
 
-\S4method{dbq}{missing,character,ANY}(q, enhance = FALSE, ...)
+\S4method{dbq}{MariaDBConnection,character,ANY}(con, q, asUTC = TRUE,
+  ...)
 
-\S4method{dbq}{MariaDBConnection,character,character}(con, q,
+\S4method{dbq}{missing,character,ANY}(q, enhance = TRUE, ...)
+
+\S4method{dbq}{MySQLConnection,character,character}(con, q,
   geom = "SHAPE", tableNam, ...)
 }
 \arguments{
@@ -28,6 +32,8 @@ dbq(con, q, geom, ...)
 \item{...}{pass to dbGetQuery}
 
 \item{enhance}{FALSE. if TRUE then enhanceOutput() is applied by reference on the output.}
+
+\item{asUTC}{for MariaDBConnection. not yet implemented}
 
 \item{tableNam}{name of the table containing the geometry.}
 }
