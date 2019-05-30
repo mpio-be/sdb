@@ -147,7 +147,7 @@ mysqlrestore <- function(file, db, user = 'root', host =  '127.0.0.1', dryrun = 
 
 
 	if( !missing(db) )
-	dbq(con, paste('CREATE DATABASE IF NOT EXISTS', db))
+	dbExecute(con, paste('CREATE DATABASE IF NOT EXISTS', db))
 
 	crd = getCredentials(user = user, host = host)
 	crd$user = paste('-u', crd$user)
