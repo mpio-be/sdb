@@ -4,8 +4,7 @@
 \alias{mysqlrestore}
 \title{mysqlrestore}
 \usage{
-mysqlrestore(file, db, user = "root", host = "127.0.0.1",
-  dryrun = FALSE)
+mysqlrestore(file, db, user, host = "127.0.0.1", dryrun = FALSE)
 }
 \arguments{
 \item{file}{sql or sql.gz file}
@@ -23,12 +22,9 @@ restore sql file locally
 }
 \examples{
 \dontrun{
-db = 'BTatWESTERHOLZ'
-fp = mysqldump(db, 'ADULTS BREEDING', 'mihai' , dir = tempdir() )
-mysqlrestore(file = fp, db = db)
+fp = mysqldump('tests', user = 'mihai' , dir = tempdir(), host = '127.0.0.1' )
+mysqlrestore(file = fp, db = 'tests', user = 'mihai')
 
-fp = mysqldump(db, user = 'mihai' , dir = tempdir() )
-mysqlrestore(file = fp, db = db)
 }
 
 

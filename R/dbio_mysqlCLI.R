@@ -1,75 +1,11 @@
 
-
-#' dumps tables between databases (wrapper to mysqldump and mysql CLI)
-#'
-#' my_remote2local uses mysql CLI and mysqldump to copy tables from remote to localhost
-#'
-#' @return              NULL or the call itself if call_only = TRUE
-#' 
-#' @param db            database name
-#' @param tables        tables are given as a "tableName1 tableName2".
-#' @param remoteUser    remoteUser
-#' @param remoteHost    remoteHost
-#' @param localHost     localHost Default to '127.0.0.1'
-#' @param localUser     localUser. Default to 'root'
-#' @param map      		max_allowed_packet in GB (see https://dev.mysql.com/doc/refman/5.5/en/mysql-command-options.html)
-#' @param call_only     Default to FALSE
-#' @param no_data       Default to FALSE
-#' 
-#' @note           		non-table objects (views, procedures, etc) are exported by default.
-#' @export
-#' @examples \dontrun{
-#' my_remote2local("dbnam", "table", "user")
-#' sysCall = my_remote2local("dbnam", "table", "user", call_only = TRUE)
-#' system(paste ("ssh user_at_host", sysCall) )
-#'}
-my_remote2local <- function(db,	tables,	remoteUser,
-	remoteHost = 'scidb.mpio.orn.mpg.de',
-	localHost  =  '127.0.0.1', localUser  = 'root',
-	map        = 1,	
-	call_only  = FALSE,
-	no_data    = FALSE	) {
-
-	localhost = getCredentials(user = localUser, host = localHost)
-	remote    = getCredentials(user = remoteUser, host = remoteHost)
-
-	localCon = dbcon(user = localhost$user, pwd = localhost$pwd, host = localhost$host)
-	on.exit(closeCon(localCon))
-
-	#DB INI
-	dbExecute(localCon, paste('CREATE DATABASE IF NOT EXISTS', db )  )
-
-
-	mysqldump = paste0('mysqldump --host=',      remote$host,
-								' --user=' ,     remote$user,
-								' --password=' , remote$pwd,
-								' --databases ',  db,
-	if(!missing(tables))   paste(' --tables ',     paste(tables, collapse = " ") ) else NULL ,
-								' --routines',
-								' --verbose')
-
-	if(no_data)	mysqldump = paste(mysqldump,'--no-data')
-
-
-	if( is.na(localhost$pwd) )
-	mysql = paste0('mysql --host=',localHost ,' --user=', localhost$user ,' --database=', db, ' --max_allowed_packet=',map,'GB ') else
-	mysql = paste0('mysql --host=', localHost,' --user=', localhost$user ,' --password=', localhost$pwd ,' --database=', db, ' --max_allowed_packet=',map,'GB ')
-
-	call = paste(mysqldump, mysql, sep = "|")
-
-	if(call_only) call else
-
-	system( call )
-
-	}
-
 #' mysqldump
 #'
 #' @param db      db
 #' @param tables  tables are given as a "tableName1 tableName2".
 #' @param user    user
 #' @param pwd     pwd
-#' @param host    default to 'scidb.mpio.orn.mpg.de'
+#' @param host    default to '127.0.0.1'
 #' @param filenam filenam. If missing then constructed from Sys.time()
 #' @param dir     saving location on disk.
 #' @param dryrun  when TRUE return call only
@@ -80,19 +16,30 @@ my_remote2local <- function(db,	tables,	remoteUser,
 #'
 #' @examples
 #' \dontrun{
-#' fp = mysqldump('BTatWESTERHOLZ',  user = 'mihai', dir = tempdir() )
+#' fp = mysqldump('BTatWESTERHOLZ',  user = 'mihai', dir = tempdir() , dryrun = TRUE)
 #' mysqldump('BTatWESTERHOLZ', 'ADULTS BREEDING', 'mihai' , dir = tempdir() )
 #' }
 #'
 #'
-mysqldump <- function(db,tables,user, pwd, host = 'scidb.mpio.orn.mpg.de', filenam, dir = getwd(), dryrun = FALSE, ...) {
+mysqldump <- function(db,tables,user, pwd, host = '127.0.0.1', filenam, dir = getwd(), dryrun = FALSE, compress=TRUE, ...) {
 
-  if(missing(filenam))
-    filenam = Sys.time() %>%
-    		as.character %>%
-    		make.names %>%
-    		gsub("X", "", .) %>%
-    		paste0('dbdump_', ., '.sql')
+	if(missing(filenam) & !missing(tables) ) {
+	ntables = strsplit(tables, ' ')[[1]] %>% length 
+	if(ntables == 1 ) 
+		fname = paste(db, tables, sep = '.')
+	if(ntables > 1 ) 
+		fname = paste(db, paste0(ntables, 'tables'), sep = '_')
+	}
+
+	if(missing(filenam) & missing(tables) ) {
+	fname = db
+	}
+
+
+	if(!compress)
+	filenam = paste0(fname, '.sql') else
+	filenam = paste0(fname, '.sql.gz')
+		
 
 	filepath = paste(dir, filenam, sep = .Platform$file.sep)
 
@@ -101,13 +48,16 @@ mysqldump <- function(db,tables,user, pwd, host = 'scidb.mpio.orn.mpg.de', filen
 	crd = data.frame(user = user, pwd = pwd, host = host)
 
 	syscall = paste0('mysqldump        --host=',      crd$host,
-	            ' --user=' ,     crd$user,
-	            ' --password=' , crd$pwd,
-	            ' --databases ',  db,
-	            if(!missing(tables))   paste(' --tables ', paste(tables, collapse = " ") ) else NULL ,
-	            ' --routines ',
-	            ' --result-file=', filepath,
-	            ' --verbose ', ...)
+				' --user=' ,     crd$user,
+				' --password=' , crd$pwd,
+				' --databases ',  db,
+				if(!missing(tables))   paste(' --tables ', paste(tables, collapse = " ") ) else NULL ,
+				' --routines ',
+				if(!compress) paste0(' --result-file=', filepath) else NULL,
+				' --verbose ', ...)
+
+	if(compress)
+		syscall = paste0(syscall, " | gzip >", filepath)
 
 	if(dryrun)  cat(syscall, '\n-------')
 
@@ -118,6 +68,80 @@ mysqldump <- function(db,tables,user, pwd, host = 'scidb.mpio.orn.mpg.de', filen
 
 	return(filepath)
  }
+
+
+
+#' mysqldump_host
+#' 
+#' @param host    default to '127.0.0.1'
+#' @param user    user
+#' @param pwd     pwd
+#' @param dir     saving location on disk.
+#' @param exclude  db-s to exclude default to c('mysql', 'information_schema', 'performance_schema')
+#' @export
+
+#' @examples
+#' \dontrun{
+#' mysqldump_host('127.0.0.1',  'mihai', dir = '~/Desktop' )
+#' 
+#' }
+
+mysqldump_host <- function(host = '127.0.0.1', user, pwd, dir, exclude = c('tests', 'information_schema', 'performance_schema') ) {
+	
+	# INI
+		started.at=proc.time()
+		if(missing(pwd))
+		crd = getCredentials(user = user, host = host) else
+		crd = data.frame(user = user, pwd = pwd, host = host)
+
+		con = dbcon('mihai', host = host); on.exit(closeCon(con))
+
+		dbExecute(con, " SET GLOBAL max_connections = 300;")
+
+	# table listing
+		x = dbq(con, 'SELECT TABLE_SCHEMA db, TABLE_NAME tab, TABLE_TYPE TYPE, 
+							TABLE_ROWS nrows FROM information_schema.`TABLES`')
+		x = x[! db %in% exclude]
+
+	# prepare dir locations and tables paths 
+		maindir = paste0(dir, '/backup_', host, '_', format(Sys.time(), "%m-%d-%y-%HH"))
+
+		stopifnot( ! dir.exists(maindir))
+		dir.create(maindir, recursive = TRUE)
+
+		z = unique(x[, .(db)])
+		z[, path := paste0(maindir, '/', db)]
+		z[, dir.create(path), by = path]
+
+		# prepare tables paths 	
+		x[, path := paste0(maindir, '/', db) ]
+
+	# RUN
+		doFuture::registerDoFuture()
+		future::plan(future::multiprocess)
+
+
+		foreach( i = 1:nrow(x) )  %dopar% {
+				
+				x[i, mysqldump(db = db, tables = tab, host = host, user = user, pwd = crd$pwd, dir = path) ]
+				}
+	
+	# CHECK
+		x[, path := paste0(path,'/', db, '.', tab, '.sql.gz')]
+		x[ , fsize := file.size(path)/1e+6, by = path ]
+
+	# write output
+	 fwrite(x, file = paste0(maindir, '/mysqldump_out.txt'))
+	 cat(paste('time taken = ', timetaken(started.at) ), file = paste0(maindir, '/mysqldump_log.txt') )	
+	 cat(paste('finished at = ',  Sys.time() ), file = paste0(maindir, '/mysqldump_log.txt'), append = TRUE , sep = "\n")	
+
+	 cat("Finished in",timetaken(started.at),"\n")
+
+}
+
+
+
+
 
 
 #' mysqlrestore
@@ -132,16 +156,14 @@ mysqldump <- function(db,tables,user, pwd, host = 'scidb.mpio.orn.mpg.de', filen
 #'
 #' @examples
 #' \dontrun{
-#' db = 'BTatWESTERHOLZ'
-#' fp = mysqldump(db, 'ADULTS BREEDING', 'mihai' , dir = tempdir() )
-#' mysqlrestore(file = fp, db = db)
-#'
-#' fp = mysqldump(db, user = 'mihai' , dir = tempdir() )
-#' mysqlrestore(file = fp, db = db)
+#' fp = mysqldump('tests', user = 'mihai' , dir = tempdir(), host = '127.0.0.1' )
+#' mysqlrestore(file = fp, db = 'tests', user = 'mihai')
+#' 
+
 #' }
 #'
 #'
-mysqlrestore <- function(file, db, user = 'root', host =  '127.0.0.1', dryrun = FALSE) {
+mysqlrestore <- function(file, db, user , host =  '127.0.0.1', dryrun = FALSE) {
 
 	con = dbcon(user = user, host = host); 	on.exit(closeCon(con))
 
@@ -174,7 +196,7 @@ mysqlrestore <- function(file, db, user = 'root', host =  '127.0.0.1', dryrun = 
 
 
 
-#' mysqlrestoreSITE
+#' mysqlrestore_host (TODO)
 #'
 #' restore an entire db system or several db-s
 #' @param dir      a directory containing all the sql files (see mysqlrestore).
@@ -190,11 +212,11 @@ mysqlrestore <- function(file, db, user = 'root', host =  '127.0.0.1', dryrun = 
 #' 
 #' @examples
 #' \dontrun{
-#' mysqlrestoreSITE('..../scidb_backup_5.01.17/',user = 'mihai', host =  '127.0.0.1', verbose = TRUE)
+#' mysqlrestore_host('..../scidb_backup_5.01.17/',user = 'mihai', host =  '127.0.0.1', verbose = TRUE)
 #' }
 #'
 #'
-mysqlrestoreSITE <- function(dir, filetype = ".sql.gz",
+mysqlrestore_host <- function(dir, filetype = ".sql.gz",
 										exclude = c('mysql', 'information_schema', 'performance_schema'),
 										progress = '/tmp/monitor_progress.txt', ...) {
 
@@ -210,10 +232,10 @@ mysqlrestoreSITE <- function(dir, filetype = ".sql.gz",
 		foreach( i = 1:length(sqlfiles) )  %dopar% {
 			fi = sqlfiles[i]
 			dbi = basename(dirname(fi))
- 			write.table(data.frame(i, basename(fi)), file = progress, append = TRUE, quote = FALSE, row.names = FALSE, col.names = FALSE)
+			write.table(data.frame(i, basename(fi)), file = progress, append = TRUE, quote = FALSE, row.names = FALSE, col.names = FALSE)
 
- 			if(!dbi%in%exclude)
- 				mysqlrestore(file = fi, db = dbi, ...)
+			if(!dbi%in%exclude)
+				mysqlrestore(file = fi, db = dbi, ...)
 
 			}
 

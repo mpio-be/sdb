@@ -4,8 +4,8 @@
 \alias{mysqldump}
 \title{mysqldump}
 \usage{
-mysqldump(db, tables, user, pwd, host = "scidb.mpio.orn.mpg.de", filenam,
-  dir = getwd(), dryrun = FALSE, ...)
+mysqldump(db, tables, user, pwd, host = "127.0.0.1", filenam,
+  dir = getwd(), dryrun = FALSE, compress = TRUE, ...)
 }
 \arguments{
 \item{db}{db}
@@ -16,7 +16,7 @@ mysqldump(db, tables, user, pwd, host = "scidb.mpio.orn.mpg.de", filenam,
 
 \item{pwd}{pwd}
 
-\item{host}{default to 'scidb.mpio.orn.mpg.de'}
+\item{host}{default to '127.0.0.1'}
 
 \item{filenam}{filenam. If missing then constructed from Sys.time()}
 
@@ -34,7 +34,7 @@ mysqldump
 }
 \examples{
 \dontrun{
-fp = mysqldump('BTatWESTERHOLZ',  user = 'mihai', dir = tempdir() )
+fp = mysqldump('BTatWESTERHOLZ',  user = 'mihai', dir = tempdir() , dryrun = TRUE)
 mysqldump('BTatWESTERHOLZ', 'ADULTS BREEDING', 'mihai' , dir = tempdir() )
 }
 
