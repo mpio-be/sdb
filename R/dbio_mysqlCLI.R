@@ -4,20 +4,22 @@
 #' @param db      db
 #' @param tables  tables are given as a "tableName1 tableName2".
 #' @param user    user
-#' @param pwd     pwd
-#' @param host    default to '127.0.0.1'
-#' @param filenam filenam. If missing then constructed from Sys.time()
-#' @param dir     saving location on disk.
-#' @param dryrun  when TRUE return call only
-#' @param ...     further arguments to mysqldump (e.g. --no-data --no-create-db)
+#' @param pwd       pwd
+#' @param host      default to '127.0.0.1'
+#' @param filenam   filenam. If missing then constructed from Sys.time()
+#' @param dir       saving location on disk.
+#' @param dryrun    when TRUE return call only. default to FALSE.
+#' @param compress  when TRUE archive the sql output. default to TRUE.
+#' @param ...       further arguments to mysqldump (e.g. --no-data --no-create-db)
 #'
 #' @return    the file path to the sql file
 #' @export
 #'
 #' @examples
 #' \dontrun{
-#' fp = mysqldump('BTatWESTERHOLZ',  user = 'mihai', dir = tempdir() , dryrun = TRUE)
-#' mysqldump('BTatWESTERHOLZ', 'ADULTS BREEDING', 'mihai' , dir = tempdir() )
+#' fp = mysqldump('tests',  user = 'testuser', dir = tempdir() , dryrun = TRUE)
+#' mysqldump('tests', 't1 t2', 'testuser' , dir = tempdir() )
+#' mysqldump('tests', 't1', 'testuser' , dir = tempdir(), compress = FALSE )
 #' }
 #'
 #'
@@ -94,7 +96,7 @@ mysqldump_host <- function(host = '127.0.0.1', user, pwd, dir, exclude = c('test
 		crd = getCredentials(user = user, host = host) else
 		crd = data.frame(user = user, pwd = pwd, host = host)
 
-		con = dbcon('mihai', host = host); on.exit(closeCon(con))
+		con = dbcon(user=user, host = host); on.exit(closeCon(con))
 
 		dbExecute(con, " SET GLOBAL max_connections = 300;")
 
@@ -142,8 +144,6 @@ mysqldump_host <- function(host = '127.0.0.1', user, pwd, dir, exclude = c('test
 
 
 
-
-
 #' mysqlrestore
 #'
 #' restore sql file locally
@@ -156,10 +156,12 @@ mysqldump_host <- function(host = '127.0.0.1', user, pwd, dir, exclude = c('test
 #'
 #' @examples
 #' \dontrun{
-#' fp = mysqldump('tests', user = 'mihai' , dir = tempdir(), host = '127.0.0.1' )
-#' mysqlrestore(file = fp, db = 'tests', user = 'mihai')
+#' fp =  mysqldump(db = 'tests', table='tests', user='testuser' , dir = tempdir(), compress = FALSE )
+#' mysqlrestore(file = fp, db = 'tests', user = 'testuser')
 #' 
-
+#' fp =  mysqldump(db = 'tests', table='tests', user='testuser' , dir = tempdir(), compress = TRUE )
+#' mysqlrestore(file = fp, db = 'tests', user = 'testuser')
+#' 
 #' }
 #'
 #'
@@ -169,7 +171,7 @@ mysqlrestore <- function(file, db, user , host =  '127.0.0.1', dryrun = FALSE) {
 
 
 	if( !missing(db) )
-	dbExecute(con, paste('CREATE DATABASE IF NOT EXISTS', db))
+	DBI::dbExecute(con, paste('CREATE DATABASE IF NOT EXISTS', db))
 
 	crd = getCredentials(user = user, host = host)
 	crd$user = paste('-u', crd$user)
@@ -177,7 +179,7 @@ mysqlrestore <- function(file, db, user , host =  '127.0.0.1', dryrun = FALSE) {
 		crd$pwd = paste0('-p', crd$pwd) else
 		crd$pwd = ''
 
-	mysqlCall = 	paste('mysql  --max-allowed-packet 4GB --net_buffer_length=1000000', paste0('-h', host),  crd$user , crd$pwd, db)
+	mysqlCall = 	paste('mysql  --max-allowed-packet 2GB --net_buffer_length=1000000', paste0('-h', host),  crd$user , crd$pwd, db)
 
 	if(tools::file_ext(file) == 'sql')
 		syscall = paste(mysqlCall, '<', file )
@@ -196,13 +198,11 @@ mysqlrestore <- function(file, db, user , host =  '127.0.0.1', dryrun = FALSE) {
 
 
 
-#' mysqlrestore_host (TODO)
+#' mysqlrestore_host
 #'
 #' restore an entire db system or several db-s
-#' @param dir      a directory containing all the sql files (see mysqlrestore).
-#' @param filetype default to .sql.gz
-#' @param exclude  db-s to exclude default to c('mysql', 'information_schema', 'performance_schema')
-#' @param progress progress file, default to '/tmp/monitor_progress.txt'. use tail -f /tmp/monitor_progress.txt
+#' @param dir      a directory containing all the sql files.
+#' @param wipe     drop all non-system db-s before restore. default to FALSE
 #' @param ...      further options passed to mysqlrestore
 #' @export
 #' 
@@ -212,32 +212,52 @@ mysqlrestore <- function(file, db, user , host =  '127.0.0.1', dryrun = FALSE) {
 #' 
 #' @examples
 #' \dontrun{
-#' mysqlrestore_host('..../scidb_backup_5.01.17/',user = 'mihai', host =  '127.0.0.1', verbose = TRUE)
+#'  mysqldump_host('127.0.0.1',  'mihai', dir = '/home/mihai/Desktop' )
+#'  mysqlrestore_host(dir = '~/Desktop/backup_127.0.0.1_09-11-19-12H',user = 'mihai', wipe = TRUE)
 #' }
 #'
 #'
-mysqlrestore_host <- function(dir, filetype = ".sql.gz",
-										exclude = c('mysql', 'information_schema', 'performance_schema'),
-										progress = '/tmp/monitor_progress.txt', ...) {
+mysqlrestore_host <- function(dir, wipe = FALSE, ... ) {
 
-	on.exit( file.remove(progress) )
+	# INI
+		started.at=proc.time()
 
-	registerDoFuture()
-	plan(multiprocess)
+		# fetch mysqldump_out.txt
+		x = fread(paste0(dir, '/mysqldump_out.txt'))
+		ok = all(names(x) == c("db", "tab", "TYPE", "nrows", "path", "fsize"))
+		if(!ok) stop(dQuote(dir), ' does not contain a valid backup!')
 
-	# restore
-	sqlfiles = list.files(dir, pattern = filetype, full.names = TRUE, recursive = TRUE)
 
-		# TODO: change to doFuture
-		foreach( i = 1:length(sqlfiles) )  %dopar% {
-			fi = sqlfiles[i]
-			dbi = basename(dirname(fi))
-			write.table(data.frame(i, basename(fi)), file = progress, append = TRUE, quote = FALSE, row.names = FALSE, col.names = FALSE)
+		con = dbcon(user=user, host = host); on.exit(closeCon(con))
 
-			if(!dbi%in%exclude)
-				mysqlrestore(file = fi, db = dbi, ...)
+		DBI::dbExecute(con, " SET GLOBAL max_connections = 300;")
+
+
+	# WIPE
+		if(wipe){
+			z = dbq(con, "SELECT DISTINCT TABLE_SCHEMA db FROM information_schema.`TABLES` 
+								WHERE TABLE_SCHEMA 
+								NOT IN ('mysql', 'information_schema', 'performance_schema')")
+			z[, DBI::dbExecute(con, paste('DROP DATABASE', db) ), by = 1:nrow(z)]
+
+		}
+
+
+	# RUN
+		doFuture::registerDoFuture()
+		future::plan(future::multiprocess)
+
+
+
+		foreach( i = 1:nrow(x) )  %dopar% {
+
+			x[i, mysqlrestore(file = path, db = db, ... ) ]
 
 			}
+
+
+	 cat("Finished in",timetaken(started.at),"\n")
+
 
  }
 

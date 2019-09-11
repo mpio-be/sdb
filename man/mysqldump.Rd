@@ -22,7 +22,9 @@ mysqldump(db, tables, user, pwd, host = "127.0.0.1", filenam,
 
 \item{dir}{saving location on disk.}
 
-\item{dryrun}{when TRUE return call only}
+\item{dryrun}{when TRUE return call only. default to FALSE.}
+
+\item{compress}{when TRUE archive the sql output. default to TRUE.}
 
 \item{...}{further arguments to mysqldump (e.g. --no-data --no-create-db)}
 }
@@ -34,8 +36,9 @@ mysqldump
 }
 \examples{
 \dontrun{
-fp = mysqldump('BTatWESTERHOLZ',  user = 'mihai', dir = tempdir() , dryrun = TRUE)
-mysqldump('BTatWESTERHOLZ', 'ADULTS BREEDING', 'mihai' , dir = tempdir() )
+fp = mysqldump('tests',  user = 'testuser', dir = tempdir() , dryrun = TRUE)
+mysqldump('tests', 't1 t2', 'testuser' , dir = tempdir() )
+mysqldump('tests', 't1', 'testuser' , dir = tempdir(), compress = FALSE )
 }
 
 

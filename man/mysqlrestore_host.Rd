@@ -2,20 +2,14 @@
 % Please edit documentation in R/dbio_mysqlCLI.R
 \name{mysqlrestore_host}
 \alias{mysqlrestore_host}
-\title{mysqlrestore_host (TODO)}
+\title{mysqlrestore_host}
 \usage{
-mysqlrestore_host(dir, filetype = ".sql.gz", exclude = c("mysql",
-  "information_schema", "performance_schema"),
-  progress = "/tmp/monitor_progress.txt", ...)
+mysqlrestore_host(dir, wipe = FALSE, ...)
 }
 \arguments{
-\item{dir}{a directory containing all the sql files (see mysqlrestore).}
+\item{dir}{a directory containing all the sql files.}
 
-\item{filetype}{default to .sql.gz}
-
-\item{exclude}{db-s to exclude default to c('mysql', 'information_schema', 'performance_schema')}
-
-\item{progress}{progress file, default to '/tmp/monitor_progress.txt'. use tail -f /tmp/monitor_progress.txt}
+\item{wipe}{drop all non-system db-s before restore. default to FALSE}
 
 \item{...}{further options passed to mysqlrestore}
 }
@@ -24,7 +18,8 @@ restore an entire db system or several db-s
 }
 \examples{
 \dontrun{
-mysqlrestore_host('..../scidb_backup_5.01.17/',user = 'mihai', host =  '127.0.0.1', verbose = TRUE)
+ mysqldump_host('127.0.0.1',  'mihai', dir = '/home/mihai/Desktop' )
+ mysqlrestore_host(dir = '~/Desktop/backup_127.0.0.1_09-11-19-12H',user = 'mihai')
 }
 
 

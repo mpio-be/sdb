@@ -22,8 +22,11 @@ restore sql file locally
 }
 \examples{
 \dontrun{
-fp = mysqldump('tests', user = 'mihai' , dir = tempdir(), host = '127.0.0.1' )
-mysqlrestore(file = fp, db = 'tests', user = 'mihai')
+fp =  mysqldump(db = 'tests', table='tests', user='testuser' , dir = tempdir(), compress = FALSE )
+mysqlrestore(file = fp, db = 'tests', user = 'testuser')
+
+fp =  mysqldump(db = 'tests', table='tests', user='testuser' , dir = tempdir(), compress = TRUE )
+mysqlrestore(file = fp, db = 'tests', user = 'testuser')
 
 }
 
