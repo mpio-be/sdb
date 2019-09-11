@@ -1,9 +1,9 @@
 
 #' mysqldump
 #'
-#' @param db      db
-#' @param tables  tables are given as a "tableName1 tableName2".
-#' @param user    user
+#' @param db        db
+#' @param tables    tables are given as a "tableName1 tableName2".
+#' @param user      user
 #' @param pwd       pwd
 #' @param host      default to '127.0.0.1'
 #' @param filenam   filenam. If missing then constructed from Sys.time()
@@ -88,7 +88,7 @@ mysqldump <- function(db,tables,user, pwd, host = '127.0.0.1', filenam, dir = ge
 #' 
 #' }
 
-mysqldump_host <- function(host = '127.0.0.1', user, pwd, dir, exclude = c('tests', 'information_schema', 'performance_schema') ) {
+mysqldump_host <- function(host = '127.0.0.1', user, pwd, dir, exclude = c('mysql', 'information_schema', 'performance_schema') ) {
 	
 	# INI
 		started.at=proc.time()
@@ -99,6 +99,10 @@ mysqldump_host <- function(host = '127.0.0.1', user, pwd, dir, exclude = c('test
 		con = dbcon(user=user, host = host); on.exit(closeCon(con))
 
 		dbExecute(con, " SET GLOBAL max_connections = 300;")
+
+    	doFuture::registerDoFuture()
+		future::plan(future::multiprocess)
+
 
 	# table listing
 		x = dbq(con, 'SELECT TABLE_SCHEMA db, TABLE_NAME tab, TABLE_TYPE TYPE, 
@@ -118,9 +122,10 @@ mysqldump_host <- function(host = '127.0.0.1', user, pwd, dir, exclude = c('test
 		# prepare tables paths 	
 		x[, path := paste0(maindir, '/', db) ]
 
+	# DUMP mysql.users
+		mysqldump(db = 'mysql', tables = 'user', host = host, user = user, pwd = crd$pwd, dir = maindir)
+
 	# RUN
-		doFuture::registerDoFuture()
-		future::plan(future::multiprocess)
 
 
 		foreach( i = 1:nrow(x) )  %dopar% {
@@ -202,7 +207,9 @@ mysqlrestore <- function(file, db, user , host =  '127.0.0.1', dryrun = FALSE) {
 #'
 #' restore an entire db system or several db-s
 #' @param dir      a directory containing all the sql files.
+#' @param host     default to localhost
 #' @param wipe     drop all non-system db-s before restore. default to FALSE
+#' @param mysqldb  restore mysql db?. default to FALSE
 #' @param ...      further options passed to mysqlrestore
 #' @export
 #' 
@@ -213,11 +220,11 @@ mysqlrestore <- function(file, db, user , host =  '127.0.0.1', dryrun = FALSE) {
 #' @examples
 #' \dontrun{
 #'  mysqldump_host('127.0.0.1',  'mihai', dir = '/home/mihai/Desktop' )
-#'  mysqlrestore_host(dir = '~/Desktop/backup_127.0.0.1_09-11-19-12H',user = 'mihai', wipe = TRUE)
+#'  mysqlrestore_host(dir = '~/Desktop/backup_127.0.0.1_09-11-19-12H' ,user = 'mihai', wipe = TRUE)
 #' }
 #'
 #'
-mysqlrestore_host <- function(dir, wipe = FALSE, ... ) {
+mysqlrestore_host <- function(dir, host = '127.0.0.1', wipe = FALSE, mysqldb = FALSE, ... ) {
 
 	# INI
 		started.at=proc.time()
@@ -231,7 +238,9 @@ mysqlrestore_host <- function(dir, wipe = FALSE, ... ) {
 		con = dbcon(user=user, host = host); on.exit(closeCon(con))
 
 		DBI::dbExecute(con, " SET GLOBAL max_connections = 300;")
-
+		
+		doFuture::registerDoFuture()
+		future::plan(future::multiprocess)
 
 	# WIPE
 		if(wipe){
@@ -242,16 +251,15 @@ mysqlrestore_host <- function(dir, wipe = FALSE, ... ) {
 
 		}
 
-
-	# RUN
-		doFuture::registerDoFuture()
-		future::plan(future::multiprocess)
+	# Restore non-system DB-s
+		tor = x[db != 'mysql']
+		setorder(tor, db, TYPE)
 
 
 
 		foreach( i = 1:nrow(x) )  %dopar% {
 
-			x[i, mysqlrestore(file = path, db = db, ... ) ]
+			x[i, mysqlrestore(file = path, db = db, host = host, ... ) ]
 
 			}
 

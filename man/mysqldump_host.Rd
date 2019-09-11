@@ -4,7 +4,7 @@
 \alias{mysqldump_host}
 \title{mysqldump_host}
 \usage{
-mysqldump_host(host = "127.0.0.1", user, pwd, dir, exclude = c("tests",
+mysqldump_host(host = "127.0.0.1", user, pwd, dir, exclude = c("mysql",
   "information_schema", "performance_schema"))
 }
 \arguments{
