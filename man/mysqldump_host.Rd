@@ -5,7 +5,7 @@
 \title{mysqldump_host}
 \usage{
 mysqldump_host(host = "127.0.0.1", user, pwd, dir, exclude = c("mysql",
-  "information_schema", "performance_schema"))
+  "information_schema", "performance_schema"), parallel = TRUE)
 }
 \arguments{
 \item{host}{default to '127.0.0.1'}
@@ -17,13 +17,15 @@ mysqldump_host(host = "127.0.0.1", user, pwd, dir, exclude = c("mysql",
 \item{dir}{saving location on disk.}
 
 \item{exclude}{db-s to exclude default to c('mysql', 'information_schema', 'performance_schema')}
+
+\item{parallel}{default to TRUE}
 }
 \description{
 mysqldump_host
 }
 \examples{
 \dontrun{
-mysqldump_host('127.0.0.1',  'mihai', dir = '~/Desktop' )
+sdb::mysqldump_host('127.0.0.1',  user = 'mihai', dir = '~/Desktop', parallel = FALSE )
 
 }
 }

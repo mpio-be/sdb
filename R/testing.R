@@ -61,6 +61,10 @@ test_db <- function(user = 'testuser', host =  '127.0.0.1', db = 'tests', pwd, d
 
           dbWriteTable( con, 't1', t1, row.names = FALSE, overwrite = TRUE )
 
+
+       # View
+       dbExecute(con, 'CREATE VIEW view_t1 as SELECT * from t1 where n1 = 0')    
+
        #t2 [ spatial table (points) ]
           t2 = SpatialPointsDataFrame(
             cbind( runif(20, -180, 180) , runif(20, -80, 80) ),

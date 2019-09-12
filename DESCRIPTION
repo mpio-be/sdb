@@ -1,7 +1,7 @@
 Package: sdb
 Title: Database Tools
 Description: An interface to databases hosted on scidb.mpio.orn.mpg.de.
-Version: 2019.6
+Version: 2019.7
 Type: Package
 Depends:
     R (>= 3.5.0),
@@ -26,7 +26,8 @@ Imports:
 Suggests:
     knitr,
     testthat,
-    rworldmap
+    rworldmap,
+    pushover
 VignetteBuilder: knitr
 Author: Mihai Valcu
 Maintainer: Mihai Valcu <valcu@orn.mpg.de>
