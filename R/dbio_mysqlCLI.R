@@ -238,7 +238,7 @@ mysqlrestore <- function(file, db, user , host =  '127.0.0.1', dryrun = FALSE) {
 #' @examples
 #' \dontrun{
 #'  fp = sdb::mysqldump_host('127.0.0.1',  'mihai', dir = '/home/mihai/Desktop', parallel = FALSE )
-#'  mysqlrestore_host(dir = fp ,user = 'mihai', wipe = TRUE, mysqldb = TRUE)
+#'  sdb::mysqlrestore_host(dir = fp ,user = 'mihai', wipe = TRUE, mysqldb = TRUE)
 #' }
 #'
 #'

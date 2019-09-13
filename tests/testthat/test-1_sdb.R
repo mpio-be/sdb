@@ -3,14 +3,14 @@
 # User and DB needs to be in place
 #   CREATE USER 'testuser'@'%' ;
 #   UPDATE mysql.user SET Password=PASSWORD('cs') WHERE User='testuser' AND Host='%' ;
-#   GRANT ALL  ON tests.* TO 'testuser'@'%' ;
+#   GRANT ALL  ON TESTS.* TO 'testuser'@'%' ;
 #   FLUSH PRIVILEGES ;
 # ====================================================================================
 
 host     =  '127.0.0.1'
 user     =  'testuser'
 pwd      =  'cs'
-db       =  'tests'
+db       =  'TESTS'
 credpath =  tempfile()
 
 sdb::test_db(user = user, host = host, db = db, pwd = pwd)

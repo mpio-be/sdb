@@ -6,7 +6,7 @@
 #' 
 #' @param  user        default to 'testuser'
 #' @param  host        default to '127.0.0.1'
-#' @param  db          default to 'tests'
+#' @param  db          default to 'TESTS'
 #' @param  pwd         pwd
 #' @param  destroy     default to FALSE
 #' 
@@ -14,7 +14,7 @@
 #' @note
 #' test_db() works independently on other functions in sdb
 #'
-test_db <- function(user = 'testuser', host =  '127.0.0.1', db = 'tests', pwd, destroy = FALSE) {
+test_db <- function(user = 'testuser', host =  '127.0.0.1', db = 'TESTS', pwd, destroy = FALSE) {
       sapply(c('rgdal', 'rworldmap'),
        function(x) require(x , character.only = TRUE) )
 
@@ -33,9 +33,9 @@ test_db <- function(user = 'testuser', host =  '127.0.0.1', db = 'tests', pwd, d
         dbExecute(con, paste('CREATE DATABASE IF NOT EXISTS', db))
         dbExecute(con, paste('USE', db))
 
-        #t1 [ a table with major types]
+        #T1 [ a table with major types]
           dbExecute(con, "
-              CREATE TABLE t1(
+              CREATE TABLE T1(
                 id INT NOT NULL auto_increment PRIMARY KEY,
                 n1  int ,
                 n2  FLOAT ,
@@ -50,7 +50,7 @@ test_db <- function(user = 'testuser', host =  '127.0.0.1', db = 'tests', pwd, d
 
               ); ")
 
-           t1 = data.frame(n1 = rpois(100, 2), n2 = rnorm(100), n3 = rnorm(100, 200), n4 = runif(100, 0, 1),
+           T1 = data.frame(n1 = rpois(100, 2), n2 = rnorm(100), n3 = rnorm(100, 200), n4 = runif(100, 0, 1),
                     n5 = sample(c('x','y','q'), 100, replace = TRUE),
                     v1 = replicate(100, paste( sample(letters, size = runif(1, 1, 20) ), collapse = '') ),
                     v2 = replicate(100, paste(sample(letters, 2), collapse = '')),
@@ -59,11 +59,11 @@ test_db <- function(user = 'testuser', host =  '127.0.0.1', db = 'tests', pwd, d
                     dt3 = Sys.time() + rnorm(100)
                     )
 
-          dbWriteTable( con, 't1', t1, row.names = FALSE, overwrite = TRUE )
+          dbWriteTable( con, 'T1', T1, row.names = FALSE, overwrite = TRUE )
 
 
        # View
-       dbExecute(con, 'CREATE VIEW view_t1 as SELECT * from t1 where n1 = 0')    
+       dbExecute(con, 'CREATE VIEW View_t1 as SELECT * from T1 where n1 = 0')    
 
        #t2 [ spatial table (points) ]
           t2 = SpatialPointsDataFrame(
