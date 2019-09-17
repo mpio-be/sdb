@@ -56,7 +56,7 @@ mysqldump <- function(db,tables,user, pwd, host = '127.0.0.1', filenam, dir = ge
 				if(!missing(tables))   paste(' --tables ', paste(tables, collapse = " ") ) else NULL ,
 				' --routines ',
 				if(!compress) paste0(' --result-file=', filepath) else NULL,
-				' --default-character-set=utf8mb4 --verbose', ...)
+				' --default-character-set=utf8mb4 --verbose --skip-comments', ...)
 
 	if(compress)
 		syscall = paste0(syscall, " | gzip >", filepath)
@@ -85,7 +85,7 @@ mysqldump <- function(db,tables,user, pwd, host = '127.0.0.1', filenam, dir = ge
 
 #' @examples
 #' \dontrun{
-#' sdb::mysqldump_host('127.0.0.1',  user = 'mihai', dir = '~/Desktop', parallel = FALSE )
+#' sdb::mysqldump_host('127.0.0.1',  user = 'mihai', dir = '~/Desktop' )
 #' 
 #' }
 
@@ -100,16 +100,18 @@ mysqldump_host <- function(host = '127.0.0.1', user, pwd, dir, exclude = c('mysq
 		con = dbcon(user=user, host = host); on.exit(closeCon(con))
 
 
-		if(parallel) {
+		# db listing
+		x = dbq(con, 'SELECT DISTINCT TABLE_SCHEMA db FROM information_schema.`TABLES`')
+		x = x[! db %in% exclude]
+
+
+		if(parallel && nrow(x) > 2) {
 			DBI::dbExecute(con, "SET GLOBAL max_connections = 300;")
 			doFuture::registerDoFuture()
 			future::plan(future::multiprocess)
 			}
 
-		# table listing
-		x = dbq(con, 'SELECT TABLE_SCHEMA db, TABLE_NAME tab, TABLE_TYPE TYPE, 
-							TABLE_ROWS nrows FROM information_schema.`TABLES`')
-		x = x[! db %in% exclude]
+
 
 		# prepare dir locations 
 		maindir = paste0(dir, '/backup_', host, '_', format(Sys.time(), "%m-%d-%y-%HH"))
@@ -117,33 +119,22 @@ mysqldump_host <- function(host = '127.0.0.1', user, pwd, dir, exclude = c('mysq
 
 		dir.create(maindir, recursive = TRUE)
 		dir.create(paste0(maindir, '/DATA'), recursive = TRUE)
-		dir.create(paste0(maindir, '/VIEWS'), recursive = TRUE)
-		dir.create(paste0(maindir, '/mysql'), recursive = TRUE)
-		
+		dir.create(paste0(maindir, '/USERS'), recursive = TRUE)
 
-		z = unique(x[, .(db)])
-		z[, path := paste0(maindir, '/DATA/', db)]
-		z[, dir.create(path), by = path]
 
-		# prepare tables paths 	
-		x[, path := paste0(maindir, '/DATA/', db) ]
-		x[TYPE == 'VIEW', path := paste0(maindir, '/VIEWS') ]
+		x[, path := paste0(maindir, '/DATA/', db)]
+		x[, dir.create(path), by = path]
 
 	# DUMP data
-		b = x[TYPE == 'BASE TABLE']
 
-		foreach( i = 1:nrow(b) )  %dopar% {
+		foreach( i = 1:nrow(x) )  %dopar% {
 				
-				b[i, mysqldump(db = db, tables = tab, host = host, user = user, pwd = crd$pwd, dir = path) ]
+				x[i, mysqldump(db = db, host = host, user = user, pwd = crd$pwd, dir = path) ]
 				}
-	
-	# DUMP views	
-		v = x[TYPE == 'VIEW']
-		v[, mysqldump(db = db, tables = tab, host = host, user = user, pwd = crd$pwd, dir = path), by = 1:nrow(v) ]
 
 	# DUMP mysql.users
 		
-		mysqldump(db = 'mysql', tables = 'user', host = host, user = user, pwd = crd$pwd, dir = paste0(maindir, '/mysql') )
+		mysqldump(db = 'mysql', tables = 'user', host = host, user = user, pwd = crd$pwd, dir = paste0(maindir, '/USERS') )
 
 	# FEEDBACK
 
@@ -226,7 +217,7 @@ mysqlrestore <- function(file, db, user , host =  '127.0.0.1', dryrun = FALSE) {
 #' @param user      user
 #' @param pwd       pwd
 #' @param wipe      drop all non-system db-s before restore. default to FALSE
-#' @param mysqldb   restore mysql db?. default to FALSE
+#' @param restore_users   restore mysql.user table
 #' @param parallel  default to TRUE
 #' @param ...       further options passed to mysqlrestore
 #' @export
@@ -237,12 +228,12 @@ mysqlrestore <- function(file, db, user , host =  '127.0.0.1', dryrun = FALSE) {
 #' 
 #' @examples
 #' \dontrun{
-#'  fp = sdb::mysqldump_host('127.0.0.1',  'mihai', dir = '/home/mihai/Desktop', parallel = FALSE )
-#'  sdb::mysqlrestore_host(dir = fp ,user = 'mihai', wipe = TRUE, mysqldb = TRUE)
+#'  fp = sdb::mysqldump_host('127.0.0.1',  'mihai', dir = '/home/mihai/Desktop')
+#'  sdb::mysqlrestore_host(dir = fp ,user = 'mihai', wipe = TRUE, restore_users = TRUE)
 #' }
 #'
 #'
-mysqlrestore_host <- function(dir, host = '127.0.0.1', user ,pwd, wipe = FALSE, mysqldb = FALSE, parallel = TRUE ) {
+mysqlrestore_host <- function(dir, host = '127.0.0.1', user ,pwd, wipe = FALSE, restore_users = FALSE, parallel = TRUE ) {
 
 	# INI
 		started.at=proc.time()
@@ -261,18 +252,16 @@ mysqlrestore_host <- function(dir, host = '127.0.0.1', user ,pwd, wipe = FALSE, 
 
 		# db-s
 		o = data.table(maindirs = list.dirs(dir, full.names = FALSE, recursive = FALSE) )
-		if(!all( o$maindirs == c('DATA', 'mysql', 'VIEWS') ) ) stop('invalid backup directory.')
+		if(!all( o$maindirs == c('DATA',  'USERS') ) ) stop('invalid backup directory.')
 
 		# DATA dump file listing
-		d = data.table(table_dumps = list.files(paste0(dir, '/DATA'), full.names = TRUE, recursive = TRUE) )
-		d[, db := dirname(table_dumps) %>% basename]
+		d = data.table(db_dumps = list.files(paste0(dir, '/DATA'), full.names = TRUE, recursive = TRUE) )
+		d[, db := dirname(db_dumps) %>% basename]
 	
-		# VIEWs file listing
-		v = data.table(views = list.files(paste0(dir, '/VIEWS'), full.names = TRUE, recursive = TRUE) )
-		v[, db := str_split(basename(views) , '\\.', simplify = TRUE)[1]  , by = 1:nrow(v)]
-		
-		# mysqldb user file listing
-		myusers = list.files(paste0(dir, '/mysql'), full.names = TRUE, recursive = TRUE)
+
+		# restore_users user file listing
+		if(restore_users)
+		myusers = list.files(paste0(dir, '/USERS'), full.names = TRUE, recursive = TRUE)
 
 	
 
@@ -288,24 +277,24 @@ mysqlrestore_host <- function(dir, host = '127.0.0.1', user ,pwd, wipe = FALSE, 
 		}
 
 	# RESTORE DATABASES
-		x = unique(o[, .(db)])
-		x[, DBI::dbExecute(con, paste('CREATE DATABASE IF NOT EXISTS', db)), by = db]
+		d[, DBI::dbExecute(con, paste('CREATE DATABASE IF NOT EXISTS', db)), by = db]
 		
 
 	# Restore DATA
 
 		foreach( i = 1:nrow(d) )  %dopar% {
 
-			d[i, mysqlrestore(file = table_dumps, db = db, host = host, user = user) ]
+			d[i, mysqlrestore(file = db_dumps, db = db, host = host, user = user) ]
 
 			}
 
-	# Restore VIEWS		
-		v[, mysqlrestore(file = views, db = db, host = host, user = user), by = 1:nrow(v) ]		
-	
-	# Restore USERS		
+
+	# Restore USERS	
+		if(restore_users) {
 		mysqlrestore(file = myusers, db = 'mysql', host = host, user = user)
 		DBI::dbExecute(con, 'FLUSH PRIVILEGES')
+			
+		}	
 
 
 	# FEEDBACK
