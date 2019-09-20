@@ -5,7 +5,7 @@
 \title{mysqlrestore_host}
 \usage{
 mysqlrestore_host(dir, host = "127.0.0.1", user, pwd, wipe = FALSE,
-  mysqldb = FALSE, parallel = TRUE)
+  restore_users = FALSE, parallel = TRUE, exclude)
 }
 \arguments{
 \item{dir}{a directory containing all the sql files.}
@@ -18,7 +18,7 @@ mysqlrestore_host(dir, host = "127.0.0.1", user, pwd, wipe = FALSE,
 
 \item{wipe}{drop all non-system db-s before restore. default to FALSE}
 
-\item{mysqldb}{restore mysql db?. default to FALSE}
+\item{restore_users}{restore mysql.user table}
 
 \item{parallel}{default to TRUE}
 
@@ -29,8 +29,9 @@ restore an entire db system or several db-s
 }
 \examples{
 \dontrun{
- fp = sdb::mysqldump_host('127.0.0.1',  'mihai', dir = '/home/mihai/Desktop', parallel = FALSE )
- mysqlrestore_host(dir = fp ,user = 'mihai', wipe = TRUE)
+ fp = sdb::mysqldump_host('127.0.0.1',  'mihai', dir = '/home/mihai/Desktop')
+ x = c('temp22')
+ sdb::mysqlrestore_host(dir = fp ,user = 'mihai', wipe = TRUE, restore_users = TRUE, exclude = x)
 }
 
 

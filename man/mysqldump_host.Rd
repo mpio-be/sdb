@@ -25,7 +25,7 @@ mysqldump_host
 }
 \examples{
 \dontrun{
-sdb::mysqldump_host('127.0.0.1',  user = 'mihai', dir = '~/Desktop', parallel = FALSE )
+sdb::mysqldump_host('127.0.0.1',  user = 'mihai', dir = '~/Desktop' )
 
 }
 }

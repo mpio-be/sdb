@@ -86,4 +86,16 @@ probeDB <- function(probe = TRUE, name = 'scidb.mpio.orn.mpg.de', port = 3306) {
 
 
 
+#' where_in
+#' @description prepare string for select ... where in (1,2,3) 
+#' @param       s     char vector
+#' @export
+#' @examples
+#' where_in( 1:3)
 
+where_in <- function(s) {
+
+  paste(s, collapse = ',') %>% 
+  paste0('(', . , ')')
+
+}

@@ -229,11 +229,12 @@ mysqlrestore <- function(file, db, user , host =  '127.0.0.1', dryrun = FALSE) {
 #' @examples
 #' \dontrun{
 #'  fp = sdb::mysqldump_host('127.0.0.1',  'mihai', dir = '/home/mihai/Desktop')
-#'  sdb::mysqlrestore_host(dir = fp ,user = 'mihai', wipe = TRUE, restore_users = TRUE)
+#'  x = c('temp22')
+#'  sdb::mysqlrestore_host(dir = fp ,user = 'mihai', wipe = TRUE, restore_users = TRUE, exclude = x)
 #' }
 #'
 #'
-mysqlrestore_host <- function(dir, host = '127.0.0.1', user ,pwd, wipe = FALSE, restore_users = FALSE, parallel = TRUE ) {
+mysqlrestore_host <- function(dir, host = '127.0.0.1', user ,pwd, wipe = FALSE, restore_users = FALSE, parallel = TRUE, exclude) {
 
 	# INI
 		started.at=proc.time()
@@ -244,26 +245,25 @@ mysqlrestore_host <- function(dir, host = '127.0.0.1', user ,pwd, wipe = FALSE, 
 		con = dbcon(user=user, host = host); on.exit(closeCon(con))
 
 
-		if(parallel) {
-			DBI::dbExecute(con, "SET GLOBAL max_connections = 300;")
-			doFuture::registerDoFuture()
-			future::plan(future::multiprocess)
-			}
-
 		# db-s
 		o = data.table(maindirs = list.dirs(dir, full.names = FALSE, recursive = FALSE) )
 		if(!all( o$maindirs == c('DATA',  'USERS') ) ) stop('invalid backup directory.')
+
 
 		# DATA dump file listing
 		d = data.table(db_dumps = list.files(paste0(dir, '/DATA'), full.names = TRUE, recursive = TRUE) )
 		d[, db := dirname(db_dumps) %>% basename]
 	
+		if(!missing(exclude)) {
+			d = d[!db%in%exclude]
+		}
+
+		if(nrow(d) == 0) stop('Nothing to restore!')
 
 		# restore_users user file listing
 		if(restore_users)
 		myusers = list.files(paste0(dir, '/USERS'), full.names = TRUE, recursive = TRUE)
 
-	
 
 
 
@@ -281,6 +281,12 @@ mysqlrestore_host <- function(dir, host = '127.0.0.1', user ,pwd, wipe = FALSE, 
 		
 
 	# Restore DATA
+		if(parallel) {
+			DBI::dbExecute(con, "SET GLOBAL max_connections = 300;")
+			doFuture::registerDoFuture()
+			future::plan(future::multiprocess)
+			}
+
 
 		foreach( i = 1:nrow(d) )  %dopar% {
 

@@ -4,7 +4,7 @@
 \alias{test_db}
 \title{Test database}
 \usage{
-test_db(user = "testuser", host = "127.0.0.1", db = "tests", pwd,
+test_db(user = "testuser", host = "127.0.0.1", db = "TESTS", pwd,
   destroy = FALSE)
 }
 \arguments{
@@ -12,7 +12,7 @@ test_db(user = "testuser", host = "127.0.0.1", db = "tests", pwd,
 
 \item{host}{default to '127.0.0.1'}
 
-\item{db}{default to 'tests'}
+\item{db}{default to 'TESTS'}
 
 \item{pwd}{pwd}
 
