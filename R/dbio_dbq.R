@@ -84,7 +84,7 @@ setMethod("dbq",signature  = c(con = "MariaDBConnection", q = "character"),
 #' @rdname dbq
 #' @export
 setMethod("dbq",signature  = c(con = "missing", q = "character"),
-		definition = function(q, enhance = TRUE, ...) {
+		definition = function(q, enhance = FALSE, ...) {
 		
 		if( isNotSelect(q) )
 			warning('Use dbExecute() for non-SELECT queries.')
