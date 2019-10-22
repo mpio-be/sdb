@@ -98,20 +98,6 @@ context("dbq")
 
 
 
- test_that("dbq can return an enhanced output", {
-
-    con = dbcon(user=user,host = host, pwd = pwd, db = db, path = credpath ); on.exit(closeCon(con))
-
-
-    dbWriteTable(con, 'temp', data.table(a = seq.POSIXt(Sys.time(), by = 10, length.out = 10), ID = 1), overwrite = TRUE )
-
-    o = dbq(con, "select * from temp", enhance = TRUE)
-    expect_is(o, 'data.table'  )
-    expect_is(o$a, 'POSIXt'  )
-
-    })
-
-
 
  test_that("dbq works through an internal connection", {
 

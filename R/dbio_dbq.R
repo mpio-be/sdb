@@ -45,7 +45,7 @@ setGeneric("dbq", function(con,q, geom, ...)   standardGeneric("dbq") )
 #' @rdname dbq
 #' @export
 setMethod("dbq",signature  = c(con = "MySQLConnection", q = "character"),
-		definition = function(con, q, enhance = TRUE, asUTC = TRUE, ...) {
+		definition = function(con, q, enhance = FALSE, asUTC = TRUE, ...) {
 		
 
 		if( isNotSelect(q) )
