@@ -4,8 +4,13 @@
 \alias{test_db}
 \title{Test database}
 \usage{
-test_db(user = "testuser", host = "127.0.0.1", db = "TESTS", pwd,
-  destroy = FALSE)
+test_db(
+  user = "testuser",
+  host = "127.0.0.1",
+  db = "TESTS",
+  pwd,
+  destroy = FALSE
+)
 }
 \arguments{
 \item{user}{default to 'testuser'}

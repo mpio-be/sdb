@@ -1,7 +1,7 @@
 Package: sdb
 Title: Database Tools
 Description: An interface to databases hosted on scidb.mpio.orn.mpg.de.
-Version: 2019.8
+Version: 2019.9
 Type: Package
 Depends:
     R (>= 3.5.0),
@@ -33,4 +33,4 @@ Author: Mihai Valcu
 Maintainer: Mihai Valcu <valcu@orn.mpg.de>
 License: GPL-3
 Encoding: UTF-8
-RoxygenNote: 6.1.1
+RoxygenNote: 7.0.1

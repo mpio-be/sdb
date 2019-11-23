@@ -4,8 +4,15 @@
 \alias{dbSafeWriteTable}
 \title{dbWriteTable() on small chunks}
 \usage{
-dbSafeWriteTable(con, name, x, append = TRUE, chunkSize = 1000,
-  verbose = TRUE, ...)
+dbSafeWriteTable(
+  con,
+  name,
+  x,
+  append = TRUE,
+  chunkSize = 1000,
+  verbose = TRUE,
+  ...
+)
 }
 \arguments{
 \item{con}{a *Connection object}

@@ -3,7 +3,6 @@
 \docType{package}
 \name{sdb}
 \alias{sdb}
-\alias{sdb-package}
 \title{\strong{s}cidb \strong{d}ata \strong{b}ase interface}
 \description{
 An interface to \href{http://scidb.mpio.orn.mpg.de}{scidb.mpio.orn.mpg.de} databases
