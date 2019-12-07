@@ -38,7 +38,17 @@ symerge <- function(ttax, tdata, sy, clean = TRUE) {
   gnam = c('.pk', 'scinam_ttax', 'scinam_tdata')
   nn   = c( gnam, setdiff(names(x), gnam) )
 
-  o2 = unique(x, by = c('scinam_ttax', setdiff(names(x), gnam) ) )
+  o2 = 
+    try(
+    unique(x, by = c('scinam_ttax', setdiff(names(x), gnam) ) ), 
+    silent =  TRUE)
+  if(inherits(o2, 'try-error')) {
+    warning('unique does not work on some of the columns')
+    o2 = copy(x)
+  }
+
+
+
 
   setcolorder(o2, nn)
  
