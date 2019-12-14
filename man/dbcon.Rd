@@ -8,7 +8,7 @@
 \title{Connect to a database}
 \usage{
 dbcon(
-  user,
+  user = Sys.info()["user"],
   pwd = "",
   db = NA,
   host = "scidb.mpio.orn.mpg.de",

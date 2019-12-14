@@ -19,7 +19,7 @@
 #' @return          a connection object
 #' @seealso         \code{\link{saveCredentials}}, \code{\link{dbq} }
 
-dbcon <- function(user, pwd = "", db = NA, host = "scidb.mpio.orn.mpg.de", path, driver = "MySQL" , ...) {
+dbcon <- function(user = Sys.info()['user'], pwd = "", db = NA, host = "scidb.mpio.orn.mpg.de", path, driver = "MySQL" , ...) {
 
   if(!missing(user) & !missing(pwd) )
   X = data.frame(user, pwd, db, host, stringsAsFactors = FALSE) else
