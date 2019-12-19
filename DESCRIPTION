@@ -1,7 +1,7 @@
 Package: sdb
 Title: Database Tools
 Description: An interface to databases hosted on scidb.mpio.orn.mpg.de.
-Version: 2019.11
+Version: 2019.12
 Type: Package
 Depends:
     R (>= 3.5.0),

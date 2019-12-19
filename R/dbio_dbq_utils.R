@@ -61,7 +61,7 @@ getCRSfromDB <- function(con, tab) {
 
 
 isNotSelect <- function(q) {
-	o = str_trim(q) %>% str_detect(regex('SELECT', ignore_case = TRUE) )
+	o = str_trim(q) %>% str_detect(regex('SELECT|SHOW', ignore_case = TRUE) )
 	!o
 	}
 
