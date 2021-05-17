@@ -9,13 +9,17 @@
 #' tdata  = data.table(scinam = c('a', 'b', 'j', 'k', 'n', 'm'), V2 = rnorm(6))
 #' sy = data.table(scinam = c('a', 'b', 'c', 'j', 'd', 'k', 'm', 'n'), syid = c(1,2,3,3,4,4,5,5))
 #' symerge(ttax, tdata, sy)
-#' ############
+#' 
+#'\dontrun{
 #' require(sdb)   
-#' tdata = dbq(user ='mihai', q = 'select * from AVES_lifeHistory.sociality')
-#' ttax = dbq(user ='mihai', q = 'select scinam, prop_epp_young from AVES_lifeHistory.promiscuity_v2')
-#' sy = dbq(user = 'mihai', q= 'select scinam, syid from  AVES_taxonomy.synonyms_v2')
+#' tdata = dbq( q = 'select scinam, bownam from AVES_taxonomy.bow')
+#' ttax  = dbq( q = 'select scinam, family from AVES_taxonomy.birdtree')
+#' sy    = dbq( q= 'select scinam, syid from  AVES_taxonomy.synonyms_v3')
 #'
 #' x = symerge(ttax, tdata, sy)
+#' 
+#' }
+
 
 
 symerge <- function(ttax, tdata, sy, clean = TRUE) { 
@@ -56,21 +60,27 @@ symerge <- function(ttax, tdata, sy, clean = TRUE) {
   o = rbind(o1, o2, fill = TRUE)
   setorder(o, `.pk`)
 
+  o = unique(o, by = setdiff(names(o), c(".pk", "syid") ) ) 
 
   # checks
   z = o[, .N, .pk][N > 1, .pk]
-  if(length(z) > 0) warning(paste('duplicated rows in ttax:', paste(z, collapse = ',')))
+  if(length(z) > 0) {
+    warning( paste('Found', length(z), 'duplicated rows in ttax; a new column `.duplicates` has been assigned to the output.') )
+    o[, N := .N, .pk]
+    o[, .duplicates := N > 1, .pk]
+    o[, N := NULL]
+
+   }
 
 
   # clean   
+  ttax[, .pk := NULL]
+
+
   if(clean) {
     setnames(o, 'scinam_ttax', 'scinam')  
     o[, ':=' (scinam_tdata = NULL, .pk = NULL, syid = NULL)]
     }  
-
-
-
-  o
 
 
   }
