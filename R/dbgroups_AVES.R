@@ -2,7 +2,7 @@
 #' @param ttax     table containing the taxonomy we wish to keep. 
 #' @param tdata    table containing the data to add to ttax.
 #' @param sy       the synonyms table. A table with two columns (scinam, syid), see examples. 
-#' @param clean    default to TRUE; remove scinam_tdata, .pk and renames scinam_ttax to scinam
+#' @param clean    default to TRUE; remove scinam_tdata, and renames scinam_ttax to scinam
 #' @export
 #' @examples
 #' ttax  = data.table(scinam = c('a', 'b', 'c', 'd', 'm', 'n'), V1 = rnorm(6))
@@ -17,6 +17,8 @@
 #' sy    = dbq( q= 'select scinam, syid from  AVES_taxonomy.synonyms_v3')
 #'
 #' x = symerge(ttax, tdata, sy)
+#' 
+#' x = symerge(ttax, tdata, sy, clean = FALSE)
 #' 
 #' }
 
@@ -75,12 +77,15 @@ symerge <- function(ttax, tdata, sy, clean = TRUE) {
 
   # clean   
   ttax[, .pk := NULL]
+  o[, .pk := NULL]
 
 
   if(clean) {
     setnames(o, 'scinam_ttax', 'scinam')  
-    o[, ':=' (scinam_tdata = NULL, .pk = NULL, syid = NULL)]
+    o[, ':=' (scinam_tdata = NULL, syid = NULL)]
     }  
+
+  o  
 
 
   }
