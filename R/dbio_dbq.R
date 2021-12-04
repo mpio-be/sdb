@@ -8,7 +8,7 @@
 #' @param asUTC		 for MariaDBConnection. not yet implemented
 #' @param geom 		 name of the geometry column. Default to 'SHAPE'
 #' @param tableNam   name of the table containing the geometry. 
-#' @param ...        pass to dbGetQuery
+#' @param ...        passed to dbcon
 #'
 #' 
 #' @seealso \code{\link{saveCredentials}},\code{\link{dbcon}}
@@ -136,25 +136,3 @@ setMethod("dbq",signature  = c(con = "MySQLConnection", q = "character", geom = 
 
 		}
 		)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
