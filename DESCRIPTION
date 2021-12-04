@@ -18,16 +18,13 @@ Imports:
     rgdal,
     sp,
     sf,
-    gdalUtils,
     askpass,
     foreach,
     doFuture,
     future
 Suggests:
     knitr,
-    testthat,
-    rworldmap,
-    pushover
+    testthat
 VignetteBuilder: knitr
 Author: Mihai Valcu
 Maintainer: Mihai Valcu <valcu@orn.mpg.de>
