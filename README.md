@@ -1,5 +1,3 @@
-[![Build Status](https://travis-ci.org/mpio-be/sdb.svg?branch=master)](https://travis-ci.org/mpio-be/sdb)
-[![Coverage Status](https://img.shields.io/codecov/c/github/mpio-be/sdb/master.svg)](https://codecov.io/github/mpio-be/sdb?branch=master)
 
 sdb
 ------------
@@ -26,4 +24,3 @@ install.packages("devtools")
 devtools::install_github("mpio-be/sdb")
 
 ```
-

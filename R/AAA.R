@@ -34,7 +34,10 @@ NULL
 
 .onAttach <- function(libname, pkgname) {
 	dcf <- read.dcf(file=system.file("DESCRIPTION", package=pkgname) )
-	packageStartupMessage(paste( pkgname, dcf[, "Version"] ))
-    }
+  msg = paste(pkgname, dcf[, "Version"])
+  msg = paste(msg, "This package has been superseded by sdb2 https://github.com/mpio-be/dborn")
+	packageStartupMessage()
+	
 
 
+  }
