@@ -3,6 +3,8 @@ sdb
 ------------
 An interface to databases hosted on scidb.mpio.orn.mpg.de
 
+This package has been superseded by `dborn` https://github.com/mpio-be/dborn
+
 
 |            Function                            |                    Description                |
 | -----------------------------------------------|-----------------------------------------------|
