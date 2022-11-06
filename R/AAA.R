@@ -35,7 +35,7 @@ NULL
 .onAttach <- function(libname, pkgname) {
 	dcf <- read.dcf(file=system.file("DESCRIPTION", package=pkgname) )
   msg = paste(pkgname, dcf[, "Version"])
-  msg = paste(msg, "This package has been superseded by dborn https://github.com/mpio-be/dborn")
+  msg = paste(msg, "This package has been superseded by dbo https://github.com/mpio-be/dbo")
 	packageStartupMessage()
 	
 
